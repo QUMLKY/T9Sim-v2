@@ -48,7 +48,7 @@ Verified both ways rather than asserted: rewriting a note leaves the hash at
 
 | Result | Condition | Evidence |
 |---|---|---|
-| PASS | tests green | 68 passed, 39.75s, `pytest -q` |
+| PASS | tests green | 77 passed, `pytest -q` |
 | PASS | re-running stages 2 and 3 reproduces their fingerprints | one seed regenerated at each scale into a temp path: 100K, 1M and 10M all **byte-identical** by sha256 to the shipped file. Stage 3 reproduces with it, its censored column sets and visible-cell counts recorded per view in `checksums.json` |
 | PASS | the deferred list matches what Ken was told | checked against the plan's section 6 list, below |
 | PASS | the checksum manifest holds one entry per dataset, and re-hashing reproduces it | 30 of 30 entries, 19.8 GB, and the reproduction step re-hashed and matched rather than trusting the recorded value |

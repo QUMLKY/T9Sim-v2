@@ -20,7 +20,7 @@ because a 10M seed peaks near 5 GB and only a process exit reliably returns it.
 
 | Tool | What it produces |
 |---|---|
-| `tools/gate_report.py` | `docs/gates/conformance.md`, `docs/provenance.md` |
+| `tools/gate_report.py` | `docs/gates/gate1.md`, `docs/provenance.md` |
 | `tools/gate2_report.py` … `gate5_report.py` | the per-stage gate reports |
 | `tools/direction_sweep.py` | the 5 direction checks on all 30 |
 | `tools/stage6_aggregate.py` | `docs/V2_Results.md` |
@@ -125,9 +125,9 @@ The working repository is never published: its history contains personal files.
 
 | | |
 |---|---|
-| Datasets | 30 of 30, 19.8 GB, all hashed and reproducible |
+| Datasets | 30 of 30, 18.5 GB, all hashed and reproducible |
 | Gates | 1 to 7, all PASS |
-| Tests | 68 passed |
+| Tests | 77 passed |
 | Settings hash | `49e9b32a49d40b8ac559f07c6e4ec934` |
 | Design fingerprint | `caeb2b87716e00e5` |
 | Direction checks | 30 of 30, 150 checks, no failures |

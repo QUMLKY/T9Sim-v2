@@ -142,7 +142,7 @@ numbers are still reported in [`docs/gates/gate4.md`](docs/gates/gate4.md).
 
 ## Status
 
-Seven stages complete. Gates 1 to 7 all PASS. 68 tests green.
+Seven stages complete. Gates 1 to 7 all PASS. 77 tests green.
 30 of 30 datasets generated, trained, direction-checked and hashed.
 
 ## Licence

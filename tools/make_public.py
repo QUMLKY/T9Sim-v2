@@ -127,6 +127,16 @@ def main(argv=None):
         # stuck in that state.
         if out.exists():
             for child in out.iterdir():
+                # NEVER touch .git. The destination is a real repository once it
+                # has been published: it holds the remote, the branch and the
+                # history of what was pushed. Deleting it silently unpublishes
+                # the tree, and the damage is not obvious — the next `git add`
+                # finds no repository HERE, walks UP to the parent, and stages
+                # the parent's entire working tree instead. That happened on
+                # 17 Aug 2026 and produced a 621-file commit in the working
+                # repository, including a broken gitlink to v1's public repo.
+                if child.name == ".git":
+                    continue
                 if child.is_dir():
                     shutil.rmtree(child, ignore_errors=True)
                 else:
