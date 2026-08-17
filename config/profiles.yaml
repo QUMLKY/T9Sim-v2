@@ -1,0 +1,62 @@
+# profiles.yaml, the override layer. Each profile states only what it changes.
+default:
+  # rho, the rival private-structure dial. Its ONE home, per open item O3 3d. It
+  # is a run setting, not a design constant, so it is configured where a run is
+  # configured. market.yaml must not carry a second copy.
+  #
+  # NOT a free parameter and NOT tuned to flatter the result. It is solved against
+  # a published external band, which is why the route is auto-calibrated: the
+  # provenance is the target and the procedure, not the number.
+  rho:
+    value: 0.8
+    route: auto-calibrated
+    target:
+      quantity: "the C3 minus C1 price-RMSE gain, price_rmse_all"
+      band: [0.05, 0.13]
+      central: 0.08
+      source: "Wang et al. 2023, Knowledge-Based Systems, censored GMM. GMM (full price information) against CGMM (interval-censored) within one model family, at win rate 31.6 percent, which matches T9's 30 percent. It is the ONLY published full-information-versus-censored arm in the literature this project holds: Li 2022 uses true lost prices for evaluation only and never trains on them, and Seo 2022 removes prices entirely"
+    method: "docs/v10_Anchor_Bands.md, the mapping rule. Read the T9 gain at rho = 0 and rho = 1 from the 1M runs, interpolate to the band, confirm on a 100K grid. Located on a grid rather than bisected, so it is not written by the autocal solver and does not live in calibrated.yaml"
+    settled_at: "docs/KDD_Schema_Decision_10Jul2026.md:40-41, 'rho is externally anchored, not tuned'"
+    grid_record: "docs/results/sweep_rho_v10_100k.json, 6 points at 0.0 to 1.0, 3 seeds each, production_point rho*=0.8"
+    # What the grid measured at the 3 seeds, mean per rho. Kept here because it is
+    # the evidence that the dial does what it claims, and because it bounds the
+    # variance confound recorded at v1 defect 3e:
+    #   rho   corr(log u, z)   sd(log u)   SSP contrast (clf)   win rate
+    #   0.0        0.085         1.438           0.0030           0.301
+    #   0.8        0.259         1.570           0.0254           0.302
+    #   1.0        0.293         1.633           0.0327           0.302
+    # Correlation rises 3.4x, dispersion only 13.5%, and the contrast 11x. Win rate
+    # is held flat by the k_global pin throughout.
+  seeds: [20250, 20251, 20252, 20253, 20254, 20255, 20256, 20257, 20258, 20259]
+  scales:
+    100K: 100000
+    1M: 1000000
+    10M: 10000000
+    golden_test: 200000
+  block_rows: 65536          # lineage constant, never a setting to change
+
+  # The four pool sizes, one rung per scale. Specification 2.0 puts them here and
+  # nowhere else ("config/profiles.yaml -- rho, seeds, scales, block_rows, the four
+  # pool sizes"), and they were missing until 16 August 2026: the register cited
+  # `profiles.<p>.n_apps` and `profiles.<p>.n_advertisers` at rows B1 and C1, and
+  # `pair_idx`'s own law decodes its cell by integer division over `n_apps`, so the
+  # generator could not have run without them. The gap survived gate 1 because the
+  # hole detector only considered dotted key names and every one of these is cited
+  # bare, which is now fixed in tools/report_holes.py.
+  #
+  # Two sizing rules, both v1's and both deliberate:
+  #   users SCALE with rows at about 4.5 auctions per user, which keeps a user in
+  #     only a handful of auctions and so preserves id-recoverability
+  #   apps, campaigns and advertisers stay DENSE and grow far more slowly, so that
+  #     app_id and campaign_id remain learnable proxies for LA1 and LC1/LC2 at
+  #     every scale rather than becoming near-unique keys
+  pool_sizes:
+    route: specified
+    source: "t9_sim/config/profiles.yaml:12-40, the approved 10 June 2026 run profiles, carried across whole. The two sizing rules are stated in that file's own header"
+    100K:   {n_users: 22000,   n_apps: 150,  n_campaigns: 30,  n_advertisers: 10}
+    1M:     {n_users: 220000,  n_apps: 500,  n_campaigns: 100, n_advertisers: 25}
+    10M:    {n_users: 2200000, n_apps: 1200, n_campaigns: 200, n_advertisers: 50}
+    # v1 has no 200K profile, so this rung is derived rather than carried: the 4.5
+    # rule gives the user count, and the entity pools hold at the 100K rung because
+    # the golden test exists to be reproducible, not to add a scale point.
+    golden_test: {n_users: 44000, n_apps: 150, n_campaigns: 30, n_advertisers: 10}

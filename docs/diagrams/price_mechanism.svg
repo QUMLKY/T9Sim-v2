@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1274" height="830" viewBox="0 0 1274 830" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<defs><marker id="a" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,3 L0,6 Z" fill="#455A64"/></marker></defs>
+<rect width="1274" height="830" fill="#FAFAFA"/>
+<text x="637" y="30" text-anchor="middle" font-size="20" font-weight="700" fill="#263238">T9Sim v2 — the price mechanism</text>
+<text x="637" y="49" text-anchor="middle" font-size="12" fill="#546E7A">what decides floor_price (H1) and the competing bid (LU7). Node schema codes, coloured by register role.</text>
+<polyline points="130,290 196,290 196,170 222,170" fill="none" stroke="#455A64" stroke-width="1.5" marker-end="url(#a)"/>
+<polyline points="127,370 223,370 223,250 249,250" fill="none" stroke="#455A64" stroke-width="1.5" marker-end="url(#a)"/>
+<polyline points="130,450 223,450 223,250 249,250" fill="none" stroke="#455A64" stroke-width="1.5" marker-end="url(#a)"/>
+<polyline points="127,530 225,530 225,330 251,330" fill="none" stroke="#455A64" stroke-width="1.5" marker-end="url(#a)"/>
+<polyline points="377,170 443,170 443,90 469,90" fill="none" stroke="#455A64" stroke-width="1.5" marker-end="url(#a)"/>
+<polyline points="367,410 443,410 443,90 469,90" fill="none" stroke="#455A64" stroke-width="1.5" marker-end="url(#a)"/>
+<polyline points="377,170 450,170 450,170 476,170" fill="none" stroke="#455A64" stroke-width="1.5" marker-end="url(#a)"/>
+<polyline points="367,490 450,490 450,170 476,170" fill="none" stroke="#455A64" stroke-width="1.5" marker-end="url(#a)"/>
+<polyline points="367,570 453,570 453,250 479,250" fill="none" stroke="#455A64" stroke-width="1.5" marker-end="url(#a)"/>
+<polyline points="350,250 480,250 480,410 506,410" fill="none" stroke="#455A64" stroke-width="1.5" marker-end="url(#a)"/>
+<polyline points="350,650 470,650 470,570 496,570" fill="none" stroke="#455A64" stroke-width="1.5" marker-end="url(#a)"/>
+<polyline points="347,330 470,330 470,490 496,490" fill="none" stroke="#455A64" stroke-width="1.5" marker-end="url(#a)"/>
+<polyline points="347,330 480,330 480,730 506,730" fill="none" stroke="#455A64" stroke-width="1.5" marker-end="url(#a)"/>
+<polyline points="638,170 710,170 710,370 736,370" fill="none" stroke="#455A64" stroke-width="1.5" marker-end="url(#a)"/>
+<polyline points="634,250 710,250 710,370 736,370" fill="none" stroke="#455A64" stroke-width="1.5" marker-end="url(#a)"/>
+<polyline points="614,330 710,330 710,370 736,370" fill="none" stroke="#455A64" stroke-width="1.5" marker-end="url(#a)"/>
+<polyline points="608,410 710,410 710,370 736,370" fill="none" stroke="#455A64" stroke-width="1.5" marker-end="url(#a)"/>
+<polyline points="618,490 710,490 710,370 736,370" fill="none" stroke="#455A64" stroke-width="1.5" marker-end="url(#a)"/>
+<polyline points="611,650 710,650 710,370 736,370" fill="none" stroke="#455A64" stroke-width="1.5" marker-end="url(#a)"/>
+<polyline points="618,490 730,490 730,466 756,466" fill="none" stroke="#455A64" stroke-width="1.5" marker-end="url(#a)"/>
+<polyline points="618,570 730,570 730,466 756,466" fill="none" stroke="#455A64" stroke-width="1.5" marker-end="url(#a)"/>
+<polyline points="608,730 730,730 730,466 756,466" fill="none" stroke="#455A64" stroke-width="1.5" marker-end="url(#a)"/>
+<polyline points="945,370 1011,370 1011,370 1037,370" fill="none" stroke="#455A64" stroke-width="1.5" marker-end="url(#a)"/>
+<polyline points="925,466 1011,466 1011,370 1037,370" fill="none" stroke="#455A64" stroke-width="1.5" marker-end="url(#a)"/>
+<polyline points="925,466 1038,466 1038,450 1064,450" fill="none" stroke="#455A64" stroke-width="1.5" marker-end="url(#a)"/>
+<rect x="28" y="262" width="102" height="56" rx="9" fill="#FFFFFF" stroke="#607D8B" stroke-width="1.4"/>
+<text x="79" y="286" text-anchor="middle" font-size="12.5" font-weight="600" fill="#263238">B6</text>
+<text x="79" y="302" text-anchor="middle" font-size="11.0" font-weight="400" fill="#263238">slot_format</text>
+<rect x="31" y="342" width="96" height="56" rx="9" fill="#FFFFFF" stroke="#607D8B" stroke-width="1.4"/>
+<text x="79" y="366" text-anchor="middle" font-size="12.5" font-weight="600" fill="#263238">A3</text>
+<text x="79" y="382" text-anchor="middle" font-size="11.0" font-weight="400" fill="#263238">os</text>
+<rect x="28" y="422" width="102" height="56" rx="9" fill="#FFFFFF" stroke="#607D8B" stroke-width="1.4"/>
+<text x="79" y="446" text-anchor="middle" font-size="12.5" font-weight="600" fill="#263238">A5</text>
+<text x="79" y="462" text-anchor="middle" font-size="11.0" font-weight="400" fill="#263238">device_type</text>
+<rect x="31" y="502" width="96" height="56" rx="9" fill="#FFFFFF" stroke="#607D8B" stroke-width="1.4"/>
+<text x="79" y="526" text-anchor="middle" font-size="12.5" font-weight="600" fill="#263238">D1</text>
+<text x="79" y="542" text-anchor="middle" font-size="11.0" font-weight="400" fill="#263238">timestamp</text>
+<rect x="222" y="142" width="155" height="56" rx="9" fill="#FFF9C4" stroke="#FBC02D" stroke-width="1.4"/>
+<text x="299" y="166" text-anchor="middle" font-size="12.5" font-weight="600" fill="#263238">eCPM target</text>
+<text x="299" y="182" text-anchor="middle" font-size="11.0" font-weight="400" fill="#263238">1.00 / 6.50 / 18.00</text>
+<rect x="249" y="222" width="102" height="56" rx="9" fill="#FFF9C4" stroke="#FBC02D" stroke-width="1.4"/>
+<text x="299" y="246" text-anchor="middle" font-size="12.5" font-weight="600" fill="#263238">segment</text>
+<text x="299" y="262" text-anchor="middle" font-size="11.0" font-weight="400" fill="#263238">os x device</text>
+<rect x="251" y="302" width="96" height="56" rx="9" fill="#FFF9C4" stroke="#FBC02D" stroke-width="1.4"/>
+<text x="299" y="326" text-anchor="middle" font-size="12.5" font-weight="600" fill="#263238">day index</text>
+<text x="299" y="342" text-anchor="middle" font-size="11.0" font-weight="400" fill="#263238">0..27</text>
+<rect x="232" y="382" width="135" height="56" rx="9" fill="#FFF9C4" stroke="#FBC02D" stroke-width="1.4"/>
+<text x="299" y="406" text-anchor="middle" font-size="12.5" font-weight="600" fill="#263238">floor_shape</text>
+<text x="299" y="422" text-anchor="middle" font-size="11.0" font-weight="400" fill="#263238">iPinYou resample</text>
+<rect x="232" y="462" width="135" height="56" rx="9" fill="#FFF9C4" stroke="#FBC02D" stroke-width="1.4"/>
+<text x="299" y="486" text-anchor="middle" font-size="12.5" font-weight="600" fill="#263238">pay_shape</text>
+<text x="299" y="502" text-anchor="middle" font-size="11.0" font-weight="400" fill="#263238">iPinYou resample</text>
+<rect x="232" y="542" width="135" height="56" rx="9" fill="#E1BEE7" stroke="#8E24AA" stroke-width="1.4"/>
+<text x="299" y="566" text-anchor="middle" font-size="12.5" font-weight="600" fill="#263238">ev_truth</text>
+<text x="299" y="582" text-anchor="middle" font-size="11.0" font-weight="400" fill="#263238">the oracle value</text>
+<rect x="249" y="622" width="102" height="56" rx="9" fill="#FFFFFF" stroke="#607D8B" stroke-width="1.4"/>
+<text x="299" y="646" text-anchor="middle" font-size="12.5" font-weight="600" fill="#263238">B3</text>
+<text x="299" y="662" text-anchor="middle" font-size="11.0" font-weight="400" fill="#263238">ad_exchange</text>
+<rect x="469" y="62" width="175" height="56" rx="9" fill="#FFCDD2" stroke="#D32F2F" stroke-width="2.6"/>
+<text x="557" y="86" text-anchor="middle" font-size="12.5" font-weight="700" fill="#263238">H1  floor_price</text>
+<text x="557" y="102" text-anchor="middle" font-size="11.0" font-weight="400" fill="#263238">= floor_shape x target</text>
+<rect x="476" y="142" width="162" height="56" rx="9" fill="#FFF9C4" stroke="#FBC02D" stroke-width="1.4"/>
+<text x="557" y="166" text-anchor="middle" font-size="12.5" font-weight="600" fill="#263238">base_e</text>
+<text x="557" y="182" text-anchor="middle" font-size="11.0" font-weight="400" fill="#263238">= pay_shape x target</text>
+<rect x="479" y="222" width="155" height="56" rx="9" fill="#FFF9C4" stroke="#FBC02D" stroke-width="1.4"/>
+<text x="557" y="246" text-anchor="middle" font-size="12.5" font-weight="600" fill="#263238">z</text>
+<text x="557" y="262" text-anchor="middle" font-size="11.0" font-weight="400" fill="#263238">standardised log ev</text>
+<rect x="499" y="302" width="115" height="56" rx="9" fill="#BBDEFB" stroke="#1976D2" stroke-width="1.4"/>
+<text x="557" y="326" text-anchor="middle" font-size="12.5" font-weight="600" fill="#263238">LR1  w_k</text>
+<text x="557" y="342" text-anchor="middle" font-size="11.0" font-weight="400" fill="#263238">value loading</text>
+<rect x="506" y="382" width="102" height="56" rx="9" fill="#BBDEFB" stroke="#1976D2" stroke-width="1.4"/>
+<text x="557" y="406" text-anchor="middle" font-size="12.5" font-weight="600" fill="#263238">LR2  R[s,k]</text>
+<text x="557" y="422" text-anchor="middle" font-size="11.0" font-weight="400" fill="#263238">retargeting</text>
+<rect x="496" y="462" width="122" height="56" rx="9" fill="#BBDEFB" stroke="#1976D2" stroke-width="1.4"/>
+<text x="557" y="486" text-anchor="middle" font-size="12.5" font-weight="600" fill="#263238">LR3  pace_k(d)</text>
+<text x="557" y="502" text-anchor="middle" font-size="11.0" font-weight="400" fill="#263238">budget pacing</text>
+<rect x="496" y="542" width="122" height="56" rx="9" fill="#BBDEFB" stroke="#1976D2" stroke-width="1.4"/>
+<text x="557" y="566" text-anchor="middle" font-size="12.5" font-weight="600" fill="#263238">LR4  pi_ke</text>
+<text x="557" y="582" text-anchor="middle" font-size="11.0" font-weight="400" fill="#263238">exchange taste</text>
+<rect x="503" y="622" width="108" height="56" rx="9" fill="#BBDEFB" stroke="#1976D2" stroke-width="1.4"/>
+<text x="557" y="646" text-anchor="middle" font-size="12.5" font-weight="600" fill="#263238">LR5  sigma_k</text>
+<text x="557" y="662" text-anchor="middle" font-size="11.0" font-weight="400" fill="#263238">dispersion</text>
+<rect x="506" y="702" width="102" height="56" rx="9" fill="#BBDEFB" stroke="#1976D2" stroke-width="1.4"/>
+<text x="557" y="726" text-anchor="middle" font-size="12.5" font-weight="600" fill="#263238">LR6  F_k(d)</text>
+<text x="557" y="742" text-anchor="middle" font-size="11.0" font-weight="400" fill="#263238">flight mask</text>
+<rect x="736" y="326" width="209" height="88" rx="9" fill="#FFF9C4" stroke="#FBC02D" stroke-width="1.4"/>
+<text x="841" y="350" text-anchor="middle" font-size="12.5" font-weight="600" fill="#263238">b_k</text>
+<text x="841" y="366" text-anchor="middle" font-size="11.0" font-weight="400" fill="#263238">log b_k = log base_e</text>
+<text x="841" y="382" text-anchor="middle" font-size="11.0" font-weight="400" fill="#263238">+ rho(w_k z + b_R R + pace)</text>
+<text x="841" y="398" text-anchor="middle" font-size="11.0" font-weight="400" fill="#263238">+ sigma_k eps</text>
+<rect x="756" y="438" width="169" height="56" rx="9" fill="#FFF9C4" stroke="#FBC02D" stroke-width="1.4"/>
+<text x="841" y="462" text-anchor="middle" font-size="12.5" font-weight="600" fill="#263238">participate_k</text>
+<text x="841" y="478" text-anchor="middle" font-size="11.0" font-weight="400" fill="#263238">Bernoulli, k=0 forced</text>
+<rect x="1037" y="342" width="209" height="56" rx="9" fill="#FFCDD2" stroke="#D32F2F" stroke-width="2.6"/>
+<text x="1142" y="366" text-anchor="middle" font-size="12.5" font-weight="700" fill="#263238">LU7  lu7_competing_bid</text>
+<text x="1142" y="382" text-anchor="middle" font-size="11.0" font-weight="400" fill="#263238">= max b_k over participants</text>
+<rect x="1064" y="422" width="155" height="56" rx="9" fill="#FFCDD2" stroke="#D32F2F" stroke-width="2.6"/>
+<text x="1142" y="446" text-anchor="middle" font-size="12.5" font-weight="700" fill="#263238">H9  bid_density</text>
+<text x="1142" y="462" text-anchor="middle" font-size="11.0" font-weight="400" fill="#263238">= participant count</text>
+<text x="28" y="780" font-size="11" font-weight="700" fill="#546E7A">REGISTER ROLE</text>
+<rect x="28" y="790" width="13" height="13" rx="3" fill="#FFFFFF" stroke="#607D8B"/>
+<text x="46" y="800" font-size="10.5" fill="#37474F">observable - a column in every view</text>
+<rect x="276" y="790" width="13" height="13" rx="3" fill="#BBDEFB" stroke="#1976D2"/>
+<text x="294" y="800" font-size="10.5" fill="#37474F">latent - hidden in all 4 views</text>
+<rect x="494" y="790" width="13" height="13" rx="3" fill="#FFF9C4" stroke="#FBC02D"/>
+<text x="512" y="800" font-size="10.5" fill="#37474F">auxiliary - generator-internal, no column</text>
+<rect x="778" y="790" width="13" height="13" rx="3" fill="#E1BEE7" stroke="#8E24AA"/>
+<text x="796" y="800" font-size="10.5" fill="#37474F">truth / estimand</text>
+<rect x="912" y="790" width="13" height="13" rx="3" fill="#FFCDD2" stroke="#D32F2F"/>
+<text x="930" y="800" font-size="10.5" fill="#37474F">the two price outputs</text>
+</svg>

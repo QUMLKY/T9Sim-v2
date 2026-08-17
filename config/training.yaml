@@ -1,0 +1,183 @@
+# training.yaml, the scoring half's settings. Loadable without the generator.
+#
+# Provenance note. Unlike the generator half, the training half has no provenance
+# register anywhere in the project. Every value below is recorded only in v1 code
+# or in docs/v1/T9Sim_Config_Reference.md, so all of them are route `inferred`
+# with a v1 citation. Adopted 15 Aug 2026 on Ken's instruction. None has an
+# outside source and none ever did.
+
+hist_winning_price:
+  # The switch that makes SSP price knowledge visible. Turning it off collapses
+  # C3 to C1 on the price channel, so it is not a neutral default.
+  enabled:
+    value: true
+    route: inferred
+    source: "v1's code default is False, but every reported run overrode it: the v10 and v11 10M workers call run_profile(..., hist_clearing=True). docs/v1/v10_Training_Results.md:11 and docs/v1/T9Sim_Config_Reference.md:130,1270. v2 sets it explicitly rather than inherit a default no run used"
+
+encoders:
+  # ONE shrinkage constant, shared by both encoders. Open item O13, Ken's decision
+  # 15 August 2026. An earlier v2 draft split it into encoders.dsp.shrink and
+  # encoders.ssp.shrink; that split is REVERSED and must not be reintroduced.
+  #
+  # Why one. Empirical-Bayes shrinkage already adapts to sample size on its own:
+  #   EB mean = (cell_sum + k*parent) / (cell_count + k)
+  # so a cell with more observations is automatically shrunk less. The SSP encoder
+  # sees more rows than the DSP encoder, but `cell_count` already handles that, so
+  # the difference in data volume is no reason for a second k.
+  #
+  # Why not two. Two independently settable constants put a free knob exactly where
+  # the C3 minus C1 result lives. Moving ssp.shrink alone could manufacture or erase
+  # the SSP contrast and nothing in the design would object. One constant removes
+  # that degree of freedom.
+  #
+  # The encoders DO differ, but in what each averages, not in how hard each is shrunk:
+  #   dsp = won-rows-only mean of bid_price, served to all 4 views, winner's-curse biased
+  #   ssp = all-clears mean of winning_price, won + sold-lost, C3 and C4 only, unbiased
+  # That difference is the whole C3 minus C1 mechanism and it needs no second dial.
+  shrink:
+    value: 20.0
+    route: inferred
+    source: "v1 HCP_EB_K, t9_sim/src/t9sim/pipeline.py:82, one constant consumed by both encoders at :124 and :140"
+    shared_by: [dsp, ssp]
+    # v1 exposed this as the leak-versus-debias diagnostic, sweepable through the
+    # environment variable T9_HCP_EB_K, to test whether the C3 minus C1 gain is real
+    # de-biasing or cell memorisation. A single shared dial is all that diagnostic
+    # needs, so collapsing the 2 slots costs it nothing.
+    diagnostic_sweep: "vary this one value; low k lets sparse cells memorise, high k collapses the signal"
+  dsp:
+    note: "fitted on won-row own bids, served to all 4 views. Uses encoders.shrink"
+  ssp:
+    note: "fitted on winning price incl. lost-sold rows, C3 and C4 only. Uses encoders.shrink"
+  keys: {value: [app_id, slot_format, ad_exchange, _daypart], route: inferred, source: "v1 HCP_KEYS, pipeline.py:83; backoff parent drops app_id"}
+
+spend_model:
+  # OPEN ITEM O12, CLOSED 16 August 2026 at stage 4, where the specification said to
+  # close it. KEEP THE KEY AND FIT IT. It is no longer a hole and no longer a
+  # setting: it is a fitted quantity, and this block records the method rather than
+  # a number.
+  #
+  # The question O12 asked was prior to the value: does the parameter exist at all?
+  # It does, and the PLAN forces that answer rather than any preference. The plan
+  # scores spend CRPS. CRPS is a distributional score, so it needs a predictive
+  # DISTRIBUTION, and a plain regression returns a point. v1 never faced this
+  # because v1 reported rmse_spend, a point metric, and never reported spend CRPS.
+  #
+  # So head 4 is distributional: XGBoost predicts the LOCATION on the log-spend
+  # scale, and the scale is the residual standard deviation of log spend, estimated
+  # ON THE VALIDATION SPLIT so it is not fitted to the rows that trained the mean.
+  # Written to the run's artifact per view, never hand-set, because a hardcoded
+  # scale is exactly what went wrong with v1's AFT_SCALE.
+  #
+  # v1's AFT_SCALE = 1.0 remains a DIFFERENT quantity and must not be copied here:
+  # it is the sigma of the EVALUATOR's win curve at pipeline.py:747, which builds
+  # the "TRUE win curve" as norm.cdf((log b - log u) / AFT_SCALE) and thereby sets
+  # the oracle ceiling every one of C1-C4 is scored against.
+  distribution:
+    value: lognormal
+    route: inferred
+    source: "O12, decided at stage 4. The generator draws G2 as LogNormal(mu_cat, sigma^ltv) x LU5 x LC2 x plat, so a lognormal predictive is the family the data is actually from. That makes the log-scale residual the natural scale parameter and gives CRPS a closed form"
+  scale:
+    fitted: true
+    estimator: "standard deviation of (log spend - predicted log spend) on the validation split"
+    route: inferred
+    source: "O12, closed 16 Aug 2026. NOT a configured value. The fitted number is reported per view in the run artifact, and differs by view because each view trains on a different set of payers"
+
+candidate_prices:
+  # The bid ladder the profit-max bidder searches, shared by both learned bidders
+  # and the true-value oracle.
+  spacing: geomspace
+  low:    {value: 0.0001, route: inferred, source: "v1 BID_GRID = np.geomspace(1e-4, 0.12, 48), t9_sim/src/t9sim/pipeline.py:73"}
+  high:   {value: 0.12,   route: inferred, source: "as low. USD per impression"}
+  n:      {value: 48,     route: inferred, source: "as low. Coarser spacing quantises the economics metrics"}
+
+xgboost:
+  # THREE parameter sets, not two. The Tier-2 win classifier is deeper than Tier-1.
+  tier1_binary:
+    value: {n_estimators: 300, max_depth: 6, learning_rate: 0.1, tree_method: hist,
+            enable_categorical: true, eval_metric: logloss, early_stopping_rounds: 20}
+    route: inferred
+    source: "v1 XGB_CLF, t9_sim/src/t9sim/pipeline.py:66. The 3 binary heads P(click), P(install|click), P(payer|install)"
+  tier1_spend:
+    value: {n_estimators: 300, max_depth: 6, learning_rate: 0.1, tree_method: hist,
+            enable_categorical: true, eval_metric: rmse, early_stopping_rounds: 20}
+    route: inferred
+    source: "v1 XGB_REG, t9_sim/src/t9sim/pipeline.py:69. The E[spend|payer] head"
+  tier2_win_classifier:
+    # monotone_constraints added 15 Aug 2026, open item O8, Ken's decision.
+    # +1 on bid_price forces the fitted p(win | bid) to be non-decreasing in the bid,
+    # which is a fact about the auction rather than a modelling preference: you win by
+    # outbidding the field, so bidding more can never win less often. Without it a tree
+    # will happily fit a sag wherever the training data is thin, and the bidder
+    # maximises (ev - b) x p(win | b), so a sag at the peak moves the chosen bid.
+    # See Schema diagrams/O8_monotone_win_curve.svg for the mechanism.
+    # Keyed by feature NAME, not position, so the constraint cannot silently attach to
+    # the wrong column if the Tier-2 feature list changes at stage 4.
+    value:
+      objective: "binary:logistic"
+      eval_metric: auc
+      tree_method: hist
+      max_depth: 8
+      monotone_constraints: {bid_price: 1}
+    route: inferred
+    source: "v1, t9_sim/src/t9sim/pipeline.py:621, deliberately deeper than Tier-1. The monotone constraint is NOT from v1, which had none; it is open item O8, decided 15 Aug 2026, and it makes the submitted paper's description of a monotone win classifier true"
+    # NOT constrained, and deliberately left open. floor_price is the other feature the
+    # win probability arguably moves monotonically in, downward, since a higher reserve
+    # is harder to clear at a fixed bid. Ken decided the bid constraint only, so -1 on
+    # floor_price stays a separate decision rather than being folded in here.
+    # Cost to note at stage 4: a monotone constraint removes the model's freedom to fit
+    # noise in that direction, so a small drop in raw win AUC is expected and is not a
+    # regression. What matters is whether the bidder's chosen bid improves.
+  # tier2_aft is DELETED, Ken's decision 15 August 2026. Tier 2 has ONE head.
+  #
+  # v1 ran two: an AFT survival model of the competing bid, and this classifier. v2
+  # keeps only the classifier, because it makes no assumption about the shape of the
+  # price distribution, and in v1 that was the difference between a true answer and a
+  # false one: the AFT bidder showed an SSP overpayment reduction that the classifier
+  # showed to be about zero, and the classifier was right.
+  #
+  # What is given up, stated plainly rather than discovered later:
+  #   price_rmse_all, price_rmse_lost, price_crps_all, price_crps_lost. All 4 need a
+  #   predicted PRICE, and a classifier has none. The lost-row slice is the real loss,
+  #   since scoring a price on rows whose price was never observed is the most direct
+  #   measurement of the censoring story. v2 measures SSP value through win AUC and
+  #   profit instead, which is narrower but sound.
+  # What is NOT given up: ece_win and mce_win. Those are calibration measures on a win
+  #   probability, the classifier has one, and v1 simply never computed them for it.
+  #   They are now required below.
+  # Why this costs v2 nothing it had planned for: overpay is already not a v2 metric,
+  #   so the AFT-versus-classifier comparison had no v2 consumer, and the plan's 7
+  #   scored figures never included a price metric.
+  #
+  # Do not re-add an AFT head without also deciding the sigma question v1 left open:
+  # its single sigma trained the model, shaped its win curve, scored its CRPS AND built
+  # the oracle ceiling every view was judged against.
+
+split_days: {train: [1, 20], valid: [21, 24], test: [25, 28]}
+
+# Calibration, MEASURED and never fitted, per open item O7. v1 reported ece and mce
+# for its AFT head only and gave the classifier logloss instead, so the 2 Tier-2 heads
+# were never scored on a common footing. With one head that asymmetry is gone, and
+# Ken's decision of 15 August adds both measures to it.
+calibration:
+  measures: [ece, mce]
+  heads: [click, install, payer, win]
+  bins:
+    value: 10
+    route: inferred
+    source: "not stated in any document. 10 equal-width bins is the common default for expected calibration error and matches how v1's reported figures read"
+  note: >
+    ece is the average gap between predicted probability and observed frequency across
+    bins, so it says how wrong calibration is on average. mce is the largest single-bin
+    gap, so it says how wrong it gets at its worst. A head can have a small ece and a
+    bad mce if one region is badly off, which is why both are reported. Neither is
+    gated: they are reported per head per view, and O7 records why v2 fits no
+    calibrator.
+
+attribution:
+  # CONFLICT carried over from v1, declared rather than hidden. Two live SHAP paths
+  # disagree: t9_sim/src/t9sim/pipeline.py:774 samples 3000, while
+  # t9_sim/scripts/v10_shap.py:82 samples 4000. Both use seed 0. v2 takes 4000
+  # because that is the path docs/SHAP_Analysis_v10.md reports.
+  samples: {value: 4000, route: inferred, source: "t9_sim/scripts/v10_shap.py:82, the path behind the reported v10 SHAP figures. v1's pipeline default was 3000; see docs/T9Sim_Hole_Provenance.md finding F"}
+  seed:    {value: 0, route: inferred, source: "t9_sim/scripts/v10_shap.py:82 and docs/v1/T9Sim_Config_Reference.md:961, random_state=0 on both paths"}
+  top_k:   {value: 8, route: inferred, source: "docs/v1/T9Sim_Config_Reference.md:961, top 8 features by mean absolute SHAP"}

@@ -1,0 +1,32 @@
+{
+ "note": "The 6 calibration files carried over from v1, hashed when copied. The loader re-checks these on every run and stops naming the file on a mismatch.",
+ "copied": "2026-08-15",
+ "source": "t9_sim/calibration",
+ "total_bytes": 36037,
+ "files": {
+  "ipinyou_region_distribution.csv": {
+   "sha256": "6fb732c3256199017b2d751ed4c19aa549966d866ece7b910d4442738cf09739",
+   "bytes": 897
+  },
+  "ipinyou_city_distribution.csv": {
+   "sha256": "0810adb32905ba93ca207da631e2611921e9fb7bdb586d679ef6e6de67afca7a",
+   "bytes": 13350
+  },
+  "ipinyou_hourdow_distribution.csv": {
+   "sha256": "15f263475c7313fb6c2ba55d0bfcac6854aa651e9bcbcb097d1f1c952df5102e",
+   "bytes": 5804
+  },
+  "ipinyou_paying_distribution.csv": {
+   "sha256": "1b5774c7505120b0002f9bc3035d553bba111605341128243f623ec628621690",
+   "bytes": 7946
+  },
+  "ipinyou_floor_bid_distribution.csv": {
+   "sha256": "f2036c5be7e472f0b48fb011719e465b04ae98373275adb354be8b1ebdc686e7",
+   "bytes": 7864
+  },
+  "ipinyou_price_summary.csv": {
+   "sha256": "898676a27966fe61fa9834c435835a4a4afac7046c5c76a530027d54965eeb92",
+   "bytes": 176
+  }
+ }
+}

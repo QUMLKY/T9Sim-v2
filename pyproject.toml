@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "t9v2"
+version = "2.0.0"
+description = "T9Sim v2, the ad-auction simulator rebuild"
+requires-python = ">=3.13,<3.14"
+dependencies = [
+    "numpy",
+    "pandas",
+    "pyarrow",
+    "PyYAML",
+    "scipy",
+    "scikit-learn",
+    "xgboost",
+]
+
+[project.optional-dependencies]
+attribution = ["shap"]
+
+[project.scripts]
+t9v2-generate = "t9v2.api:main_generate"
+t9v2-run = "t9v2.api:main_run"
+t9v2-campaign = "t9v2.api:main_campaign"
+
+[tool.setuptools.packages.find]
+where = ["src"]

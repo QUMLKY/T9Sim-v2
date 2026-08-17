@@ -1,0 +1,468 @@
+# market.yaml, the generator half's settings.
+# Every value carries {value, route, source}. route is one of quoted,
+# auto-calibrated, inferred, specified. A value the documents do not supply is
+# left as HOLE and reported by the conformance check at gate 1.
+
+auction:
+  # rho is NOT here. Open item O3 3d gave it one home, profiles.yaml, because it
+  # is a run setting rather than a design constant. Do not re-add it, the
+  # duplicate-key check will fail on two homes.
+  shade:
+    value: 0.85
+    route: specified
+    source: "docs/Simulator_Schema - June 10 (v7).md:245 gives the design range, H2 = value_estimate x shade(~0.7-1.0) x LogNormal(0, sigma_explore). 0.85 is its midpoint. No outside source stands behind the range"
+  # The win-rate pin, added 16 August 2026 for the same reason as ltv.lognormal_mu:
+  # it is in the calibrated.yaml contract and had no starting value anywhere, so
+  # the bisection had no origin. 1 is the neutral start v1 declared
+  # (benchmarks.yaml:249) and it means "bid the value estimate unshaded by any
+  # global factor", so a solved value above 1 reads directly as how far the market
+  # has to be leaned on to reach a 30 percent win rate. v1 never persisted its
+  # answer: the bisection ran on a warm-up sample at generation time and the
+  # result was not written to calibrated.yaml, so there is no v1_solved to record.
+  k_global:
+    value: 1.0
+    route: auto-calibrated
+    target:
+      quantity: "win rate"
+      band: [0.295, 0.305]
+      source: "market.yaml win_rate.target 0.30 with win_rate.solver_tolerance 0.005"
+    source: "neutral start 1, v1 benchmarks.yaml:249 'solved on warm-up so win rate hits profiles.win_rate.target'. Route and method at t9_sim/calibration/provenance_table.md:36, bisection on a warm-up sample"
+  sigma_explore:
+    value: 0.30
+    route: inferred
+    source: "t9_sim/calibration/provenance_table.md:35, 'bid diversity for Tier-2 P(win|bid)'. No non-v1 statement of a value exists. NB this is a sigma on the log-bid scale and the evaluator's win curve uses 1.0 for the same quantity, see docs/T9Sim_Hole_Provenance.md finding E"
+
+entity_latents:
+  sigma_app: {value: 0.30, route: specified, source: "register row 15 LA1, LogNormal(0, 0.30)"}
+
+rival_pool:
+  K:
+    value: 8
+    route: specified
+    source: "docs/T9Sim_DGP_Node_Register.md, pool-rivals, K = 8 persistent rivals"
+  n_gaming:
+    value: 3
+    route: specified
+    source: "docs/T9Sim_Specification_v2.md 2.5, gaming archetypes k < 3"
+  value_loading_gaming:
+    value: [0.35, 0.75]
+    route: specified
+    source: "docs/T9Sim_Specification_v2.md 2.5, LR1"
+  value_loading_nongaming:
+    value: [0.00, 0.20]
+    route: specified
+    source: "docs/T9Sim_Specification_v2.md 2.5, LR1"
+  beta_R:
+    value: 0.5
+    route: specified
+    source: "docs/T9Sim_Specification_v2.md 2.5, LR2 scaling"
+  pacing_ar:
+    value: 0.85
+    route: specified
+    source: "docs/T9Sim_Specification_v2.md 2.5, LR3 phi_p"
+  pacing_sigma:
+    value: 0.30
+    route: specified
+    source: "docs/T9Sim_Specification_v2.md 2.5, LR3 sigma_p"
+  exch_participation:
+    value: [0.15, 0.60]
+    route: specified
+    source: "docs/T9Sim_Specification_v2.md 2.5, LR4"
+  log_bid_dispersion:
+    value: [0.30, 0.55]
+    route: specified
+    source: "docs/T9Sim_Specification_v2.md 2.5, LR5"
+
+# Median per-format eCPM targets, US 2025. These scale the iPinYou price shapes,
+# and slot_format alone explains about half the variance of the rival bid, so
+# they are the single largest term in the market layer.
+ecpm_targets_usd:
+  banner:
+    value: 1.00
+    route: quoted
+    source: "docs/Industry_Source_Reports.md:111, section 7 Tenjin with Clever Ads Solutions: 'Tier 1 (US/UK): banner $0.50-1.50'. Midpoint"
+  interstitial:
+    value: 6.50
+    route: quoted
+    source: "docs/Industry_Source_Reports.md:111, section 7 Tenjin: 'interstitial $5-8'. Midpoint"
+  rewarded:
+    value: 18.00
+    route: quoted
+    source: "docs/Industry_Source_Reports.md:169, section 12 Appodeal: 'Rewarded video eCPM US Android $18.36'. Tenjin's own band at :111 is $15-30; the Appodeal point is taken in preference to its midpoint"
+
+advertiser_scale:
+  # Two different shares, and confusing them is a known silent defect. Appendix A
+  # of the specification records it: advertiser_share sets POOL COMPOSITION, how
+  # many advertisers sit in each tier, while campaign_share allocates CAMPAIGN
+  # VOLUME, how many rows each tier wins. Building row frequency from the published
+  # advertiser_share puts majors on the wrong share of rows, and win-rate
+  # autocalibration then absorbs the level shift so no validation gate fires.
+  # Both were missing from v2 until 16 August 2026, which left `adv_tier` and
+  # `sample_weight` naming keys that existed only in v1.
+  advertiser_share:
+    indie: {value: 0.85, route: quoted, source: "count-mix proxy: SocialPeta 84K+/month advertisers against Sensor Tower revenue-tier counts, empirically about 0.87/0.11/0.02. t9_sim/config/benchmarks.yaml:145"}
+    mid:   {value: 0.13, route: quoted, source: "count-mix proxy, Sensor Tower 828 games above $10M as the mid cohort. benchmarks.yaml:149"}
+    major: {value: 0.02, route: quoted, source: "count-mix proxy, top-1 percent publisher cohort, 134 games above $100M. benchmarks.yaml:153"}
+  campaign_share:
+    indie: {value: 0.05, route: inferred, source: "spend-share proxy from IAP concentration, top 1 percent at 92.5 percent (Sensor Tower 2025), discounted for ad-monetised indie spend. benchmarks.yaml:146. docs/T9Sim_Specification_v2.md Appendix A row C2 fixes this vector at 0.05/0.20/0.75"}
+    mid:   {value: 0.20, route: inferred, source: "spend-share proxy, see indie. benchmarks.yaml:150"}
+    major: {value: 0.75, route: inferred, source: "spend-share proxy from IAP concentration, discounted; the stated range is 0.70-0.85. benchmarks.yaml:154"}
+  # Per-tier bid-level multiplier on the value estimate in H2.
+  k_cpa:
+    indie:
+      value: 0.8
+      route: inferred
+      source: "t9_sim/calibration/provenance_table.md:21, 'thinner margins -> lower bid level'. The same row states outright that NO PUBLISHED bid-level-by-size data exists, so this stays inferred permanently"
+    mid:
+      value: 1.0
+      route: inferred
+      source: "as indie. The reference tier, 1.0 by construction"
+    major:
+      value: 1.2
+      route: inferred
+      source: "as indie"
+app_categories:
+  share:
+    casual:      {value: 0.50, route: specified, source: "spec 1.6 B2, quota 0.50/0.20/0.20/0.10"}
+    strategy:    {value: 0.20, route: specified, source: "spec 1.6 B2"}
+    rpg:         {value: 0.20, route: specified, source: "spec 1.6 B2"}
+    hypercasual: {value: 0.10, route: specified, source: "spec 1.6 B2"}
+  # Per-genre multiplier on install probability (F1) and on bid value (H2).
+  # NB the Sensor Tower / Newzoo citation belongs to `share` above, NOT here.
+  # install_ease has no outside source. See docs/T9Sim_Hole_Provenance.md finding I.
+  install_ease:
+    casual:      {value: 1.0, route: inferred, source: "docs/Simulator_Schema - June 10 (v7).md:214. The reference genre"}
+    strategy:    {value: 0.7, route: inferred, source: "as casual. Bigger download and commitment"}
+    rpg:         {value: 0.6, route: inferred, source: "as casual. Heaviest commitment"}
+    hypercasual: {value: 1.4, route: inferred, source: "as casual. Instant-play installs"}
+  # Per-genre multiplier folded into mu_cat for G2 spend.
+  ltv_multiplier:
+    casual:      {value: 1.0, route: inferred, source: "t9_sim/calibration/provenance_table.md:17. The reference tier"}
+    strategy:    {value: 1.8, route: inferred, source: "as casual, anchored loosely on AppMagic strategy ARPPU. NB rpg carries the identical 1.8, which is a design convenience rather than a measurement"}
+    rpg:         {value: 1.8, route: inferred, source: "as strategy, same value"}
+    hypercasual: {value: 0.5, route: inferred, source: "as casual. Low-IAP tier"}
+
+# C4, the DEMAND-side genre mix of campaigns. Distinct from app_categories.share,
+# which is the supply side. Only the 0.50 casual anchor is external; the rest is a
+# declared adjustment whose full justification is truncated in the v1 register.
+ad_genre_mix:
+  casual:
+    value: 0.55
+    route: inferred
+    source: "externally bounded. AppsFlyer 2026, casual is about 50 percent of $25B global UA spend, is the quoted anchor; the +0.05 US and folding adjustment is inferred, cross-checked against SocialPeta FY2025 creative share of about 58 percent for casual plus casino plus puzzle"
+  # The 3 below carried their real basis only in v1 and read here as bare
+  # residuals until 16 August 2026. Restored from t9_sim/config/benchmarks.yaml
+  # :119-130, whose figures were re-checked against docs/Industry_Source_Reports.md
+  # section 21, an adversarial verification pass run on these exact values on
+  # 10-11 June 2026. All 3 stay `inferred`: every underlying figure is a CREATIVE
+  # share and the quantity wanted is a SPEND share, so the step between them is
+  # judgement no source makes.
+  strategy:
+    value: 0.17
+    route: inferred
+    source: "externally bounded. SocialPeta FY2025 SLG creative share 6.7 percent, upweighted on per-title intensity, 728 creatives per title per year, and on AppsFlyer's US iOS midcore budgets +43 percent YoY. The split against rpg is inferred. Industry_Source_Reports.md:275,277"
+  rpg:
+    value: 0.20
+    route: inferred
+    source: "externally bounded. SocialPeta FY2025 RPG creative share 9.5 percent plus Action 4.4 percent, upweighted on the highest per-title intensity, above 800 creatives per title per year. The split against strategy is inferred. Industry_Source_Reports.md:275. NB the 9.5 and the per-title figure are verified verbatim there; the Action 4.4 sits inside that line's elision and is carried from v1 unre-checked"
+  hypercasual:
+    value: 0.08
+    route: inferred
+    source: "set BELOW its supply share deliberately. AppsFlyer 2026 reports hypercasual UA spend declining in the West, iOS -14 percent, and no demand-side share is published by anyone. Industry_Source_Reports.md:277"
+archetype_shares:
+  whale:            {value: 0.02, route: specified, source: "register row 1 LU1; spec 1.6 LU1"}
+  engaged_spender:  {value: 0.08, route: specified, source: "register row 1 LU1; spec 1.6 LU1"}
+  casual:           {value: 0.20, route: specified, source: "register row 1 LU1; spec 1.6 LU1"}
+  time_filler:      {value: 0.40, route: specified, source: "register row 1 LU1; spec 1.6 LU1"}
+  inactive:         {value: 0.30, route: specified, source: "register row 1 LU1; spec 1.6 LU1"}
+# Open item O3 3a. These 3 shares were never checked against an outside source and
+# will not be. iPinYou cannot supply them, being 96 percent desktop Windows web
+# traffic against a 2025 US mobile-gaming market. They keep their values, carry
+# route `inferred`, and the datasheet declares the gap. Do not relabel them
+# `quoted` unless a real external source is attached.
+device:
+  os_split:
+    iOS:     {value: 0.59, route: inferred, source: "O3 3a keep and declare; value from register row 4 A3, spec 1.6 A3, the active marginal"}
+    Android: {value: 0.41, route: inferred, source: "O3 3a keep and declare; value from register row 4 A3, spec 1.6 A3"}
+  device_split:
+    phone:  {value: 0.90, route: inferred, source: "O3 3a keep and declare; value from register row 6 A5, spec 1.6 A5"}
+    tablet: {value: 0.10, route: inferred, source: "O3 3a keep and declare; value from register row 6 A5, spec 1.6 A5"}
+  # O3 3a settles the route as `inferred`. The v1 record's own source string is
+  # literally "PLACEHOLDER pending StatCounter", i.e. it declares itself unsourced.
+  # A4_osversion_given_os in tables.yaml consumes exactly these numbers, one object.
+  os_versions:
+    iOS:
+      "18.x": {value: 0.55, route: inferred, source: "t9_sim/calibration/provenance_table.md:39, source string 'PLACEHOLDER pending StatCounter'"}
+      "17.x": {value: 0.30, route: inferred, source: "as 18.x"}
+      "16.x": {value: 0.10, route: inferred, source: "as 18.x"}
+      "15.x": {value: 0.05, route: inferred, source: "as 18.x"}
+    Android:
+      "15": {value: 0.30, route: inferred, source: "t9_sim/calibration/provenance_table.md:40, source string 'PLACEHOLDER pending StatCounter'"}
+      "14": {value: 0.35, route: inferred, source: "as 15"}
+      "13": {value: 0.25, route: inferred, source: "as 15"}
+      "12": {value: 0.10, route: inferred, source: "as 15"}
+ltv:
+  # The solver's starting point, added 16 August 2026. Every other constant in
+  # the calibrated.yaml contract had a value here to begin the search from and
+  # this one had none, so the search had no origin. It is the ANALYTIC value,
+  # mu = ln(median) = ln(6), which is what v1 declared before its own autocal ran
+  # (benchmarks.yaml:72-75, route `quoted`). v1's ANSWER was 0.481154, recorded
+  # below as a check on the stage-2 solve and never read by the loader: the
+  # solved value belongs in calibrated.yaml, written by the solver, or the two
+  # would be indistinguishable.
+  lognormal_mu:
+    value: 1.7918
+    route: auto-calibrated
+    target:
+      quantity: "median payer spend, USD"
+      band: [6.0, 6.0]
+      source: "market.yaml ltv.base_median_usd. NB the circularity warning below: validation.yaml scores the simulator against the same 6.00 this solve aims at"
+    v1_solved: 0.481154
+    source: "analytic start ln(6) = 1.7918, v1 benchmarks.yaml:72-75. v1's solved answer 0.481154 at t9_sim/calibration/provenance_table.md:11, SOLVED by autocal 2026-06-18; it is a sanity check on v2's solve, not an input"
+  # RELABELLED `specified` to `auto-calibrated` on 16 August 2026. 1.648169 is not
+  # a design number: v1's provenance table records it as SOLVED by autocal on
+  # 18 June 2026 against the whale top-5-percent revenue-share target 0.55-0.65
+  # (t9_sim/calibration/provenance_table.md:12). Routing it `specified` claimed a
+  # design document stood behind a fitted value. The solver rewrites this at
+  # stage 2, so the number below is v1's answer kept as the starting point and as
+  # a sanity check, never as the authority.
+  lognormal_sigma:
+    value: 1.648169
+    route: auto-calibrated
+    target:
+      quantity: "the whale top-5-percent share of total generated revenue"
+      band: [0.55, 0.65]
+      source: "docs/Industry_Source_Reports.md, the whale-concentration band. The provenance of an auto-calibrated value is this target, not the number"
+    source: "t9_sim/calibration/provenance_table.md:12, SOLVED by autocal 2026-06-18. v1's analytic starting point was sqrt(2 x ln(mean/median)) = sqrt(2 x ln(25/6)) = 1.6889, routed `quoted` at benchmarks.yaml:76-79 with the note 'then refined vs whale target (autocal)'. The refinement is what 1.648169 is"
+  # RELABELLED from `quoted` to `inferred` on 15 Aug 2026. The v1 record cites
+  # "GameAnalytics / Wappier ARPPU", but docs/Industry_Source_Reports.md carries no
+  # such figure for either firm: its GameAnalytics section has retention only, and
+  # Wappier appears once as a bare URL with no number. The companion mean of $25
+  # cites Unity and AppMagic, whose sections give whale concentration and $7/$15
+  # transaction sizes respectively. Nothing supports $6 or $25.
+  # CIRCULARITY WARNING: lognormal_mu is SOLVED against this number, and
+  # validation.yaml then scores the simulator against the same number.
+  base_median_usd:
+    value: 6.0
+    route: inferred
+    source: "v1 claimed quoted to GameAnalytics / Wappier ARPPU; unsupported by docs/Industry_Source_Reports.md. See docs/T9Sim_Hole_Provenance.md finding B"
+  decay_d7:
+    value: 0.40
+    route: specified
+    source: "docs/T9Sim_Specification_v2.md:200 and docs/T9Sim_DGP_Node_Register.md:145. G3 = 0.40 x G2, a revenue-recognition curve judgement"
+  decay_d30:
+    value: 0.70
+    route: specified
+    source: "docs/T9Sim_Specification_v2.md:588 and docs/T9Sim_DGP_Node_Register.md:146. G4 = 0.70 x G2, same judgement"
+
+# The funnel base rates are SOLVER OUTPUTS, so the provenance is the target and the
+# solver, never the number. v2 re-solves all three. Each `start` below is where the
+# bisection begins, not an answer and not a bound.
+funnel:
+  # TWO changes on 16 August 2026, both to the same three keys.
+  #
+  # 1. `ceiling` renamed to `start`. It was never a ceiling. The law is a plain
+  #    MULTIPLIER on the archetype propensity, clipped to [0, 1] only afterwards
+  #    (auctions.py:370-377), and v1's own solved base_ir is 2.564963, well above
+  #    any bound a reader would infer from the old name. v1's comment said
+  #    "ceiling" and v2 inherited the word without the check.
+  #
+  # 2. The values are now v1's SOLVED answers rather than v1's initial guesses.
+  #    0.08 / 0.40 / 0.55 carried no design authority: they were where v1's autocal
+  #    happened to begin, and demonstrably poor, since base_ctr's true answer is
+  #    0.27141, more than 3x the guess. Starting the search near the answer costs
+  #    nothing and saves generation passes. The earlier objection to seeding from a
+  #    solved value does not apply here, because there is no design meaning in
+  #    0.08 to preserve.
+  #
+  # These remain SOLVER OUTPUTS. v2 re-solves all three at stage 2 against the
+  # bands in validation.yaml and writes the answers to calibrated.yaml; matching
+  # v1 is not required and not expected, since v2 has changed laws these targets
+  # depend on. Record the bisection step count and |start - solved| so a solve
+  # that barely moves is visible as such rather than mistaken for agreement.
+  base_ctr:
+    start: {value: 0.27141, route: auto-calibrated, source: "v1's solved answer, t9_sim/calibration/provenance_table.md:3 and calibrated.yaml, SOLVED by autocal 2026-06-18 against a population CTR target of 2-5 percent (AppsFlyer/Adjust). v1's pre-solve guess was 0.08, benchmarks.yaml:19"}
+    target: "validation.yaml calibration_targets.population_ctr"
+  base_ir:
+    start: {value: 2.564963, route: auto-calibrated, source: "v1's solved answer, provenance_table.md:4, SOLVED by autocal 2026-06-18 against a click-to-install target of 25-40 percent (AppsFlyer). Above 1 because it multiplies a propensity below 1; the clip to [0, 1] is applied after. v1's pre-solve guess was 0.40"}
+    target: "validation.yaml calibration_targets.click_to_install"
+  base_payer:
+    start: {value: 0.257853, route: auto-calibrated, source: "v1's solved answer, provenance_table.md:5, SOLVED by autocal 2026-06-18 so install-to-payer lands 2-5 percent (DeltaDNA 4 percent NA). v1's pre-solve guess was 0.55"}
+    target: "validation.yaml calibration_targets.install_to_payer"
+
+# ---------------------------------------------------------------------------
+# Added 15 August 2026, closing the undeclared-key gap the upgraded hole
+# detector found. These are the law PARAMETERS of nodes that graph.yaml already
+# declares. Without them the network knows LU2 is a Beta keyed by archetype and
+# cannot draw it, so every one of these is a stage-2 blocker rather than a
+# review item.
+#
+# Provenance is the same as the 25 gate-1 holes: the values are recorded in
+# t9_sim/calibration/provenance_table.md rows 39-50 and in v1's archetypes.yaml,
+# each already carrying its own route and source. Nothing here is invented.
+# ---------------------------------------------------------------------------
+
+# LU2, LU3, LU4. Beta(a, b) per archetype. The register calls these
+# `archetypes.propensity.*`. inactive is not a separate mechanism: it is one
+# cell of the same law, and LU4's near-zero pairs with LU5's fixed zero.
+archetype_propensity:
+  route: inferred
+  source: "v1 archetypes.yaml propensity block; provenance_table.md row 44-46. Each pair is a Beta(a,b) whose mean is the stated rate"
+  click:            # LU2
+    whale:           {value: [5, 5],   route: inferred, source: "~0.50; whales click selectively, convert hard"}
+    engaged_spender: {value: [5, 5],   route: inferred, source: "~0.50"}
+    casual:          {value: [4, 6],   route: inferred, source: "~0.40"}
+    time_filler:     {value: [3, 7],   route: inferred, source: "~0.30; taps a lot, converts little"}
+    inactive:        {value: [1, 19],  route: inferred, source: "~0.05; ad-blind"}
+  install:          # LU3
+    whale:           {value: [6, 4],   route: inferred, source: "~0.60"}
+    engaged_spender: {value: [5, 5],   route: inferred, source: "~0.50"}
+    casual:          {value: [3, 7],   route: inferred, source: "~0.30"}
+    time_filler:     {value: [1, 9],   route: inferred, source: "~0.10"}
+    inactive:        {value: [1, 49],  route: inferred, source: "~0.02"}
+  payer:            # LU4
+    whale:           {value: [9, 1],   route: inferred, source: "~0.90; near-certain payers"}
+    engaged_spender: {value: [6, 4],   route: inferred, source: "~0.60"}
+    casual:          {value: [1, 19],  route: inferred, source: "~0.05"}
+    time_filler:     {value: [1, 49],  route: inferred, source: "~0.02"}
+    inactive:        {value: [1, 199], route: inferred, source: "~0.005"}
+
+# LU5. LogNormal(mu, sigma) per archetype, relative to casual = 1.0 by
+# construction. The dollar anchor lives in ltv.base_median_usd, never here, so
+# it is not counted twice. inactive is a FIXED ZERO, an exact identity rather
+# than a small number, tied to LU4's near-zero payer rate.
+archetype_ltv_multiplier:
+  # mu and sigma are separate leaves because they have DIFFERENT provenance.
+  #
+  # THE 3 FREE mu WERE RELABELLED `auto-calibrated` to `inferred` on 16 August 2026.
+  # The old label claimed a solver had produced them. None had. They are v1's design
+  # judgements, checked against the whale-share target rather than solved against it,
+  # and they CANNOT be solved as they stand: whale, engaged_spender, time_filler and
+  # ltv.lognormal_sigma all aim at the same scalar, the top-5-percent share, so four
+  # unknowns face one equation. sigma is the one the solver takes, and these three
+  # are held.
+  #
+  # This is the mirror of the sigma correction made the same day. sigma was a real
+  # solver output wearing a `specified` label; these were judgements wearing an
+  # `auto-calibrated` one. Both directions of mislabelling were inherited from v1.
+  #
+  # Solving all four would need a per-archetype revenue-share target, and no source
+  # in docs/Industry_Source_Reports.md splits spend by player archetype, which is
+  # unsurprising: archetype is T9's own latent, not an industry category.
+  whale:
+    mu:    {value: 1.95, route: inferred, source: "~7x the casual median. Set against the whale top-5% revenue share target 0.55-0.65, NOT solved against it: see the block note. provenance_table.md row 47"}
+    sigma: {value: 0.50, route: inferred, source: "within-whale spread, a judgement. The widest in the pool, so it drives the extreme spend tail. provenance_table.md row 48"}
+  engaged_spender:
+    mu:    {value: 0.92, route: inferred, source: "~2.5x. Set against the same whale-share target, not solved against it"}
+    sigma: {value: 0.40, route: inferred, source: "spread judgement"}
+  casual:
+    mu:    {value: 0.00, route: quoted, source: "the reference archetype, unit median by construction, so this is an identity rather than an estimate"}
+    sigma: {value: 0.30, route: inferred, source: "spread judgement"}
+  time_filler:
+    mu:    {value: -1.20, route: inferred, source: "~0.3x. Set against the same whale-share target, not solved against it"}
+    sigma: {value: 0.30, route: inferred, source: "spread judgement"}
+  inactive:
+    fixed: {value: 0, route: specified, source: "exact zero identity, not a small draw. Tied to LU4's near-zero payer rate. Register row 10 and constraint R9"}
+
+# LU6. One Dirichlet(k x centroid) draw per user, stored as 4 genre columns.
+archetype_interest:
+  concentration_k: {value: 20.0, route: inferred, source: "tightness around the centroid; sensitivity-test. provenance_table.md row 49"}
+  order: [casual, strategy, rpg, hypercasual]
+  centroids:
+    whale:           {value: [0.10, 0.40, 0.40, 0.10], route: inferred, source: "whales skew strategy and rpg, the high-LTV genres"}
+    engaged_spender: {value: [0.20, 0.30, 0.30, 0.20], route: inferred, source: "broad but core-leaning"}
+    casual:          {value: [0.40, 0.15, 0.15, 0.30], route: inferred, source: "casual and hypercasual leaning"}
+    time_filler:     {value: [0.35, 0.10, 0.10, 0.45], route: inferred, source: "session-filler genres"}
+    inactive:        {value: [0.25, 0.25, 0.25, 0.25], route: inferred, source: "uniform, no engagement signal"}
+
+# LC1 and LC2. entity_latents.sigma_app for LA1 is already above; these are the
+# 2 the register named with no home.
+entity_latents_extra:
+  sigma_cre:  {value: 0.25, route: inferred, source: "LC1 creative-appeal spread. provenance_table.md row 40"}
+  sigma_game: {value: 0.35, route: inferred, source: "LC2 monetisation-quality spread, drives the LTV tails. provenance_table.md row 41"}
+
+# LA2, the app's audience profile: Dirichlet(k x centroid[app_category]) per app,
+# stored as 5 archetype columns. NB v1 held 2 different concentrations, 10.0 at
+# entity_latents.audience_dirichlet_k and 3.0 at bn.k_audience, and the register
+# names both. The BN-layer value is the live one; the other was inert.
+app_audience:
+  concentration_k: {value: 3.0, route: inferred, source: "v1 bn.k_audience, the live BN-layer value. The older entity_latents.audience_dirichlet_k of 10.0 was marked INERT until the BN layer and is not carried"}
+  order: [whale, engaged_spender, casual, time_filler, inactive]
+  centroids:
+    casual:      {value: [0.02, 0.09, 0.22, 0.40, 0.27], route: inferred, source: "v1 bn.audience_centroids"}
+    strategy:    {value: [0.05, 0.15, 0.25, 0.33, 0.22], route: inferred, source: "v1 bn.audience_centroids"}
+    rpg:         {value: [0.06, 0.18, 0.25, 0.31, 0.20], route: inferred, source: "v1 bn.audience_centroids"}
+    hypercasual: {value: [0.01, 0.04, 0.15, 0.45, 0.35], route: inferred, source: "v1 bn.audience_centroids"}
+
+# m_stage, the relevance weight per funnel stage: alpha = (1-w) + w * r_genre.
+funnel_relevance_weights:
+  click:   {value: 0.5, route: inferred, source: "relevance moves CTR about 2x between r=0 and r=1; review after the golden run"}
+  install: {value: 0.6, route: inferred, source: "interest matters more once attention is paid"}
+  pay:     {value: 0.7, route: inferred, source: "spend is the most interest-driven stage"}
+
+# E2 and F2, the 2 delay laws. Structural only under the current no-window design.
+funnel_delays:
+  click_delay_mean_s: {value: 30, route: inferred, source: "E2 = D1 + Exponential(30s). provenance_table.md row 5"}
+  install_delay:
+    mu:    {value: 7.5, route: inferred, source: "median click to install about 30 minutes. provenance_table.md row 6"}
+    sigma: {value: 1.0, route: inferred, source: "wide right tail in hours"}
+
+# Per-auction context: the exchange (B3), the slot format (B6) and the slot
+# quality lookup (v_slot). Missing from v2 until 16 August 2026, when the register
+# review found B3, B6 and v_slot each naming a key that lived only in v1. The
+# size-given-format table is NOT here: it is a conditional table and already sits
+# at `tables.yaml size_given_format`.
+context:
+  ad_exchanges:                      # 2025 US mediation shares
+    "AppLovin MAX":     {value: 0.52, route: quoted, source: "2025 mediation reports, MAX above 50 percent. t9_sim/config/benchmarks.yaml:161"}
+    "Unity LevelPlay":  {value: 0.20, route: quoted, source: "2025 mediation reports. benchmarks.yaml:162"}
+    "Google AdMob":     {value: 0.20, route: quoted, source: "2025 mediation reports. benchmarks.yaml:163"}
+    "Mintegral":        {value: 0.05, route: inferred, source: "tail split judgement, no published figure. benchmarks.yaml:164"}
+    "Liftoff Monetize": {value: 0.03, route: inferred, source: "tail split judgement, no published figure. benchmarks.yaml:165"}
+  # No measured impression mix exists: Tenjin and CAS publish eCPM by format and
+  # never impression shares. Triangulated as revenue share divided by eCPM, from
+  # the Braberg 2025 revenue split (interstitial 50, rewarded 35, banner 15 percent
+  # of ad revenue) against US eCPMs (banner about $0.5-1.2, interstitial $14-20,
+  # rewarded $16-30), which implies banner 0.70-0.85 / interstitial 0.10-0.20 /
+  # rewarded 0.05-0.10.
+  slot_format_shares:
+    banner:       {value: 0.70, route: inferred, source: "derived, revenue-share over eCPM triangulation, Braberg 2025 against Tenjin/CAS US eCPMs. Sensitivity range 0.55-0.85. benchmarks.yaml:176"}
+    interstitial: {value: 0.20, route: inferred, source: "derived, see banner. benchmarks.yaml:177"}
+    rewarded:     {value: 0.10, route: inferred, source: "derived, see banner; consistent with a 35 percent revenue share at roughly 20x banner eCPM. benchmarks.yaml:178"}
+  # v_slot = format_weight(B6) x size_weight(B4, B5), landing in roughly [0.45, 2].
+  # Attention proxies with no outside source of any kind, and none is available.
+  slot_quality:
+    format_weight:
+      banner:       {value: 0.5, route: inferred, source: "attention proxy, consistent with the eCPM ordering. benchmarks.yaml:193"}
+      interstitial: {value: 1.0, route: inferred, source: "the reference format, 1.0 by construction. benchmarks.yaml:194"}
+      rewarded:     {value: 1.8, route: inferred, source: "opt-in attention premium. benchmarks.yaml:195"}
+    size_weight:
+      "320x50":  {value: 0.9, route: inferred, source: "small banner. benchmarks.yaml:197"}
+      "300x250": {value: 1.1, route: inferred, source: "MREC, larger canvas. benchmarks.yaml:198"}
+      "320x100": {value: 1.0, route: inferred, source: "the reference size. benchmarks.yaml:199"}
+      "320x480": {value: 1.0, route: inferred, source: "full screen, the format weight already carries it. benchmarks.yaml:200"}
+      "480x320": {value: 1.0, route: inferred, source: "full screen landscape, as 320x480"}
+
+# D1 and D4, the 28-day window. O3 3e anchors the rival day index to its START.
+time:
+  window_days:      {value: 28, route: specified, source: "docs/T9Sim_Specification_v2.md 1.6 D1 and D4, the 4-week window"}
+  window_start_utc: {value: "2025-06-02", route: specified, source: "v1 time.window_start_utc, a Monday so day-of-week 0 is Monday"}
+
+# The target k_global is solved against. Not a generator draw: it is the pin the
+# bisection aims at, so it belongs with the values it judges.
+win_rate:
+  target:           {value: 0.30, route: quoted, source: "iPinYou 23.8 percent empirical rescaled; the same target validation.yaml gates on"}
+  solver_tolerance: {value: 0.005, route: inferred, source: "|achieved - target| accepted after the solve"}
+
+# The 3 dependency constants the register named under v1's bn.* edge-flag names.
+# The flags are gone (O11, no switched-off variants) but the constants are real.
+dependency_strengths:
+  pairing_strength:   {value: 1.0, route: inferred, source: "edge #1. v1 bn.pairing_strength_s. Seeds the IPF pairing table before the rake"}
+  exposure_beta:      {value: 0.5, route: inferred, source: "edge #2. v1 bn.exposure_beta_vo. How strongly user value tilts campaign selection"}
+  ios_ltv_multiplier: {value: 1.8, route: inferred, source: "edge #3. v1 bn.ios_ltv_multiplier. plat(iOS)=1.8, plat(Android)=1.0; externally bounded by AppMagic and Backlinko at about 1.6-2x"}
+  payer_timing:
+    route: inferred
+    source: "edge #4. v1 bn.payer_timing. t_pay(hour, dow), raked to mean 1 over the population so install-to-payer is preserved. Shape from SOOMLA, IAP peaks at 4 PM and 8-9 PM, Saturday"
+    hour_mult: [0.70, 0.60, 0.55, 0.50, 0.50, 0.60, 0.70, 0.80, 0.90, 1.00, 1.10, 1.15,
+                1.20, 1.20, 1.30, 1.35, 1.40, 1.30, 1.20, 1.30, 1.40, 1.30, 1.00, 0.85]
+    dow_mult:  [1.00, 1.00, 1.00, 1.00, 1.05, 1.30, 1.10]

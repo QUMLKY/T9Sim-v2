@@ -1,0 +1,177 @@
+# tables.yaml, the probability tables graph.yaml names.
+# Values are NOT copied from v1's settings. Each table is populated from the
+# design documents or recorded as a hole for gate 1.
+
+meta:
+  note: >
+    9 tables. 6 carry over from v1 and 3 were wired by open item O1 on
+    15 August 2026, os, device_type and day_of_week given archetype. The
+    register rows for A3, A5 and D3 were amended to T2 with LU1 as parent
+    before this file was written.
+
+  # Shared input to the 3 tilted tables below. Not a table itself, so it lives
+  # here rather than under `tables`, which holds only probability tables.
+  archetype_ladder:
+    route: inferred
+    source: "O3 3b. Monetisation rank whale > engaged_spender > casual > time_filler > inactive, scored +2..-2, then centred on the archetype shares and scaled to unit variance under them"
+    scores: {whale: 2.901, engaged_spender: 1.894, casual: 0.886, time_filler: -0.121, inactive: -1.128}
+    check: {share_weighted_mean: 0.0, share_weighted_variance: 1.0}
+
+  # The sweep the O3 3b decision commits to. Multiply every tau by each factor
+  # in turn. x0 is the null and must reproduce the unwired generator bit for bit.
+  tilt_sensitivity_sweep: [0.0, 0.5, 1.0, 2.0]
+
+tables:
+  A2_city_given_region:
+    kind: conditional
+    parents: [A1]
+    route: quoted
+    source: calibration/ipinyou_city_distribution.csv, already conditional per region
+    values:
+      0: {0: 1.000000}
+      1: {1: 1.000000}
+      2: {2: 1.000000}
+      3: {3: 0.035748, 4: 0.219592, 5: 0.106511, 6: 0.049555, 7: 0.079537, 8: 0.092754, 9: 0.136382, 10: 0.042206, 11: 0.031853, 12: 0.074413, 13: 0.085711, 14: 0.045738}
+      15: {15: 0.063708, 16: 0.244757, 17: 0.083672, 18: 0.056464, 19: 0.053380, 20: 0.054317, 21: 0.023933, 22: 0.079079, 23: 0.107466, 24: 0.052439, 25: 0.086520, 26: 0.094266}
+      27: {27: 0.060364, 28: 0.182596, 29: 0.135504, 30: 0.034191, 31: 0.123551, 32: 0.094875, 33: 0.080549, 34: 0.098455, 35: 0.054287, 36: 0.043192, 37: 0.040629, 38: 0.033333, 39: 0.018474}
+      40: {40: 0.023068, 41: 0.221015, 42: 0.184989, 43: 0.076718, 44: 0.049483, 45: 0.039393, 46: 0.047390, 47: 0.065153, 48: 0.050479, 49: 0.039908, 50: 0.038461, 51: 0.039811, 52: 0.040625, 53: 0.039980, 54: 0.043528}
+      55: {56: 0.381137, 57: 0.194751, 58: 0.102238, 59: 0.026852, 60: 0.063256, 61: 0.042732, 62: 0.058965, 63: 0.045910, 64: 0.084159}
+      65: {65: 0.026921, 66: 0.329951, 67: 0.098758, 68: 0.042683, 69: 0.029947, 70: 0.041008, 71: 0.106756, 72: 0.032956, 73: 0.064000, 74: 0.022818, 75: 0.086710, 76: 0.035768, 77: 0.068495, 78: 0.013230}
+      79: {79: 1.000000}
+      80: {80: 0.027712, 81: 0.176132, 82: 0.119353, 83: 0.063864, 84: 0.075780, 85: 0.255996, 86: 0.048946, 87: 0.032762, 88: 0.027178, 89: 0.039886, 90: 0.042619, 91: 0.031632, 92: 0.034697, 93: 0.023441}
+      94: {94: 0.012493, 95: 0.239262, 96: 0.152979, 97: 0.146592, 98: 0.073212, 99: 0.041129, 100: 0.067052, 101: 0.104946, 102: 0.030108, 103: 0.016322, 104: 0.089702, 105: 0.026203}
+      106: {106: 0.117365, 107: 0.225935, 108: 0.066132, 109: 0.045676, 110: 0.050153, 111: 0.038861, 112: 0.030349, 113: 0.022537, 114: 0.058998, 115: 0.025317, 116: 0.048958, 117: 0.057157, 118: 0.041802, 119: 0.036378, 120: 0.045706, 121: 0.031149, 122: 0.018726, 123: 0.038802}
+      124: {124: 0.026739, 125: 0.230945, 126: 0.190740, 127: 0.066874, 128: 0.040143, 129: 0.262124, 130: 0.063186, 131: 0.035719, 132: 0.042038, 133: 0.041491}
+      134: {134: 0.050009, 135: 0.281385, 136: 0.041904, 137: 0.039545, 138: 0.093314, 139: 0.043313, 140: 0.021415, 141: 0.146006, 142: 0.063576, 143: 0.081642, 144: 0.058589, 145: 0.079303}
+      146: {146: 0.038963, 147: 0.127096, 148: 0.149854, 149: 0.055998, 150: 0.037254, 151: 0.031509, 152: 0.086485, 153: 0.079181, 154: 0.059848, 155: 0.041426, 156: 0.042336, 157: 0.026864, 158: 0.012665, 159: 0.071163, 160: 0.032901, 161: 0.035852, 162: 0.032149, 163: 0.038453}
+      164: {164: 0.027723, 165: 0.266786, 166: 0.033192, 167: 0.086480, 168: 0.050060, 169: 0.046630, 170: 0.017593, 171: 0.066804, 172: 0.059826, 173: 0.024536, 174: 0.044329, 175: 0.024524, 176: 0.030383, 177: 0.062260, 178: 0.044946, 179: 0.043024, 180: 0.041263, 181: 0.029128, 396: 0.000511}
+      183: {183: 0.024406, 184: 0.387007, 185: 0.039606, 186: 0.044026, 187: 0.066211, 188: 0.073468, 189: 0.027411, 190: 0.055504, 191: 0.046727, 192: 0.052153, 193: 0.048005, 194: 0.033026, 195: 0.020743, 196: 0.026880, 397: 0.054825}
+      201: {201: 0.035804, 202: 0.305390, 203: 0.074660, 204: 0.056122, 205: 0.078421, 206: 0.057369, 207: 0.059307, 208: 0.057598, 209: 0.018196, 210: 0.038499, 211: 0.055262, 212: 0.043547, 213: 0.048045, 214: 0.042643, 215: 0.029138}
+      216: {216: 0.034981, 217: 0.228555, 218: 0.011359, 219: 0.268408, 220: 0.035086, 221: 0.026493, 222: 0.068194, 223: 0.028317, 224: 0.020143, 225: 0.014034, 226: 0.015024, 227: 0.036213, 228: 0.012783, 229: 0.006515, 230: 0.008188, 231: 0.011060, 232: 0.012757, 233: 0.095585, 234: 0.036248, 235: 0.009022, 236: 0.015359, 237: 0.005675}
+      238: {238: 0.039935, 239: 0.330139, 240: 0.112810, 241: 0.107229, 242: 0.060190, 243: 0.037102, 244: 0.021388, 245: 0.040682, 246: 0.048774, 247: 0.070085, 248: 0.046710, 249: 0.016718, 250: 0.041258, 251: 0.020703, 252: 0.006277}
+      253: {253: 0.024668, 254: 0.919288, 255: 0.039466, 398: 0.016578}
+      275: {275: 1.000000}
+      276: {276: 0.037232, 277: 0.392704, 278: 0.026743, 279: 0.021886, 280: 0.032848, 281: 0.044416, 282: 0.066449, 283: 0.022559, 284: 0.023971, 285: 0.026083, 286: 0.049733, 287: 0.047754, 288: 0.025359, 289: 0.034770, 290: 0.021375, 291: 0.036182, 292: 0.015773, 293: 0.015465, 294: 0.022999, 295: 0.006617, 296: 0.005671, 297: 0.023412}
+      298: {299: 0.381359, 300: 0.053299, 301: 0.137448, 302: 0.046242, 303: 0.076687, 304: 0.060829, 305: 0.068653, 306: 0.089190, 307: 0.086294}
+      308: {308: 0.039281, 309: 0.436003, 310: 0.071319, 311: 0.054599, 312: 0.022822, 313: 0.040905, 314: 0.021059, 315: 0.029853, 316: 0.022605, 317: 0.035293, 318: 0.077694, 319: 0.038435, 320: 0.033552, 321: 0.046106, 322: 0.021003, 323: 0.005629, 324: 0.003844}
+      325: {325: 0.063853, 326: 0.629526, 327: 0.065352, 328: 0.041783, 329: 0.039426, 330: 0.026355, 331: 0.051639, 332: 0.082066}
+      333: {333: 0.038695, 334: 0.539253, 335: 0.013975, 336: 0.059100, 337: 0.070725, 338: 0.071186, 339: 0.027090, 340: 0.051383, 341: 0.056814, 342: 0.047548, 343: 0.024231}
+      344: {344: 0.038790, 345: 0.406728, 346: 0.032271, 347: 0.030177, 348: 0.065774, 349: 0.054680, 350: 0.043310, 351: 0.035566, 352: 0.065237, 353: 0.065466, 354: 0.056379, 355: 0.033859, 356: 0.038134, 357: 0.024061, 358: 0.009569}
+      359: {359: 0.022814, 360: 0.686758, 361: 0.067783, 362: 0.021023, 363: 0.009616, 364: 0.032273, 365: 0.009522, 366: 0.008642, 367: 0.141569}
+      368: {368: 0.091534, 369: 0.520959, 370: 0.140154, 371: 0.102884, 372: 0.064474, 373: 0.079996}
+      374: {374: 0.001793, 375: 0.353687, 376: 0.047611, 377: 0.015279, 378: 0.036182, 379: 0.070852, 380: 0.025118, 381: 0.081205, 382: 0.060260, 383: 0.009606, 384: 0.045364, 385: 0.012649, 386: 0.092132, 387: 0.035734, 388: 0.016582, 399: 0.095946}
+      393: {393: 1.000000}
+      394: {394: 1.000000}
+      395: {395: 1.000000}
+
+  # Consumes market.yaml device.os_versions. One object, two slots: keep them equal.
+  A4_osversion_given_os:
+    kind: conditional
+    parents: [A3]
+    route: inferred
+    source: "market.yaml device.os_versions, route inferred, whose v1 source string is literally 'PLACEHOLDER pending StatCounter' (t9_sim/calibration/provenance_table.md:39-40)"
+    values:
+      iOS:     {"18.x": 0.55, "17.x": 0.30, "16.x": 0.10, "15.x": 0.05}
+      Android: {"15": 0.30, "14": 0.35, "13": 0.25, "12": 0.10}
+
+  size_given_format:
+    kind: conditional
+    parents: [B6]
+    route: inferred
+    source: "externally bounded. Banner from Adpiler 2023, 320x50 is 28.3 percent of all display impressions against 320x100 at 2.1 percent, about 10x. Interstitial menu from Google Ad Manager, phones are 320x480 portrait and 480x320 landscape (docs/Industry_Source_Reports.md:282-283); the orientation split itself is inferred. Rewarded is a full-screen unit with no slot-size concept per Unity LevelPlay. Values at docs/Archive/Simulator_Schema - June 10 (v7) full.md:458"
+    values:
+      banner:       {"320x50": 0.80, "300x250": 0.15, "320x100": 0.05}
+      interstitial: {"320x480": 0.92, "480x320": 0.08}
+      rewarded:     {"320x480": 1.00}
+
+  D2_hour_given_archetype:
+    kind: conditional
+    parents: [LU1]
+    raked: {preserve: hour_marginal, method: ipf, tol: 1.0e-6}
+    source: calibration/ipinyou_hourdow_distribution.csv
+    base_hour_marginal:   # the iPinYou hour shape the rake must preserve
+      {0: 0.077092, 1: 0.025543, 2: 0.014116, 3: 0.013783, 4: 0.007705, 5: 0.008069, 6: 0.009471, 7: 0.019186, 8: 0.028271, 9: 0.034150, 10: 0.052870, 11: 0.053109, 12: 0.053584, 13: 0.058726, 14: 0.054990, 15: 0.062192, 16: 0.062835, 17: 0.059677, 18: 0.063373, 19: 0.048545, 20: 0.048827, 21: 0.040811, 22: 0.058318, 23: 0.044758}
+    # Circular tilt P(h|k), von Mises, raked so sum_k pi_k P(h|k) = the base hour
+    # shape above. mu_k is the archetype's peak hour, kappa_k its concentration,
+    # kappa = 0 meaning flat. Structure and rake rule at
+    # docs/Archive/Simulator_Schema - June 10 (v7) full.md:663-666,691.
+    archetype_tilts:
+      route: inferred
+      source: "externally shaped, values v1-only. Dayparting from ByteBrew, North America peak 8 PM with a 1 AM tail, and Flurry per-archetype hour shaping; SOOMLA puts the spend curve 2-3 hours later than the play curve (docs/Industry_Source_Reports.md sections 28, 29, 31). The 5 (mu, kappa) pairs themselves appear only at t9_sim/config/bn_cpts.yaml:30-45"
+      mu_kappa:
+        whale:           [22, 0.6]
+        engaged_spender: [21, 0.5]
+        casual:          [20, 0.3]
+        time_filler:     [12, 0.4]
+        inactive:        [0.0, 0.0]
+
+  # pair_idx and c_idx are not stored tables. Both are built at run time by
+  # IPF from other settings, so they carry a recipe rather than values.
+  pair_idx_archetype_by_app:
+    kind: joint_built_at_runtime
+    parents: []
+    raked: {preserve: [archetype_mix, uniform_app_popularity], method: ipf, iterations: 500}
+    build_inputs: [LA2, pairing_strength]
+
+  c_idx_campaign_given_valuebin:
+    kind: conditional_built_at_runtime
+    parents: [user_vbin]
+    raked: {preserve: campaign_budget_shares, method: ipf, iterations: 300}
+    build_inputs: [sample_weight, LC2, exposure_beta]
+
+  # --- wired by O1, 15 August 2026 -------------------------------------------
+  # Each is raked so the marginal the design already fixes survives, which is
+  # what stops wiring from moving the population mix.
+  #
+  # Their tilt strengths are open item O3 3b, decided 15 August 2026: invent and
+  # declare. No outside dataset can supply them, because archetype is T9's own
+  # latent, so every value below is route `inferred` and the datasheet says so.
+  #
+  # The tilt is ONE dial per table, not a hand-written cell grid:
+  #
+  #     P(child = c | archetype a) = logistic( logit(p_marginal) + tau * s_a )
+  #
+  # s_a is the shared archetype ladder below. Two properties make this the form
+  # to use. tau = 0 reproduces a parentless draw exactly, so O1 stays reversible
+  # at run time and the sensitivity sweep has a true null. And because the ladder
+  # is centred on the archetype shares, the pre-rake marginal already lands within
+  # 0.6 percent of target, so the rake corrects rounding rather than undoing the
+  # tilt. Cell values are built at load, never stored, so the dial cannot drift
+  # from the grid it implies. The ladder itself is at meta.archetype_ladder.
+  A3_os_given_archetype:
+    kind: conditional_built_at_runtime
+    parents: [LU1]
+    raked: {preserve: os_marginal, target: {iOS: 0.59, Android: 0.41}, method: ipf, tol: 1.0e-6}
+    tilt:
+      level: iOS
+      ladder: meta.archetype_ladder
+      tau: {value: 0.13, route: inferred, source: "O3 3b, set so the top archetype reaches 0.68 iOS"}
+      implies: {whale: 0.6772, engaged_spender: 0.6480, casual: 0.6176, time_filler: 0.5862, inactive: 0.5541}
+      swing: 0.1231          # 1.22x relative, pre-rake marginal 0.5896 against target 0.59
+
+  A5_device_given_archetype:
+    kind: conditional_built_at_runtime
+    parents: [LU1]
+    raked: {preserve: device_marginal, target: {phone: 0.90, tablet: 0.10}, method: ipf, tol: 1.0e-6}
+    tilt:
+      level: tablet
+      ladder: meta.archetype_ladder
+      tau: {value: 0.13, route: inferred, source: "O3 3b, same strength as A3; tablet is the minority class so the same dial gives a smaller absolute swing"}
+      implies: {whale: 0.1394, engaged_spender: 0.1244, casual: 0.1109, time_filler: 0.0986, inactive: 0.0876}
+      swing: 0.0519          # 1.59x relative, pre-rake marginal 0.1006 against target 0.10
+
+  D3_dow_given_archetype:
+    kind: conditional_built_at_runtime
+    parents: [LU1]
+    raked: {preserve: dow_marginal, source: calibration/ipinyou_hourdow_distribution.csv, method: ipf, tol: 1.0e-6}
+    tilt:
+      level: weekend            # Sat and Sun together; the shift spreads evenly inside each block
+      ladder: meta.archetype_ladder
+      ladder_sign: +1        # CORRECTED 15 Aug 2026. Read in value order like A3 and A5. An earlier draft reversed it on the reasoning that regular players skew away from the weekend; both v1 and the v7 schema say the opposite, that high-value players skew slightly TOWARD it
+      tau:
+        value: 0.04
+        route: inferred
+        source: "O3 3b, corrected against v1 and the schema. The v7 schema states day-of-week PLAY is near-flat with a modest weekend uptick, and that the weekend SPEND skew is carried by t_pay rather than by a play-of-day tilt (docs/Archive/Simulator_Schema - June 10 (v7) full.md:691). tau = 0.04 reproduces v1's weekend_logit almost exactly: v1's per-archetype shifts fit tau = +0.0383 on this ladder, giving swing 0.035 against 0.033 here"
+      implies: {whale: 0.3100, engaged_spender: 0.3014, casual: 0.2930, time_filler: 0.2847, inactive: 0.2766}
+      swing: 0.0334          # 1.12x relative, pre-rake marginal 0.28578 against a uniform 0.28571. Deliberately the weakest of the 3 tilts, since day of week is near-flat by design
+

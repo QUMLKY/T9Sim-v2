@@ -1,0 +1,88 @@
+# calibrated.yaml, machine-written by the stage 2 solver. Do not hand-edit.
+# Regenerate with `python -m t9v2.autocal`.
+meta:
+  solved: '2026-08-16T10:52:01+00:00'
+  scale: per constant, see rows_per_measurement
+  seed: 20250
+  rows_per_measurement:
+    funnel.base_ctr: 200000 rows at 1M pools
+    funnel.base_ir: 200000 rows at 1M pools
+    funnel.base_payer: 1000000 rows at 1M pools
+    ltv.lognormal_mu: 10000000 rows at 10M pools
+    ltv.lognormal_sigma: 10000000 rows at 10M pools
+    k_global: 200000 rows at 1M pools
+  checksum: '2e7fe4543a789be3'
+solved:
+  funnel.base_ctr.start.value:
+    value: 0.2731445312
+    note: 'SOLVED funnel.base_ctr against population_ctr. Target 0.035, achieved 0.03518 on 200,000 rows at 1M pools in 9 iterations. Started at 0.27141 and moved +0.00173453. In band.'
+  funnel.base_ir.start.value:
+    value: 2.699609375
+    note: 'SOLVED funnel.base_ir against click_to_install. Target 0.325, achieved 0.323906 on 200,000 rows at 1M pools in 7 iterations. Started at 2.56496 and moved +0.134646. In band.'
+  funnel.base_payer.start.value:
+    value: 0.2903588867
+    note: 'SOLVED funnel.base_payer against install_to_payer. Target 0.035, achieved 0.0351899 on 1,000,000 rows at 1M pools in 11 iterations. Started at 0.257853 and moved +0.0325059. In band.'
+  ltv.lognormal_mu.value:
+    value: 0.146484375
+    note: 'SOLVED ltv.lognormal_mu against median_payer_spend_usd. Target 6, achieved 6.00041 on 10,000,000 rows at 10M pools in 9 iterations. Started at 1.7918 and moved -1.64532. In band.'
+  ltv.lognormal_sigma.value:
+    value: 1.5625
+    note: 'SOLVED ltv.lognormal_sigma against whale_concentration. Target 0.6, achieved 0.598276 on 10,000,000 rows at 10M pools in 3 iterations. Started at 1.64817 and moved -0.085669. In band.'
+  auction.k_global.value:
+    value: 1.376914063
+    note: 'SOLVED k_global against auction_win_rate. Target 0.3, achieved 0.29951 on 200,000 rows at 1M pools in 8 iterations. Started at 1 and moved +0.376914. In band.'
+
+# ---------------------------------------------------------------------------
+# The solver's OUTPUT CONTRACT. Names only, no values: a value here would be a
+# hand-set calibration, which is the one thing this file must never contain.
+#
+# Written 16 August 2026, when the register review found `lognormal_mu` cited by
+# the register and by two comments in market.yaml and validation.yaml as if it
+# lived at `market.yaml ltv.lognormal_mu`. It does not and must not: it is a
+# solver output, so market.yaml holding it would put a fitted number in the
+# hand-written layer. It had no home anywhere, which is why it read as a gap.
+#
+# Each entry names the key the solver writes and the target it is solved against.
+# The provenance of an auto-calibrated value is its target and its procedure, not
+# the number, so the targets are the part worth stating in advance.
+contract:
+  funnel.base_ctr:
+    target: "population CTR in 0.02 to 0.05 (validation.yaml calibration_targets.population_ctr)"
+    from: "market.yaml funnel.base_ctr.start, v1's solved 0.27141"
+  funnel.base_ir:
+    target: "click to install in 0.25 to 0.40"
+    from: "market.yaml funnel.base_ir.start, v1's solved 2.564963"
+  funnel.base_payer:
+    target: "install to payer in 0.02 to 0.05"
+    from: "market.yaml funnel.base_payer.start, v1's solved 0.257853"
+  ltv.lognormal_mu:
+    target: "median payer spend of 6.00 USD (market.yaml ltv.base_median_usd)"
+    from: "market.yaml ltv.lognormal_mu, the analytic ln(6) = 1.7918"
+    note: "carries market.yaml's circularity warning: validation.yaml then scores the simulator against the same 6.00 the solve aimed at"
+  ltv.lognormal_sigma:
+    target: "whale top-5-percent share of total revenue in 0.55 to 0.65"
+    from: "market.yaml ltv.lognormal_sigma, v1's solved 1.648169. Its own analytic origin was sqrt(2 x ln(mean/median)) = 1.6889"
+    note: "added 16 Aug 2026, which makes the contract 9 and not the 8 the rebuild plan states. v2 had routed this `specified` while v1's provenance table records it as an autocal output; the register review caught the disagreement and v1's record settled it"
+  k_global:
+    target: "win rate 0.30 plus or minus 0.005 (market.yaml win_rate)"
+    from: "market.yaml auction.k_global, the neutral 1.0"
+    note: "the register names this at H2. A pin rather than a law parameter, but it still needs an origin for the bisection, so market.yaml carries the neutral start from 16 Aug 2026. v1 never persisted its answer, so this is the one contract key with no v1 value to check against"
+
+# NOT solved here, though its route reads auto-calibrated: rho. profiles.yaml
+# states why. It is located on a grid against a published band rather than
+# bisected, so the solver never writes it and it stays a run setting.
+#
+# SETTLED 16 August 2026, in two moves. The contract briefly listed 9 because
+# ltv.lognormal_sigma joined it, and then dropped to 6 because the 3 archetype
+# LTV means left it: they are routed `inferred`, not solved. All 3 plus sigma aim
+# at one scalar, the top-5-percent revenue share, so 4 unknowns face 1 equation.
+# sigma is the one the solver takes and the 3 means are held at their v1 values.
+# Solving all 4 would need a per-archetype revenue-share target, and no source
+# splits spend by player archetype because archetype is T9's own latent.
+#
+# The old note said the contract is 9, not the 8 the rebuild plan states.
+# ltv.lognormal_sigma was the disputed one, and v1's provenance table settles it
+# outright at t9_sim/calibration/provenance_table.md:12, which records the value
+# as an autocal output solved against the whale-share target. v2 had inherited
+# the number without the record and routed it `specified`. market.yaml now
+# routes it `auto-calibrated` and the plan's count of 8 is the stale one.

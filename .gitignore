@@ -1,0 +1,24 @@
+# Generated data. Reproducible from this source by seed: every dataset carries a
+# sha256 and a portable content fingerprint in docs/gates/checksums.md, so the
+# files are verifiable without being stored. A 10M seed is about 1.8 GB and the
+# full campaign is 18.5 GB, which is why this line exists before anyone runs it.
+output/
+
+# environments and caches
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+
+# editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Word lock files, which appear beside a .docx that is open and are never wanted
+~$*

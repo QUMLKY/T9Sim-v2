@@ -1,0 +1,125 @@
+# validation.yaml, the pass criteria. Kept apart from the values they judge.
+# Bands are transcribed from docs/Fidelity_Comprehensive_19Jul2026.md, which
+# tabulates each with its external source, and agree with the shorter list in
+# docs/BN_Formalisation_Readable.md. Neither is in the plan's named input pack,
+# so the pack needs widening or these need moving into the specification.
+
+calibration_targets:
+  population_ctr:
+    band: [0.02, 0.05]
+    route: quoted
+    source: "AppsFlyer; Liftoff Mobile Gaming Index, via Fidelity_Comprehensive_19Jul2026.md"
+  click_to_install:
+    band: [0.25, 0.40]
+    route: quoted
+    source: "AppsFlyer; Liftoff, via Fidelity_Comprehensive_19Jul2026.md"
+  install_to_payer:
+    band: [0.02, 0.05]
+    route: quoted
+    source: "GameAnalytics; AppsFlyer, via Fidelity_Comprehensive_19Jul2026.md"
+  whale_concentration:
+    band: [0.55, 0.65]
+    note: "top 5% of payers, share of payer spend"
+    route: quoted
+    source: "GameAnalytics; Newzoo, via Fidelity_Comprehensive_19Jul2026.md"
+  median_payer_spend_usd:
+    reference: 6.0
+    band: [5.0, 9.0]
+    route: inferred
+    source: "band from t9_sim/scripts/fidelity_comprehensive.py:120. TWO CAVEATS. (1) The $6 reference is itself unsupported: v1 routed it `quoted` to GameAnalytics / Wappier ARPPU, and docs/Industry_Source_Reports.md carries no such figure for either firm, so market.yaml ltv.base_median_usd was relabelled `inferred`. (2) This band looks fitted to the outcome rather than to a source: v1 ran 8.08 across 10 seeds and [5.0, 9.0] is exactly wide enough to admit it. See correction C5 and docs/T9Sim_Hole_Provenance.md finding D"
+    circularity_warning: "market.yaml ltv.lognormal_mu is SOLVED against the 6.0 reference, and this gate then scores the simulator against the same number. The generator is calibrated to the target it is judged on"
+  auction_win_rate:
+    band: [0.20, 0.40]
+    pinned: 0.30
+    route: quoted
+    source: "iPinYou 23.8% empirical rescaled, via Fidelity_Comprehensive_19Jul2026.md"
+
+# THE MARKET'S STRUCTURE, added 16 August 2026. Until then nothing in this file
+# looked at the auction beyond the win rate, so four properties that between them
+# decide what the SSP layer can possibly be worth went unmeasured through stages 1
+# to 4 and surfaced only when someone went looking by hand.
+#
+# None is externally sourced and none can be: no publication states how much of a
+# clearing price ought to be private, or how often a floor should be the binding
+# hurdle. They are recorded so that a change to the rival-bid law or the floor
+# shape shows up as a moved number here, rather than as an unexplained shift in
+# the C3-minus-C1 result three stages later.
+#
+# REPORTED, NOT GATED, like the calibration levels. A value outside its band is a
+# finding to explain, not a build to fail.
+market_structure:
+  route: inferred
+  source: "measured on this build over 3 seeds at 200K rows. Bands are +- 2 seed standard deviations around the measured value, not an outside claim. Evidence: docs/gates/private_sweep.json"
+  private_share_of_log_lu7:
+    value: 0.178
+    band: [0.12, 0.24]
+    note: >
+      Share of var(log lu7) owed to the 6 rival latents rather than to base_e, the
+      shared PUBLIC price core. At 0.178 the clearing price is 82 percent public,
+      which is why a lone DSP reaches 0.87 win AUC from its own bid and the floor
+      alone, and why the SSP layer has little left to explain. Raising it was
+      tried on 16 Aug 2026 and REVERTED: tripling the amplitude reached 0.44 and
+      moved C1 win AUC to 0.798 as intended, but rival bids then scaled as
+      exp(1.8 z), so the highest-value rows became unwinnable at a profit and the
+      oracle's own ev_ratio fell 0.90 to 0.52 — the CEILING itself collapsed, so
+      the market had stopped being one any bidder could operate in. The amplitude
+      has an economic ceiling well below 3x, and identification and profitability
+      pull in opposite directions: 0.178 is where both are viable. Recorded in
+      the plan's stage 4 section, beside the archetype tilt sweep. (This note
+      pointed at the gate 4 artifact until 17 Aug 2026; the experiment ran after
+      gate 4 was written, so that artifact never held it.)
+  corr_log_lu7_z:
+    value: 0.212
+    band: [0.19, 0.24]
+    note: >
+      How strongly the competing bid tracks the user's true value. This is what
+      makes the market value-aware, and so what makes adverse selection a
+      mechanism rather than an assertion.
+  floor_binds_rate:
+    value: 0.331
+    band: [0.25, 0.42]
+    note: >
+      Share of rows where the floor exceeds the highest rival bid, so the outcome
+      is settled by 2 numbers every DSP already holds. Together with the eCPM
+      target's 18x format spread this is the largest cap on what an SSP feed can
+      add, and nothing measured it before stage 4.
+  density_predictable_share:
+    value: 0.049
+    band: [0.0, 0.15]
+    note: >
+      Share of var(bid_density) explained by ad_exchange and day together; the
+      remaining 95 percent is a per-row Bernoulli draw. H9 is genuine information
+      about the hurdle, corr 0.305 with the price residual and monotone in the
+      count, that NOTHING observable can forecast. That is why no historical
+      aggregate of it helps, and it is a property of the participation law rather
+      than of any model.
+
+# The 5 golden-run direction gates. Transcribed from what v1's code ACTUALLY does
+# (t9_sim/src/t9sim/validate.py:38-90), not from v1's prose list, which had drifted
+# out of sync in 2 places and was inert documentation the validator never read.
+# Both divergences are documented improvements with a stated reason, so v2 keeps
+# the behaviour and writes the prose to match. Route is `inferred`: the checks are
+# design assertions, not measurements. DATASHEET.md:155-159 already describes this
+# arrangement to external readers.
+direction_checks:
+  route: inferred
+  source: "t9_sim/src/t9sim/validate.py:38-90, the implemented behaviour. Check 4's direction is also stated formally as proposition P4 at docs/BN_Formalisation_Readable.md:212"
+  checks:
+    - id: ltv_by_archetype_monotone
+      assert: "mean e_ltv strictly decreasing over whale > engaged_spender > casual > time_filler > inactive"
+      note: "on the DETERMINISTIC e_ltv, not realised payer spend. Realised medians need thousands of payers per archetype and tie or invert on noise at small scale. v1's prose said payer spend, which was wrong"
+    - id: relevance_lifts_ctr
+      assert: "ctr(r above median) > ctr(r at or below median), where r = lu6[ad_genre]"
+    - id: format_ecpm_ordering
+      assert: "mean winning_price over sold rows: rewarded > interstitial > banner"
+    - id: adverse_selection
+      assert: "mean log(ev_truth) on lost rows > mean log(ev_truth) on won rows, over ev_truth > 0"
+      note: "in LOG space. Raw means are whale-dominated and flip sign on an unlucky seed. v1's prose said raw means, which was wrong"
+    - id: win_rises_with_bid_within_format
+      assert: "within each slot_format, win rate in the top bid_price quartile > the bottom quartile"
+      note: "WITHIN format. Pooling quartiles across formats confounds bid level with format, since rewarded bids are highest and face the highest hurdles"
+  gate_policy: "the 5 direction checks are ANDed into the run's pass or fail; the 6 calibration_targets levels are reported with an in-band status but do not gate"
+
+repro_tolerance:
+  auc_absolute: 0.002
+  crps_relative: 0.01
