@@ -50,28 +50,30 @@ excess is not established. The absence of interference is.
 
 ---
 
-### Two bidders, and why the design is the contribution
+### Two channels, and why the separation is the contribution
 
-Tier 2 runs a win classifier beside an interval-censored AFT price head, each constrained so it can
-move through 1 channel only.
+A data layer can help a bidder in 2 ways, and a single number cannot tell them apart. It can supply
+**features** the model reads, or it can supply **labels** the model learns from. T9Sim separates
+them by construction rather than by argument.
 
-- the **classifier**'s label `won` is visible in all 4 views, so its C3−C1 contrast moves only
-  through **features**
+- the **4 funnel heads** receive every SSP encoder, and their labels are identical in all 4 views,
+  so their C3−C1 contrast can move only through **features**
 - the **price head**'s features are identical in all 4 views, every SSP encoder barred from it by
-  name, so its contrast moves only through **labels**
+  name, so its contrast can move only through **labels**
 
-A disagreement between them locates a mechanism rather than cancelling a claim. The AFT price head
-is the reported bidder. Both are built and both are kept, `--bidders both|aft`.
+Run the ablation and the 2 channels answer separately. The funnel heads do not move, so the SSP
+layer supplies no feature the DSP view could not already reconstruct. The price head moves a long
+way, so the same layer supplies a label the DSP view cannot observe at all. The layer is worth a
+great deal, and it is worth it for a reason a single contrast would have hidden.
 
-**This supersedes v2, and 2 of v2's claims are dead.** v2 ran 1 head, found nothing on the SSP
-layer, and reported it as a flat null. v2.2 finds that null is real on the feature channel and
-large on the label channel, so it was a channel result reported as a flat one. v2 also held that
-five sixths of the gap to the oracle is pricing. That was a property of the classifier's win curve
-rather than of the study, and under the price head's curve the same split reverses.
+**This supersedes v2, and 2 of v2's claims are dead.** v2 measured the SSP layer on the feature
+channel alone and reported the result as a flat null. That null is real, and it is only half the
+question. v2 also held that five sixths of the gap to the oracle is pricing. That was a property of
+the win curve v2 bid with rather than of the study, and the same split reverses under v2.2's.
 
 **A v2 number must never be placed beside a v2.2 number.** The floor fix, the units fix, the wider
-bid ladder, the added column and the second head each move every figure, so the 2 together compare
-2 simulators rather than 2 data layers.
+bid ladder, the added column and the price head each move every figure, so the 2 together compare 2
+simulators rather than 2 data layers.
 
 Full numbers: [`docs/V2.2_Results_AFT.md`](docs/V2.2_Results_AFT.md), and the analysis beside it.
 
