@@ -13,9 +13,9 @@
   "detail": {
    "ltv_by_archetype_monotone": "mean e_ltv whale 72.91 > engaged_spender 21.96 > casual 5.897 > time_filler 1.464 > inactive 0",
    "relevance_lifts_ctr": "ctr high-relevance 0.03928 vs low 0.02934",
-   "format_ecpm_ordering": "banner 3.230 < interstitial 20.044 < rewarded 58.584",
-   "adverse_selection": "mean log ev lost -9.5821 > won -10.8151 (gap 1.2330)",
-   "win_rises_with_bid_within_format": "banner 0.640>0.200; interstitial 0.146>0.039; rewarded 0.082>0.018"
+   "format_ecpm_ordering": "banner 2.849 < interstitial 18.524 < rewarded 53.570",
+   "adverse_selection": "mean log ev lost -9.5374 > won -10.9084 (gap 1.3711)",
+   "win_rises_with_bid_within_format": "banner 0.629>0.194; interstitial 0.132>0.033; rewarded 0.068>0.011"
   }
  },
  {
@@ -32,9 +32,9 @@
   "detail": {
    "ltv_by_archetype_monotone": "mean e_ltv whale 57.44 > engaged_spender 20.62 > casual 5.872 > time_filler 1.432 > inactive 0",
    "relevance_lifts_ctr": "ctr high-relevance 0.03928 vs low 0.02646",
-   "format_ecpm_ordering": "banner 3.820 < interstitial 24.862 < rewarded 69.761",
-   "adverse_selection": "mean log ev lost -9.5348 > won -10.6533 (gap 1.1185)",
-   "win_rises_with_bid_within_format": "banner 0.588>0.181; interstitial 0.143>0.039; rewarded 0.070>0.024"
+   "format_ecpm_ordering": "banner 3.404 < interstitial 22.871 < rewarded 64.164",
+   "adverse_selection": "mean log ev lost -9.4941 > won -10.7585 (gap 1.2644)",
+   "win_rises_with_bid_within_format": "banner 0.574>0.174; interstitial 0.129>0.033; rewarded 0.059>0.015"
   }
  },
  {
@@ -51,9 +51,9 @@
   "detail": {
    "ltv_by_archetype_monotone": "mean e_ltv whale 66.21 > engaged_spender 20.63 > casual 6.332 > time_filler 1.591 > inactive 0",
    "relevance_lifts_ctr": "ctr high-relevance 0.03920 vs low 0.02676",
-   "format_ecpm_ordering": "banner 3.684 < interstitial 24.070 < rewarded 69.659",
-   "adverse_selection": "mean log ev lost -9.5216 > won -10.6450 (gap 1.1233)",
-   "win_rises_with_bid_within_format": "banner 0.599>0.180; interstitial 0.126>0.036; rewarded 0.069>0.022"
+   "format_ecpm_ordering": "banner 3.276 < interstitial 22.147 < rewarded 64.005",
+   "adverse_selection": "mean log ev lost -9.4819 > won -10.7519 (gap 1.2700)",
+   "win_rises_with_bid_within_format": "banner 0.582>0.173; interstitial 0.111>0.031; rewarded 0.057>0.018"
   }
  },
  {
@@ -70,9 +70,9 @@
   "detail": {
    "ltv_by_archetype_monotone": "mean e_ltv whale 53.31 > engaged_spender 19.98 > casual 6.13 > time_filler 1.517 > inactive 0",
    "relevance_lifts_ctr": "ctr high-relevance 0.04062 vs low 0.02906",
-   "format_ecpm_ordering": "banner 4.041 < interstitial 26.903 < rewarded 74.907",
-   "adverse_selection": "mean log ev lost -9.4913 > won -10.4647 (gap 0.9735)",
-   "win_rises_with_bid_within_format": "banner 0.530>0.151; interstitial 0.105>0.029; rewarded 0.062>0.019"
+   "format_ecpm_ordering": "banner 3.652 < interstitial 24.872 < rewarded 69.396",
+   "adverse_selection": "mean log ev lost -9.4694 > won -10.5628 (gap 1.0933)",
+   "win_rises_with_bid_within_format": "banner 0.502>0.145; interstitial 0.092>0.024; rewarded 0.052>0.013"
   }
  },
  {
@@ -89,9 +89,9 @@
   "detail": {
    "ltv_by_archetype_monotone": "mean e_ltv whale 76.33 > engaged_spender 23.8 > casual 7.009 > time_filler 1.557 > inactive 0",
    "relevance_lifts_ctr": "ctr high-relevance 0.04108 vs low 0.03086",
-   "format_ecpm_ordering": "banner 3.589 < interstitial 22.804 < rewarded 65.731",
-   "adverse_selection": "mean log ev lost -9.4699 > won -10.5826 (gap 1.1127)",
-   "win_rises_with_bid_within_format": "banner 0.571>0.167; interstitial 0.120>0.031; rewarded 0.069>0.012"
+   "format_ecpm_ordering": "banner 3.215 < interstitial 21.087 < rewarded 60.702",
+   "adverse_selection": "mean log ev lost -9.4335 > won -10.7105 (gap 1.2770)",
+   "win_rises_with_bid_within_format": "banner 0.545>0.160; interstitial 0.102>0.027; rewarded 0.058>0.008"
   }
  },
  {
@@ -108,9 +108,9 @@
   "detail": {
    "ltv_by_archetype_monotone": "mean e_ltv whale 80.03 > engaged_spender 23.35 > casual 7.116 > time_filler 1.607 > inactive 0",
    "relevance_lifts_ctr": "ctr high-relevance 0.04050 vs low 0.02792",
-   "format_ecpm_ordering": "banner 2.819 < interstitial 16.322 < rewarded 45.920",
-   "adverse_selection": "mean log ev lost -9.4376 > won -10.3313 (gap 0.8937)",
-   "win_rises_with_bid_within_format": "banner 0.700>0.250; interstitial 0.199>0.052; rewarded 0.103>0.029"
+   "format_ecpm_ordering": "banner 2.441 < interstitial 15.085 < rewarded 42.562",
+   "adverse_selection": "mean log ev lost -9.3690 > won -10.4262 (gap 1.0572)",
+   "win_rises_with_bid_within_format": "banner 0.703>0.246; interstitial 0.181>0.048; rewarded 0.091>0.024"
   }
  },
  {
@@ -127,9 +127,9 @@
   "detail": {
    "ltv_by_archetype_monotone": "mean e_ltv whale 68.21 > engaged_spender 23.17 > casual 6.412 > time_filler 1.562 > inactive 0",
    "relevance_lifts_ctr": "ctr high-relevance 0.04366 vs low 0.03218",
-   "format_ecpm_ordering": "banner 3.276 < interstitial 20.890 < rewarded 58.664",
-   "adverse_selection": "mean log ev lost -9.3551 > won -10.5578 (gap 1.2027)",
-   "win_rises_with_bid_within_format": "banner 0.619>0.197; interstitial 0.139>0.035; rewarded 0.080>0.023"
+   "format_ecpm_ordering": "banner 2.905 < interstitial 19.317 < rewarded 54.208",
+   "adverse_selection": "mean log ev lost -9.3125 > won -10.6735 (gap 1.3610)",
+   "win_rises_with_bid_within_format": "banner 0.598>0.188; interstitial 0.124>0.032; rewarded 0.066>0.019"
   }
  },
  {
@@ -146,9 +146,9 @@
   "detail": {
    "ltv_by_archetype_monotone": "mean e_ltv whale 64.4 > engaged_spender 19.9 > casual 6.696 > time_filler 1.612 > inactive 0",
    "relevance_lifts_ctr": "ctr high-relevance 0.03756 vs low 0.02818",
-   "format_ecpm_ordering": "banner 5.458 < interstitial 37.102 < rewarded 106.792",
-   "adverse_selection": "mean log ev lost -9.6799 > won -10.9973 (gap 1.3175)",
-   "win_rises_with_bid_within_format": "banner 0.416>0.104; interstitial 0.079>0.017; rewarded 0.040>0.008"
+   "format_ecpm_ordering": "banner 5.033 < interstitial 34.687 < rewarded 99.933",
+   "adverse_selection": "mean log ev lost -9.6770 > won -11.0762 (gap 1.3992)",
+   "win_rises_with_bid_within_format": "banner 0.381>0.098; interstitial 0.069>0.015; rewarded 0.034>0.006"
   }
  },
  {
@@ -165,9 +165,9 @@
   "detail": {
    "ltv_by_archetype_monotone": "mean e_ltv whale 61.67 > engaged_spender 20.62 > casual 5.874 > time_filler 1.642 > inactive 0",
    "relevance_lifts_ctr": "ctr high-relevance 0.03690 vs low 0.03030",
-   "format_ecpm_ordering": "banner 3.339 < interstitial 20.986 < rewarded 59.477",
-   "adverse_selection": "mean log ev lost -9.5006 > won -10.5196 (gap 1.0189)",
-   "win_rises_with_bid_within_format": "banner 0.633>0.195; interstitial 0.156>0.041; rewarded 0.085>0.019"
+   "format_ecpm_ordering": "banner 2.951 < interstitial 19.302 < rewarded 54.866",
+   "adverse_selection": "mean log ev lost -9.4593 > won -10.6195 (gap 1.1602)",
+   "win_rises_with_bid_within_format": "banner 0.618>0.189; interstitial 0.138>0.036; rewarded 0.072>0.009"
   }
  },
  {
@@ -184,9 +184,9 @@
   "detail": {
    "ltv_by_archetype_monotone": "mean e_ltv whale 74.14 > engaged_spender 23.53 > casual 6.094 > time_filler 1.395 > inactive 0",
    "relevance_lifts_ctr": "ctr high-relevance 0.04208 vs low 0.03006",
-   "format_ecpm_ordering": "banner 4.136 < interstitial 27.188 < rewarded 77.735",
-   "adverse_selection": "mean log ev lost -9.5975 > won -10.7286 (gap 1.1311)",
-   "win_rises_with_bid_within_format": "banner 0.521>0.151; interstitial 0.105>0.026; rewarded 0.057>0.012"
+   "format_ecpm_ordering": "banner 3.740 < interstitial 25.156 < rewarded 72.219",
+   "adverse_selection": "mean log ev lost -9.5724 > won -10.8514 (gap 1.2789)",
+   "win_rises_with_bid_within_format": "banner 0.489>0.144; interstitial 0.088>0.024; rewarded 0.046>0.010"
   }
  },
  {
@@ -203,9 +203,9 @@
   "detail": {
    "ltv_by_archetype_monotone": "mean e_ltv whale 76.41 > engaged_spender 23.13 > casual 6.304 > time_filler 1.542 > inactive 0",
    "relevance_lifts_ctr": "ctr high-relevance 0.04044 vs low 0.02925",
-   "format_ecpm_ordering": "banner 3.226 < interstitial 20.201 < rewarded 58.074",
-   "adverse_selection": "mean log ev lost -9.4775 > won -10.5542 (gap 1.0767)",
-   "win_rises_with_bid_within_format": "banner 0.636>0.201; interstitial 0.145>0.039; rewarded 0.079>0.021"
+   "format_ecpm_ordering": "banner 2.847 < interstitial 18.628 < rewarded 53.475",
+   "adverse_selection": "mean log ev lost -9.4381 > won -10.6424 (gap 1.2043)",
+   "win_rises_with_bid_within_format": "banner 0.622>0.192; interstitial 0.127>0.035; rewarded 0.064>0.014"
   }
  },
  {
@@ -222,9 +222,9 @@
   "detail": {
    "ltv_by_archetype_monotone": "mean e_ltv whale 74.84 > engaged_spender 23.77 > casual 6.94 > time_filler 1.674 > inactive 0",
    "relevance_lifts_ctr": "ctr high-relevance 0.03705 vs low 0.02739",
-   "format_ecpm_ordering": "banner 3.822 < interstitial 24.667 < rewarded 70.139",
-   "adverse_selection": "mean log ev lost -9.5810 > won -10.5476 (gap 0.9667)",
-   "win_rises_with_bid_within_format": "banner 0.584>0.185; interstitial 0.135>0.038; rewarded 0.075>0.020"
+   "format_ecpm_ordering": "banner 3.405 < interstitial 22.669 < rewarded 64.422",
+   "adverse_selection": "mean log ev lost -9.5349 > won -10.6660 (gap 1.1310)",
+   "win_rises_with_bid_within_format": "banner 0.566>0.180; interstitial 0.120>0.033; rewarded 0.062>0.015"
   }
  },
  {
@@ -241,9 +241,9 @@
   "detail": {
    "ltv_by_archetype_monotone": "mean e_ltv whale 69.77 > engaged_spender 21.32 > casual 6.454 > time_filler 1.56 > inactive 0",
    "relevance_lifts_ctr": "ctr high-relevance 0.04065 vs low 0.03029",
-   "format_ecpm_ordering": "banner 3.682 < interstitial 24.092 < rewarded 69.236",
-   "adverse_selection": "mean log ev lost -9.4707 > won -10.6193 (gap 1.1486)",
-   "win_rises_with_bid_within_format": "banner 0.592>0.183; interstitial 0.133>0.036; rewarded 0.069>0.018"
+   "format_ecpm_ordering": "banner 3.278 < interstitial 22.132 < rewarded 63.542",
+   "adverse_selection": "mean log ev lost -9.4328 > won -10.7253 (gap 1.2925)",
+   "win_rises_with_bid_within_format": "banner 0.573>0.176; interstitial 0.115>0.032; rewarded 0.057>0.014"
   }
  },
  {
@@ -260,9 +260,9 @@
   "detail": {
    "ltv_by_archetype_monotone": "mean e_ltv whale 79.49 > engaged_spender 23.99 > casual 6.65 > time_filler 1.491 > inactive 0",
    "relevance_lifts_ctr": "ctr high-relevance 0.03986 vs low 0.03087",
-   "format_ecpm_ordering": "banner 4.048 < interstitial 26.551 < rewarded 75.543",
-   "adverse_selection": "mean log ev lost -9.5808 > won -10.6157 (gap 1.0349)",
-   "win_rises_with_bid_within_format": "banner 0.534>0.153; interstitial 0.111>0.030; rewarded 0.059>0.016"
+   "format_ecpm_ordering": "banner 3.653 < interstitial 24.593 < rewarded 69.820",
+   "adverse_selection": "mean log ev lost -9.5618 > won -10.6995 (gap 1.1378)",
+   "win_rises_with_bid_within_format": "banner 0.504>0.145; interstitial 0.096>0.027; rewarded 0.049>0.012"
   }
  },
  {
@@ -279,9 +279,9 @@
   "detail": {
    "ltv_by_archetype_monotone": "mean e_ltv whale 73.56 > engaged_spender 22.89 > casual 6.543 > time_filler 1.59 > inactive 0",
    "relevance_lifts_ctr": "ctr high-relevance 0.03913 vs low 0.03009",
-   "format_ecpm_ordering": "banner 3.598 < interstitial 22.983 < rewarded 66.196",
-   "adverse_selection": "mean log ev lost -9.5072 > won -10.6350 (gap 1.1278)",
-   "win_rises_with_bid_within_format": "banner 0.569>0.166; interstitial 0.120>0.032; rewarded 0.063>0.016"
+   "format_ecpm_ordering": "banner 3.224 < interstitial 21.276 < rewarded 61.250",
+   "adverse_selection": "mean log ev lost -9.4785 > won -10.7410 (gap 1.2625)",
+   "win_rises_with_bid_within_format": "banner 0.541>0.159; interstitial 0.104>0.028; rewarded 0.052>0.012"
   }
  },
  {
@@ -298,9 +298,9 @@
   "detail": {
    "ltv_by_archetype_monotone": "mean e_ltv whale 72.39 > engaged_spender 24.56 > casual 6.806 > time_filler 1.671 > inactive 0",
    "relevance_lifts_ctr": "ctr high-relevance 0.03792 vs low 0.02900",
-   "format_ecpm_ordering": "banner 2.811 < interstitial 16.348 < rewarded 46.476",
-   "adverse_selection": "mean log ev lost -9.5052 > won -10.3817 (gap 0.8765)",
-   "win_rises_with_bid_within_format": "banner 0.702>0.249; interstitial 0.187>0.057; rewarded 0.111>0.029"
+   "format_ecpm_ordering": "banner 2.436 < interstitial 15.116 < rewarded 42.927",
+   "adverse_selection": "mean log ev lost -9.4296 > won -10.4897 (gap 1.0601)",
+   "win_rises_with_bid_within_format": "banner 0.706>0.249; interstitial 0.168>0.052; rewarded 0.092>0.022"
   }
  },
  {
@@ -317,9 +317,9 @@
   "detail": {
    "ltv_by_archetype_monotone": "mean e_ltv whale 67.37 > engaged_spender 21.49 > casual 6.226 > time_filler 1.573 > inactive 0",
    "relevance_lifts_ctr": "ctr high-relevance 0.04019 vs low 0.03115",
-   "format_ecpm_ordering": "banner 3.281 < interstitial 20.656 < rewarded 59.166",
-   "adverse_selection": "mean log ev lost -9.4775 > won -10.7040 (gap 1.2265)",
-   "win_rises_with_bid_within_format": "banner 0.619>0.191; interstitial 0.138>0.037; rewarded 0.076>0.021"
+   "format_ecpm_ordering": "banner 2.907 < interstitial 19.092 < rewarded 54.566",
+   "adverse_selection": "mean log ev lost -9.4380 > won -10.8087 (gap 1.3706)",
+   "win_rises_with_bid_within_format": "banner 0.601>0.184; interstitial 0.120>0.032; rewarded 0.063>0.015"
   }
  },
  {
@@ -336,9 +336,9 @@
   "detail": {
    "ltv_by_archetype_monotone": "mean e_ltv whale 72.43 > engaged_spender 21.62 > casual 6.284 > time_filler 1.536 > inactive 0",
    "relevance_lifts_ctr": "ctr high-relevance 0.03982 vs low 0.03182",
-   "format_ecpm_ordering": "banner 5.454 < interstitial 37.024 < rewarded 106.203",
-   "adverse_selection": "mean log ev lost -9.6215 > won -10.8405 (gap 1.2189)",
-   "win_rises_with_bid_within_format": "banner 0.414>0.105; interstitial 0.072>0.017; rewarded 0.035>0.008"
+   "format_ecpm_ordering": "banner 5.035 < interstitial 34.585 < rewarded 99.266",
+   "adverse_selection": "mean log ev lost -9.6171 > won -10.9271 (gap 1.3100)",
+   "win_rises_with_bid_within_format": "banner 0.378>0.097; interstitial 0.061>0.015; rewarded 0.029>0.005"
   }
  },
  {
@@ -355,9 +355,9 @@
   "detail": {
    "ltv_by_archetype_monotone": "mean e_ltv whale 65.76 > engaged_spender 21.37 > casual 6.1 > time_filler 1.5 > inactive 0",
    "relevance_lifts_ctr": "ctr high-relevance 0.03888 vs low 0.02935",
-   "format_ecpm_ordering": "banner 3.354 < interstitial 20.990 < rewarded 60.100",
-   "adverse_selection": "mean log ev lost -9.5885 > won -10.5416 (gap 0.9532)",
-   "win_rises_with_bid_within_format": "banner 0.625>0.200; interstitial 0.147>0.041; rewarded 0.086>0.020"
+   "format_ecpm_ordering": "banner 2.964 < interstitial 19.339 < rewarded 55.345",
+   "adverse_selection": "mean log ev lost -9.5436 > won -10.6422 (gap 1.0987)",
+   "win_rises_with_bid_within_format": "banner 0.614>0.192; interstitial 0.130>0.036; rewarded 0.070>0.015"
   }
  },
  {
@@ -374,9 +374,9 @@
   "detail": {
    "ltv_by_archetype_monotone": "mean e_ltv whale 71.18 > engaged_spender 22.35 > casual 6.246 > time_filler 1.501 > inactive 0",
    "relevance_lifts_ctr": "ctr high-relevance 0.04155 vs low 0.03226",
-   "format_ecpm_ordering": "banner 4.135 < interstitial 27.411 < rewarded 77.725",
-   "adverse_selection": "mean log ev lost -9.5326 > won -10.7118 (gap 1.1792)",
-   "win_rises_with_bid_within_format": "banner 0.522>0.149; interstitial 0.105>0.026; rewarded 0.052>0.015"
+   "format_ecpm_ordering": "banner 3.738 < interstitial 25.373 < rewarded 71.864",
+   "adverse_selection": "mean log ev lost -9.5118 > won -10.8145 (gap 1.3027)",
+   "win_rises_with_bid_within_format": "banner 0.490>0.141; interstitial 0.090>0.023; rewarded 0.042>0.011"
   }
  },
  {
@@ -393,9 +393,9 @@
   "detail": {
    "ltv_by_archetype_monotone": "mean e_ltv whale 73.29 > engaged_spender 22.32 > casual 6.491 > time_filler 1.541 > inactive 0",
    "relevance_lifts_ctr": "ctr high-relevance 0.03930 vs low 0.02981",
-   "format_ecpm_ordering": "banner 3.225 < interstitial 20.201 < rewarded 57.781",
-   "adverse_selection": "mean log ev lost -9.4897 > won -10.5703 (gap 1.0806)",
-   "win_rises_with_bid_within_format": "banner 0.635>0.201; interstitial 0.145>0.040; rewarded 0.080>0.021"
+   "format_ecpm_ordering": "banner 2.845 < interstitial 18.628 < rewarded 53.204",
+   "adverse_selection": "mean log ev lost -9.4487 > won -10.6637 (gap 1.2150)",
+   "win_rises_with_bid_within_format": "banner 0.620>0.194; interstitial 0.128>0.036; rewarded 0.066>0.016"
   }
  },
  {
@@ -412,9 +412,9 @@
   "detail": {
    "ltv_by_archetype_monotone": "mean e_ltv whale 80.74 > engaged_spender 24.43 > casual 6.71 > time_filler 1.6 > inactive 0",
    "relevance_lifts_ctr": "ctr high-relevance 0.03694 vs low 0.02849",
-   "format_ecpm_ordering": "banner 3.819 < interstitial 24.666 < rewarded 70.188",
-   "adverse_selection": "mean log ev lost -9.6018 > won -10.6287 (gap 1.0269)",
-   "win_rises_with_bid_within_format": "banner 0.584>0.185; interstitial 0.135>0.038; rewarded 0.075>0.020"
+   "format_ecpm_ordering": "banner 3.404 < interstitial 22.686 < rewarded 64.478",
+   "adverse_selection": "mean log ev lost -9.5579 > won -10.7424 (gap 1.1845)",
+   "win_rises_with_bid_within_format": "banner 0.569>0.179; interstitial 0.119>0.034; rewarded 0.062>0.015"
   }
  },
  {
@@ -431,9 +431,9 @@
   "detail": {
    "ltv_by_archetype_monotone": "mean e_ltv whale 73.31 > engaged_spender 22.08 > casual 6.401 > time_filler 1.53 > inactive 0",
    "relevance_lifts_ctr": "ctr high-relevance 0.04068 vs low 0.02978",
-   "format_ecpm_ordering": "banner 3.677 < interstitial 24.085 < rewarded 69.287",
-   "adverse_selection": "mean log ev lost -9.4995 > won -10.6500 (gap 1.1505)",
-   "win_rises_with_bid_within_format": "banner 0.594>0.183; interstitial 0.131>0.035; rewarded 0.071>0.018"
+   "format_ecpm_ordering": "banner 3.271 < interstitial 22.135 < rewarded 63.570",
+   "adverse_selection": "mean log ev lost -9.4601 > won -10.7603 (gap 1.3002)",
+   "win_rises_with_bid_within_format": "banner 0.574>0.175; interstitial 0.115>0.031; rewarded 0.058>0.013"
   }
  },
  {
@@ -450,9 +450,9 @@
   "detail": {
    "ltv_by_archetype_monotone": "mean e_ltv whale 70.33 > engaged_spender 22.27 > casual 6.4 > time_filler 1.524 > inactive 0",
    "relevance_lifts_ctr": "ctr high-relevance 0.03949 vs low 0.03029",
-   "format_ecpm_ordering": "banner 4.038 < interstitial 26.571 < rewarded 75.811",
-   "adverse_selection": "mean log ev lost -9.5780 > won -10.6099 (gap 1.0319)",
-   "win_rises_with_bid_within_format": "banner 0.534>0.153; interstitial 0.111>0.029; rewarded 0.061>0.015"
+   "format_ecpm_ordering": "banner 3.644 < interstitial 24.583 < rewarded 70.102",
+   "adverse_selection": "mean log ev lost -9.5607 > won -10.6889 (gap 1.1282)",
+   "win_rises_with_bid_within_format": "banner 0.505>0.146; interstitial 0.096>0.026; rewarded 0.050>0.011"
   }
  },
  {
@@ -469,9 +469,9 @@
   "detail": {
    "ltv_by_archetype_monotone": "mean e_ltv whale 73.66 > engaged_spender 23.42 > casual 6.666 > time_filler 1.61 > inactive 0",
    "relevance_lifts_ctr": "ctr high-relevance 0.03714 vs low 0.03090",
-   "format_ecpm_ordering": "banner 3.599 < interstitial 23.116 < rewarded 65.826",
-   "adverse_selection": "mean log ev lost -9.5800 > won -10.7236 (gap 1.1435)",
-   "win_rises_with_bid_within_format": "banner 0.570>0.166; interstitial 0.119>0.031; rewarded 0.064>0.016"
+   "format_ecpm_ordering": "banner 3.225 < interstitial 21.391 < rewarded 60.850",
+   "adverse_selection": "mean log ev lost -9.5492 > won -10.8364 (gap 1.2872)",
+   "win_rises_with_bid_within_format": "banner 0.541>0.158; interstitial 0.104>0.027; rewarded 0.052>0.012"
   }
  },
  {
@@ -488,9 +488,9 @@
   "detail": {
    "ltv_by_archetype_monotone": "mean e_ltv whale 71.58 > engaged_spender 22.37 > casual 6.38 > time_filler 1.558 > inactive 0",
    "relevance_lifts_ctr": "ctr high-relevance 0.03934 vs low 0.02955",
-   "format_ecpm_ordering": "banner 2.812 < interstitial 16.363 < rewarded 46.546",
-   "adverse_selection": "mean log ev lost -9.5225 > won -10.5233 (gap 1.0008)",
-   "win_rises_with_bid_within_format": "banner 0.703>0.248; interstitial 0.189>0.055; rewarded 0.111>0.031"
+   "format_ecpm_ordering": "banner 2.435 < interstitial 15.134 < rewarded 43.026",
+   "adverse_selection": "mean log ev lost -9.4494 > won -10.6224 (gap 1.1730)",
+   "win_rises_with_bid_within_format": "banner 0.709>0.246; interstitial 0.171>0.050; rewarded 0.094>0.023"
   }
  },
  {
@@ -507,9 +507,9 @@
   "detail": {
    "ltv_by_archetype_monotone": "mean e_ltv whale 72.2 > engaged_spender 22.94 > casual 6.4 > time_filler 1.579 > inactive 0",
    "relevance_lifts_ctr": "ctr high-relevance 0.03944 vs low 0.02990",
-   "format_ecpm_ordering": "banner 3.281 < interstitial 20.676 < rewarded 59.244",
-   "adverse_selection": "mean log ev lost -9.4772 > won -10.7325 (gap 1.2553)",
-   "win_rises_with_bid_within_format": "banner 0.620>0.189; interstitial 0.139>0.037; rewarded 0.076>0.020"
+   "format_ecpm_ordering": "banner 2.907 < interstitial 19.092 < rewarded 54.617",
+   "adverse_selection": "mean log ev lost -9.4342 > won -10.8449 (gap 1.4107)",
+   "win_rises_with_bid_within_format": "banner 0.601>0.182; interstitial 0.122>0.033; rewarded 0.062>0.014"
   }
  },
  {
@@ -526,9 +526,9 @@
   "detail": {
    "ltv_by_archetype_monotone": "mean e_ltv whale 69.59 > engaged_spender 21.6 > casual 6.334 > time_filler 1.522 > inactive 0",
    "relevance_lifts_ctr": "ctr high-relevance 0.03976 vs low 0.03036",
-   "format_ecpm_ordering": "banner 5.437 < interstitial 37.096 < rewarded 106.095",
-   "adverse_selection": "mean log ev lost -9.6198 > won -10.8923 (gap 1.2725)",
-   "win_rises_with_bid_within_format": "banner 0.417>0.106; interstitial 0.073>0.017; rewarded 0.038>0.008"
+   "format_ecpm_ordering": "banner 5.019 < interstitial 34.651 < rewarded 99.112",
+   "adverse_selection": "mean log ev lost -9.6169 > won -10.9758 (gap 1.3589)",
+   "win_rises_with_bid_within_format": "banner 0.380>0.098; interstitial 0.062>0.015; rewarded 0.030>0.006"
   }
  },
  {
@@ -545,9 +545,9 @@
   "detail": {
    "ltv_by_archetype_monotone": "mean e_ltv whale 68.1 > engaged_spender 21.75 > casual 6.298 > time_filler 1.517 > inactive 0",
    "relevance_lifts_ctr": "ctr high-relevance 0.04046 vs low 0.03094",
-   "format_ecpm_ordering": "banner 3.349 < interstitial 21.015 < rewarded 59.851",
-   "adverse_selection": "mean log ev lost -9.5283 > won -10.5122 (gap 0.9839)",
-   "win_rises_with_bid_within_format": "banner 0.627>0.199; interstitial 0.147>0.041; rewarded 0.082>0.022"
+   "format_ecpm_ordering": "banner 2.960 < interstitial 19.356 < rewarded 55.080",
+   "adverse_selection": "mean log ev lost -9.4856 > won -10.6086 (gap 1.1230)",
+   "win_rises_with_bid_within_format": "banner 0.614>0.192; interstitial 0.130>0.036; rewarded 0.068>0.016"
   }
  },
  {
@@ -564,9 +564,9 @@
   "detail": {
    "ltv_by_archetype_monotone": "mean e_ltv whale 75.4 > engaged_spender 23.69 > casual 6.459 > time_filler 1.52 > inactive 0",
    "relevance_lifts_ctr": "ctr high-relevance 0.04192 vs low 0.03161",
-   "format_ecpm_ordering": "banner 4.132 < interstitial 27.367 < rewarded 78.524",
-   "adverse_selection": "mean log ev lost -9.4748 > won -10.7194 (gap 1.2446)",
-   "win_rises_with_bid_within_format": "banner 0.525>0.147; interstitial 0.104>0.027; rewarded 0.055>0.014"
+   "format_ecpm_ordering": "banner 3.734 < interstitial 25.320 < rewarded 72.582",
+   "adverse_selection": "mean log ev lost -9.4558 > won -10.8188 (gap 1.3631)",
+   "win_rises_with_bid_within_format": "banner 0.493>0.139; interstitial 0.090>0.023; rewarded 0.045>0.010"
   }
  }
 ]

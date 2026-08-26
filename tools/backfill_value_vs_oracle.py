@@ -58,9 +58,9 @@ def main(argv=None):
             continue
         touched += 1
         oracle = res["views"]["C1"]["economics"]["oracle"]
-        print("%-6s %-9s %2d policies   oracle ev_ratio %.4f -> of oracle %.4f"
+        print("%-6s %-9s %2d policies   oracle captured %.4f -> of oracle %.4f"
               % (res.get("scale"), "seed%s" % res.get("seed"), n,
-                 oracle["ev_ratio"], oracle["value_vs_oracle"]))
+                 oracle["value_captured"], oracle["value_vs_oracle"]))
         if not a.dry_run:
             p.write_text(json.dumps(res, indent=1, default=float),
                          encoding="utf-8")

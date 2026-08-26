@@ -16,11 +16,11 @@
 
 ## Startup checks
 
-V1 to V11 run on every load and a failure raises before any data is made. V3 was deferred out of gate 1 because it needs the generator; it now binds 78 nodes to 78 law functions and passes.
+V1 to V11 run on every load and a failure raises before any data is made. V3 was deferred out of gate 1 because it needs the generator; it now binds 79 nodes to 79 law functions and passes.
 
 ## `t9v2_100K_seed20250.parquet`
 
-100000 rows, 55 columns. seed 20250, rho 0.8, win rate 0.2998.
+100000 rows, 56 columns. seed 20250, rho 0.8, win rate 0.3006.
 
 ### Calibration levels
 
@@ -33,7 +33,7 @@ Reported with an in-band status. Per `validation.yaml`'s gate policy these do no
 | install_to_payer | 0.0427574 | [0.02, 0.05] | in band |
 | whale_concentration | 0.480867 | [0.55, 0.65] | not measurable here, 49 payers against 2000 needed |
 | median_payer_spend_usd | 7.9262 | [5, 9] | not measurable here, 49 payers against 2000 needed |
-| auction_win_rate | 0.29976 | [0.2, 0.4] | in band |
+| auction_win_rate | 0.30058 | [0.2, 0.4] | in band |
 
 ### Exact identities
 
@@ -61,15 +61,15 @@ ANDed into the run's pass or fail.
 |---|---|---|
 | PASS | `ltv_by_archetype_monotone` | mean e_ltv whale 72.91 > engaged_spender 21.96 > casual 5.897 > time_filler 1.464 > inactive 0 |
 | PASS | `relevance_lifts_ctr` | ctr high-relevance 0.03928 vs low 0.02934 |
-| PASS | `format_ecpm_ordering` | banner 3.230 < interstitial 20.044 < rewarded 58.584 |
-| PASS | `adverse_selection` | mean log ev lost -9.5821 > won -10.8151 (gap 1.2330) |
-| PASS | `win_rises_with_bid_within_format` | banner 0.640>0.200; interstitial 0.146>0.039; rewarded 0.082>0.018 |
+| PASS | `format_ecpm_ordering` | banner 2.849 < interstitial 18.524 < rewarded 53.570 |
+| PASS | `adverse_selection` | mean log ev lost -9.5374 > won -10.9084 (gap 1.3711) |
+| PASS | `win_rises_with_bid_within_format` | banner 0.629>0.194; interstitial 0.132>0.033; rewarded 0.068>0.011 |
 
 **t9v2_100K_seed20250.parquet: PASS**
 
 ## `t9v2_1M_seed20250.parquet`
 
-1000000 rows, 55 columns. seed 20250, rho 0.8, win rate 0.2997.
+1000000 rows, 56 columns. seed 20250, rho 0.8, win rate 0.2993.
 
 ### Calibration levels
 
@@ -82,7 +82,7 @@ Reported with an in-band status. Per `validation.yaml`'s gate policy these do no
 | install_to_payer | 0.0351899 | [0.02, 0.05] | in band |
 | whale_concentration | 0.42201 | [0.55, 0.65] | not measurable here, 405 payers against 2000 needed |
 | median_payer_spend_usd | 6.77036 | [5, 9] | not measurable here, 405 payers against 2000 needed |
-| auction_win_rate | 0.299733 | [0.2, 0.4] | in band |
+| auction_win_rate | 0.299292 | [0.2, 0.4] | in band |
 
 ### Exact identities
 
@@ -110,60 +110,11 @@ ANDed into the run's pass or fail.
 |---|---|---|
 | PASS | `ltv_by_archetype_monotone` | mean e_ltv whale 76.41 > engaged_spender 23.13 > casual 6.304 > time_filler 1.542 > inactive 0 |
 | PASS | `relevance_lifts_ctr` | ctr high-relevance 0.04044 vs low 0.02925 |
-| PASS | `format_ecpm_ordering` | banner 3.226 < interstitial 20.201 < rewarded 58.074 |
-| PASS | `adverse_selection` | mean log ev lost -9.4775 > won -10.5542 (gap 1.0767) |
-| PASS | `win_rises_with_bid_within_format` | banner 0.636>0.201; interstitial 0.145>0.039; rewarded 0.079>0.021 |
+| PASS | `format_ecpm_ordering` | banner 2.847 < interstitial 18.628 < rewarded 53.475 |
+| PASS | `adverse_selection` | mean log ev lost -9.4381 > won -10.6424 (gap 1.2043) |
+| PASS | `win_rises_with_bid_within_format` | banner 0.622>0.192; interstitial 0.127>0.035; rewarded 0.064>0.014 |
 
 **t9v2_1M_seed20250.parquet: PASS**
-
-## `t9v2_10M_seed20250.parquet`
-
-10000000 rows, 55 columns. seed 20250, rho 0.8, win rate 0.2998.
-
-### Calibration levels
-
-Reported with an in-band status. Per `validation.yaml`'s gate policy these do not gate; the direction checks do.
-
-| Target | Measured | Band | Status |
-|---|---:|---|---|
-| population_ctr | 0.0345584 | [0.02, 0.05] | in band |
-| click_to_install | 0.338141 | [0.25, 0.4] | in band |
-| install_to_payer | 0.0354624 | [0.02, 0.05] | in band |
-| whale_concentration | 0.598276 | [0.55, 0.65] | in band |
-| median_payer_spend_usd | 5.95995 | [5, 9] | in band |
-| auction_win_rate | 0.299765 | [0.2, 0.4] | in band |
-
-### Exact identities
-
-Every row, no tolerance. One violating row is a failure.
-
-| Result | Identity |
-|---|---|
-| PASS | install 0 wherever click 0 |
-| PASS | is_payer 0 wherever install 0 |
-| PASS | ltv_value 0 wherever not payer |
-| PASS | click_timestamp -1 exactly where no click |
-| PASS | install_timestamp -1 exactly where no install |
-| PASS | winning_price is our own bid on won rows (first price) |
-| PASS | winning_price is NaN exactly on unsold rows |
-| PASS | bid_density in 1..8 |
-| PASS | ltv_7d = 0.40 x ltv_value and ltv_30d = 0.70 x ltv_value |
-| PASS | ev_truth = p_click x p_install x p_payer x e_ltv |
-| PASS | inactive users carry ev_truth exactly 0 |
-
-### Direction checks
-
-ANDed into the run's pass or fail.
-
-| Result | Check | Measured |
-|---|---|---|
-| PASS | `ltv_by_archetype_monotone` | mean e_ltv whale 73.29 > engaged_spender 22.32 > casual 6.491 > time_filler 1.541 > inactive 0 |
-| PASS | `relevance_lifts_ctr` | ctr high-relevance 0.03930 vs low 0.02981 |
-| PASS | `format_ecpm_ordering` | banner 3.225 < interstitial 20.201 < rewarded 57.781 |
-| PASS | `adverse_selection` | mean log ev lost -9.4897 > won -10.5703 (gap 1.0806) |
-| PASS | `win_rises_with_bid_within_format` | banner 0.635>0.201; interstitial 0.145>0.040; rewarded 0.080>0.021 |
-
-**t9v2_10M_seed20250.parquet: PASS**
 
 ## Two levels cannot be measured at these scales
 
@@ -194,7 +145,7 @@ Band [0.55, 0.65] and target 6.0. The estimator is still swinging at 5M, 0.642 a
 | levels not measurable at these scales | `median_payer_spend_usd`, `whale_concentration` |
 | all direction checks pass | yes |
 | V1 to V11 all pass | yes |
-| row count matches the scale, 55 columns | yes |
+| row count matches the scale, 56 columns | yes |
 
 **Gate 2: PASS**
 

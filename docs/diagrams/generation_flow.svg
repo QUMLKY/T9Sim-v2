@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="620" height="160" viewBox="0 0 1240 320">
+<rect width="1240" height="320" fill="#FFFFFF"/>
+<defs><marker id="ar" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#78909C"/></marker></defs>
+<text x="620.0" y="34.0" font-family="Segoe UI, Arial, sans-serif" font-size="21" font-weight="700" fill="#212121" text-anchor="middle">How one auction row is generated</text>
+<text x="620.0" y="52.0" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#546E7A" text-anchor="middle">five stages, in generation order, ending in the 56 column master record</text>
+<rect x="34.0" y="90" width="212" height="96" rx="10" fill="#BBDEFB" stroke="#1976D2" stroke-width="1.8"/>
+<text x="46.0" y="114.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#212121">1)  four frozen pools</text>
+<text x="46.0" y="134.0" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="400" fill="#546E7A">LU users, LA apps,</text>
+<text x="46.0" y="151.0" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="400" fill="#546E7A">LC campaigns, LR rivals</text>
+<rect x="274.0" y="90" width="212" height="96" rx="10" fill="#FFFFFF" stroke="#607D8B" stroke-width="1.8"/>
+<text x="286.0" y="114.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#212121">2)  observable features</text>
+<text x="286.0" y="134.0" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="400" fill="#546E7A">A user and device,</text>
+<text x="286.0" y="151.0" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="400" fill="#546E7A">B app, C campaign, D time</text>
+<polyline points="246.0,138.0 274.0,138.0" fill="none" stroke="#78909C" stroke-width="2.2" marker-end="url(#ar)"/>
+<rect x="514.0" y="90" width="212" height="96" rx="10" fill="#E1BEE7" stroke="#8E24AA" stroke-width="1.8"/>
+<text x="526.0" y="114.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#212121">3)  true probabilities</text>
+<text x="526.0" y="134.0" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="400" fill="#546E7A">p click, p install, p pay,</text>
+<text x="526.0" y="151.0" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="400" fill="#546E7A">spend head, EV truth</text>
+<polyline points="486.0,138.0 514.0,138.0" fill="none" stroke="#78909C" stroke-width="2.2" marker-end="url(#ar)"/>
+<rect x="754.0" y="90" width="212" height="96" rx="10" fill="#FFE0B2" stroke="#EF6C00" stroke-width="1.8"/>
+<text x="766.0" y="114.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#212121">4)  the market settles</text>
+<text x="766.0" y="134.0" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="400" fill="#546E7A">floor, rival bids, own bid,</text>
+<text x="766.0" y="151.0" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="400" fill="#546E7A">win and winning price (H)</text>
+<polyline points="726.0,138.0 754.0,138.0" fill="none" stroke="#78909C" stroke-width="2.2" marker-end="url(#ar)"/>
+<rect x="994.0" y="90" width="212" height="96" rx="10" fill="#FFCDD2" stroke="#D32F2F" stroke-width="1.8"/>
+<text x="1006.0" y="114.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#212121">5)  funnel outcomes</text>
+<text x="1006.0" y="134.0" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="400" fill="#546E7A">E click, F install, G payer</text>
+<text x="1006.0" y="151.0" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="400" fill="#546E7A">and spend, on every row</text>
+<polyline points="966.0,138.0 994.0,138.0" fill="none" stroke="#78909C" stroke-width="2.2" marker-end="url(#ar)"/>
+<rect x="340.0" y="232" width="560" height="58" rx="10" fill="#FAFAFA" stroke="#212121" stroke-width="2.2"/>
+<text x="620.0" y="257.0" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="#212121" text-anchor="middle">the master record, 56 columns</text>
+<text x="620.0" y="275.0" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="400" fill="#546E7A" text-anchor="middle">one parquet per seed and scale, latents and truth retained for scoring only</text>
+<polyline points="1100.0,186 1100.0,208 860.0,208 860.0,232" fill="none" stroke="#78909C" stroke-width="2.2" marker-end="url(#ar)"/>
+</svg>

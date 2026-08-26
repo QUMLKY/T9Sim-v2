@@ -1,0 +1,2626 @@
+{
+ "scale": "10M",
+ "seeds": [
+  20250,
+  20251,
+  20252,
+  20253,
+  20254,
+  20255,
+  20256,
+  20257,
+  20258,
+  20259
+ ],
+ "targets": [
+  1.0,
+  1.5,
+  2.0,
+  3.0
+ ],
+ "reproduces_recorded_run": true,
+ "checks": [
+  {
+   "seed": 20250,
+   "view": "C1",
+   "wins_rebuilt": 479078,
+   "wins_recorded": 479078,
+   "profit_rebuilt": 5414.3861536430195,
+   "profit_recorded": 5414.3861536430195,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20250,
+   "view": "C2",
+   "wins_rebuilt": 520698,
+   "wins_recorded": 520698,
+   "profit_rebuilt": 8164.229308425192,
+   "profit_recorded": 8164.229308425192,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20250,
+   "view": "C3",
+   "wins_rebuilt": 462609,
+   "wins_recorded": 462609,
+   "profit_rebuilt": 5227.468929485445,
+   "profit_recorded": 5227.468929485445,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20250,
+   "view": "C4",
+   "wins_rebuilt": 506194,
+   "wins_recorded": 506194,
+   "profit_rebuilt": 8588.111645683484,
+   "profit_recorded": 8588.111645683484,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20251,
+   "view": "C1",
+   "wins_rebuilt": 691458,
+   "wins_recorded": 691458,
+   "profit_rebuilt": 5962.8431237132245,
+   "profit_recorded": 5962.843123713223,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20251,
+   "view": "C2",
+   "wins_rebuilt": 658508,
+   "wins_recorded": 658508,
+   "profit_rebuilt": 8606.704044286678,
+   "profit_recorded": 8606.704044286678,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20251,
+   "view": "C3",
+   "wins_rebuilt": 650926,
+   "wins_recorded": 650926,
+   "profit_rebuilt": 5963.864559286401,
+   "profit_recorded": 5963.8645592863995,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20251,
+   "view": "C4",
+   "wins_rebuilt": 564235,
+   "wins_recorded": 564235,
+   "profit_rebuilt": 9303.31041759011,
+   "profit_recorded": 9303.31041759011,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20252,
+   "view": "C1",
+   "wins_rebuilt": 339083,
+   "wins_recorded": 339083,
+   "profit_rebuilt": 3942.1698723710633,
+   "profit_recorded": 3942.1698723710633,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20252,
+   "view": "C2",
+   "wins_rebuilt": 430447,
+   "wins_recorded": 430447,
+   "profit_rebuilt": 7097.9824722188205,
+   "profit_recorded": 7097.9824722188205,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20252,
+   "view": "C3",
+   "wins_rebuilt": 301609,
+   "wins_recorded": 301609,
+   "profit_rebuilt": 3849.8931826438034,
+   "profit_recorded": 3849.8931826438043,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20252,
+   "view": "C4",
+   "wins_rebuilt": 434992,
+   "wins_recorded": 434992,
+   "profit_rebuilt": 7341.26349918294,
+   "profit_recorded": 7341.26349918294,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20253,
+   "view": "C1",
+   "wins_rebuilt": 595470,
+   "wins_recorded": 595470,
+   "profit_rebuilt": 5196.13734823614,
+   "profit_recorded": 5196.13734823614,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20253,
+   "view": "C2",
+   "wins_rebuilt": 631174,
+   "wins_recorded": 631174,
+   "profit_rebuilt": 7261.6020018657,
+   "profit_recorded": 7261.602001865698,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20253,
+   "view": "C3",
+   "wins_rebuilt": 567792,
+   "wins_recorded": 567792,
+   "profit_rebuilt": 5312.436146994072,
+   "profit_recorded": 5312.436146994072,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20253,
+   "view": "C4",
+   "wins_rebuilt": 581735,
+   "wins_recorded": 581735,
+   "profit_rebuilt": 7860.152659494866,
+   "profit_recorded": 7860.152659494866,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20254,
+   "view": "C1",
+   "wins_rebuilt": 398575,
+   "wins_recorded": 398575,
+   "profit_rebuilt": 2246.8661482092607,
+   "profit_recorded": 2246.8661482092607,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20254,
+   "view": "C2",
+   "wins_rebuilt": 504382,
+   "wins_recorded": 504382,
+   "profit_rebuilt": 4623.086574571979,
+   "profit_recorded": 4623.086574571979,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20254,
+   "view": "C3",
+   "wins_rebuilt": 374421,
+   "wins_recorded": 374421,
+   "profit_rebuilt": 2248.779465753497,
+   "profit_recorded": 2248.7794657534973,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20254,
+   "view": "C4",
+   "wins_rebuilt": 468200,
+   "wins_recorded": 468200,
+   "profit_rebuilt": 5042.961242455674,
+   "profit_recorded": 5042.961242455673,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20255,
+   "view": "C1",
+   "wins_rebuilt": 919655,
+   "wins_recorded": 919655,
+   "profit_rebuilt": 5311.724576560232,
+   "profit_recorded": 5311.72457656023,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20255,
+   "view": "C2",
+   "wins_rebuilt": 702587,
+   "wins_recorded": 702587,
+   "profit_rebuilt": 7712.380609776097,
+   "profit_recorded": 7712.380609776097,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20255,
+   "view": "C3",
+   "wins_rebuilt": 867735,
+   "wins_recorded": 867735,
+   "profit_rebuilt": 5939.773709659747,
+   "profit_recorded": 5939.773709659747,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20255,
+   "view": "C4",
+   "wins_rebuilt": 646901,
+   "wins_recorded": 646901,
+   "profit_rebuilt": 8573.011499749651,
+   "profit_recorded": 8573.011499749651,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20256,
+   "view": "C1",
+   "wins_rebuilt": 744324,
+   "wins_recorded": 744324,
+   "profit_rebuilt": 6303.5383375219935,
+   "profit_recorded": 6303.538337521992,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20256,
+   "view": "C2",
+   "wins_rebuilt": 650701,
+   "wins_recorded": 650701,
+   "profit_rebuilt": 9952.469954351014,
+   "profit_recorded": 9952.469954351014,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20256,
+   "view": "C3",
+   "wins_rebuilt": 712100,
+   "wins_recorded": 712100,
+   "profit_rebuilt": 6342.303544625645,
+   "profit_recorded": 6342.303544625645,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20256,
+   "view": "C4",
+   "wins_rebuilt": 654712,
+   "wins_recorded": 654712,
+   "profit_rebuilt": 10295.3577335906,
+   "profit_recorded": 10295.357733590597,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20257,
+   "view": "C1",
+   "wins_rebuilt": 326414,
+   "wins_recorded": 326414,
+   "profit_rebuilt": 1594.1864851971893,
+   "profit_recorded": 1594.1864851971893,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20257,
+   "view": "C2",
+   "wins_rebuilt": 375578,
+   "wins_recorded": 375578,
+   "profit_rebuilt": 3333.9099336411405,
+   "profit_recorded": 3333.909933641141,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20257,
+   "view": "C3",
+   "wins_rebuilt": 319648,
+   "wins_recorded": 319648,
+   "profit_rebuilt": 1643.335887922598,
+   "profit_recorded": 1643.3358879225982,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20257,
+   "view": "C4",
+   "wins_rebuilt": 375594,
+   "wins_recorded": 375594,
+   "profit_rebuilt": 3407.726427110778,
+   "profit_recorded": 3407.7264271107774,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20258,
+   "view": "C1",
+   "wins_rebuilt": 690073,
+   "wins_recorded": 690073,
+   "profit_rebuilt": 4679.073702060649,
+   "profit_recorded": 4679.07370206065,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20258,
+   "view": "C2",
+   "wins_rebuilt": 572951,
+   "wins_recorded": 572951,
+   "profit_rebuilt": 7013.281054762821,
+   "profit_recorded": 7013.281054762821,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20258,
+   "view": "C3",
+   "wins_rebuilt": 651258,
+   "wins_recorded": 651258,
+   "profit_rebuilt": 4683.506531173023,
+   "profit_recorded": 4683.506531173023,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20258,
+   "view": "C4",
+   "wins_rebuilt": 567306,
+   "wins_recorded": 567306,
+   "profit_rebuilt": 6986.22866809345,
+   "profit_recorded": 6986.22866809345,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20259,
+   "view": "C1",
+   "wins_rebuilt": 623113,
+   "wins_recorded": 623113,
+   "profit_rebuilt": 5644.405347593729,
+   "profit_recorded": 5644.405347593729,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20259,
+   "view": "C2",
+   "wins_rebuilt": 583848,
+   "wins_recorded": 583848,
+   "profit_rebuilt": 8828.835489183486,
+   "profit_recorded": 8828.835489183486,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20259,
+   "view": "C3",
+   "wins_rebuilt": 601514,
+   "wins_recorded": 601514,
+   "profit_rebuilt": 5805.847905741201,
+   "profit_recorded": 5805.847905741201,
+   "wins_match": true,
+   "profit_close": true
+  },
+  {
+   "seed": 20259,
+   "view": "C4",
+   "wins_rebuilt": 542256,
+   "wins_recorded": 542256,
+   "profit_rebuilt": 9490.851757233768,
+   "profit_recorded": 9490.851757233768,
+   "wins_match": true,
+   "profit_close": true
+  }
+ ],
+ "results": {
+  "20250": {
+   "C1": {
+    "1.0": {
+     "wins": 479078,
+     "win_rate": 0.33534765830347313,
+     "placed_rate": 1.0,
+     "spend": 1537.154766999312,
+     "value": 6951.540920642331,
+     "profit": 5414.3861536430195,
+     "profit_per_1k_wins": 11.301679796699117,
+     "value_captured": 0.34174589632562663,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 419184,
+     "win_rate": 0.2934227261495687,
+     "placed_rate": 0.8424437614141387,
+     "spend": 1148.6116667693802,
+     "value": 5934.479177210313,
+     "profit": 4785.867510440932,
+     "profit_per_1k_wins": 11.417104446832257,
+     "value_captured": 0.29174594939363574,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 235061,
+     "win_rate": 0.16453929403661344,
+     "placed_rate": 0.4827758065408046,
+     "spend": 713.5749396112192,
+     "value": 4641.127069787473,
+     "profit": 3927.552130176254,
+     "profit_per_1k_wins": 16.70865064887946,
+     "value_captured": 0.2281632444564669,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 42256,
+     "win_rate": 0.02957858772323413,
+     "placed_rate": 0.2304191303240023,
+     "spend": 202.77616237559377,
+     "value": 2039.116661367544,
+     "profit": 1836.3404989919504,
+     "profit_per_1k_wins": 43.45750896894998,
+     "value_captured": 0.10024536417275091,
+     "mean_bid": NaN
+    }
+   },
+   "oracle": {
+    "1.0": {
+     "wins": 157619,
+     "profit": 17856.47169839184,
+     "value": 19634.16935178658,
+     "spend": 1777.6976533947372,
+     "placed_rate": 0.11033101614796574,
+     "value_captured": 0.9652387694087615
+    },
+    "1.5": {
+     "wins": 141035,
+     "profit": 17784.25813133995,
+     "value": 19265.4562315213,
+     "spend": 1481.1981001813513,
+     "placed_rate": 0.09872245644515158,
+     "value_captured": 0.947112400419419
+    },
+    "2.0": {
+     "wins": 129656,
+     "profit": 17631.030155176806,
+     "value": 18903.66482642017,
+     "spend": 1272.634671243362,
+     "placed_rate": 0.0907573213234486,
+     "value_captured": 0.929326311057268
+    },
+    "3.0": {
+     "wins": 113964,
+     "profit": 17232.330044015223,
+     "value": 18231.024639658885,
+     "spend": 998.6945956436607,
+     "placed_rate": 0.079773148695822,
+     "value_captured": 0.8962585313874718
+    }
+   },
+   "C2": {
+    "1.0": {
+     "wins": 520698,
+     "win_rate": 0.36448105524215646,
+     "placed_rate": 0.9964671731295163,
+     "spend": 3731.3475306606274,
+     "value": 11895.57683908582,
+     "profit": 8164.229308425192,
+     "profit_per_1k_wins": 15.67939440601883,
+     "value_captured": 0.5848004946805538,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 454186,
+     "win_rate": 0.31792361898108706,
+     "placed_rate": 0.8254537131081386,
+     "spend": 2773.003293910241,
+     "value": 10495.468282581935,
+     "profit": 7722.464988671693,
+     "profit_per_1k_wins": 17.00286884375937,
+     "value_captured": 0.5159695176269962,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 307391,
+     "win_rate": 0.21516924599660786,
+     "placed_rate": 0.5280361696512882,
+     "spend": 1882.616360499668,
+     "value": 9019.57428867687,
+     "profit": 7136.957928177201,
+     "profit_per_1k_wins": 23.21784934554753,
+     "value_captured": 0.44341283967794515,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 129708,
+     "win_rate": 0.09079372056998421,
+     "placed_rate": 0.3013591618653494,
+     "spend": 1046.8281049113052,
+     "value": 6966.028060852838,
+     "profit": 5919.199955941533,
+     "profit_per_1k_wins": 45.634810157750735,
+     "value_captured": 0.34245810111201197,
+     "mean_bid": NaN
+    }
+   },
+   "C3": {
+    "1.0": {
+     "wins": 462609,
+     "win_rate": 0.3238195969343435,
+     "placed_rate": 1.0,
+     "spend": 1253.4547756722002,
+     "value": 6480.923705157646,
+     "profit": 5227.468929485445,
+     "profit_per_1k_wins": 11.299972394582563,
+     "value_captured": 0.3186098026209199,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 420767,
+     "win_rate": 0.2945308032123735,
+     "placed_rate": 0.8889500987329563,
+     "spend": 1123.196061106237,
+     "value": 6228.4929482228,
+     "profit": 5105.296887116563,
+     "profit_per_1k_wins": 12.133311041779804,
+     "value_captured": 0.30620001085335824,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 316175,
+     "win_rate": 0.22131791871908252,
+     "placed_rate": 0.6125867194549073,
+     "spend": 867.463198873664,
+     "value": 5307.658703016137,
+     "profit": 4440.1955041424735,
+     "profit_per_1k_wins": 14.043474354842962,
+     "value_captured": 0.2609307204776058,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 53746,
+     "win_rate": 0.0376214212365804,
+     "placed_rate": 0.2292774539567031,
+     "spend": 244.24319145616585,
+     "value": 2289.3480650684205,
+     "profit": 2045.1048736122548,
+     "profit_per_1k_wins": 38.05129448912021,
+     "value_captured": 0.11254703315849199,
+     "mean_bid": NaN
+    }
+   },
+   "C4": {
+    "1.0": {
+     "wins": 506194,
+     "win_rate": 0.3543284654007662,
+     "placed_rate": 0.9972840562200362,
+     "spend": 2741.7461548732995,
+     "value": 11329.857800556783,
+     "profit": 8588.111645683484,
+     "profit_per_1k_wins": 16.966047890104356,
+     "value_captured": 0.5569890839303869,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 470523,
+     "win_rate": 0.32935928226285716,
+     "placed_rate": 0.8883012121649082,
+     "spend": 2599.2588379031713,
+     "value": 11212.849032807257,
+     "profit": 8613.590194904085,
+     "profit_per_1k_wins": 18.306416891212724,
+     "value_captured": 0.5512367958162829,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 384699,
+     "win_rate": 0.2692837258268754,
+     "placed_rate": 0.6410642299704397,
+     "spend": 2304.360820073654,
+     "value": 10765.702733464095,
+     "profit": 8461.34191339044,
+     "profit_per_1k_wins": 21.994707325442594,
+     "value_captured": 0.5292545598484343,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 164087,
+     "win_rate": 0.11485852242858573,
+     "placed_rate": 0.32715362791990205,
+     "spend": 1374.5532554289023,
+     "value": 8397.113724160607,
+     "profit": 7022.5604687317045,
+     "profit_per_1k_wins": 42.79778695894071,
+     "value_captured": 0.41281194902990304,
+     "mean_bid": NaN
+    }
+   }
+  },
+  "20251": {
+   "C1": {
+    "1.0": {
+     "wins": 691458,
+     "win_rate": 0.4835637772995851,
+     "placed_rate": 1.0,
+     "spend": 2574.232996247885,
+     "value": 8537.07611996111,
+     "profit": 5962.8431237132245,
+     "profit_per_1k_wins": 8.623579629873722,
+     "value_captured": 0.4283732116824513,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 619982,
+     "win_rate": 0.4335777990532344,
+     "placed_rate": 0.862348339523652,
+     "spend": 1992.3286230792326,
+     "value": 7391.127844306358,
+     "profit": 5398.799221227126,
+     "profit_per_1k_wins": 8.707993492112877,
+     "value_captured": 0.3708718451295162,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 348053,
+     "win_rate": 0.2434071532623131,
+     "placed_rate": 0.48090698716922126,
+     "spend": 1221.691915317671,
+     "value": 5902.647455182325,
+     "profit": 4680.9555398646535,
+     "profit_per_1k_wins": 13.44897340308704,
+     "value_captured": 0.29618290996534063,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 63792,
+     "win_rate": 0.04461225480288771,
+     "placed_rate": 0.18237511023336253,
+     "spend": 377.8258102930368,
+     "value": 2710.3878154612953,
+     "profit": 2332.5620051682586,
+     "profit_per_1k_wins": 36.565117964137485,
+     "value_captured": 0.13600177825513254,
+     "mean_bid": NaN
+    }
+   },
+   "oracle": {
+    "1.0": {
+     "wins": 162921,
+     "profit": 17877.85913675193,
+     "value": 19390.861232307878,
+     "spend": 1513.0020955559473,
+     "placed_rate": 0.1139370636559642,
+     "value_captured": 0.9729941945756366
+    },
+    "1.5": {
+     "wins": 146349,
+     "profit": 17824.29068062505,
+     "value": 19105.38910507556,
+     "spend": 1281.098424450508,
+     "placed_rate": 0.10234761221074451,
+     "value_captured": 0.9586697806580429
+    },
+    "2.0": {
+     "wins": 135307,
+     "profit": 17707.0621449776,
+     "value": 18828.05062496338,
+     "spend": 1120.9884799857791,
+     "placed_rate": 0.09462550728326949,
+     "value_captured": 0.9447534967009396
+    },
+    "3.0": {
+     "wins": 120076,
+     "profit": 17386.212091334946,
+     "value": 18286.93007633025,
+     "spend": 900.7179849953044,
+     "placed_rate": 0.08397386988511953,
+     "value_captured": 0.9176011620997107
+    }
+   },
+   "C2": {
+    "1.0": {
+     "wins": 658508,
+     "win_rate": 0.4605205462399671,
+     "placed_rate": 0.9995146585021131,
+     "spend": 4153.8419047640555,
+     "value": 12760.545949050733,
+     "profit": 8606.704044286678,
+     "profit_per_1k_wins": 13.070006809767959,
+     "value_captured": 0.6402983848574677,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 572051,
+     "win_rate": 0.40005776542899923,
+     "placed_rate": 0.8250903371584863,
+     "spend": 3178.4453587737753,
+     "value": 11415.737532068917,
+     "profit": 8237.292173295142,
+     "profit_per_1k_wins": 14.399576564493623,
+     "value_captured": 0.5728186186488565,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 354883,
+     "win_rate": 0.24818364091442813,
+     "placed_rate": 0.49710578416569867,
+     "spend": 2126.713940560207,
+     "value": 9832.25248647808,
+     "profit": 7705.538545917874,
+     "profit_per_1k_wins": 21.712898464896526,
+     "value_captured": 0.4933625419899115,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 134772,
+     "win_rate": 0.09425136073950939,
+     "placed_rate": 0.26557621015426724,
+     "spend": 1103.163708731445,
+     "value": 7341.73686931601,
+     "profit": 6238.573160584565,
+     "profit_per_1k_wins": 46.28983142332655,
+     "value_captured": 0.36839350590804987,
+     "mean_bid": NaN
+    }
+   },
+   "C3": {
+    "1.0": {
+     "wins": 650926,
+     "win_rate": 0.4552181554085855,
+     "placed_rate": 1.0,
+     "spend": 2165.93951885032,
+     "value": 8129.804078136721,
+     "profit": 5963.864559286401,
+     "profit_per_1k_wins": 9.162123742616522,
+     "value_captured": 0.40793712441636076,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 609757,
+     "win_rate": 0.42642705436174444,
+     "placed_rate": 0.9059094873073408,
+     "spend": 1991.8068594451108,
+     "value": 7865.397626285818,
+     "profit": 5873.590766840707,
+     "profit_per_1k_wins": 9.63267460126035,
+     "value_captured": 0.3946697434796837,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 459369,
+     "win_rate": 0.32125481058044464,
+     "placed_rate": 0.6254261599067361,
+     "spend": 1552.5561020791208,
+     "value": 6856.727571719097,
+     "profit": 5304.171469639976,
+     "profit_per_1k_wins": 11.546646529565503,
+     "value_captured": 0.34405672038710905,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 80197,
+     "win_rate": 0.05608491657930753,
+     "placed_rate": 0.20104956847266386,
+     "spend": 484.24176872813325,
+     "value": 3220.134667600552,
+     "profit": 2735.8928988724188,
+     "profit_per_1k_wins": 34.114653900674824,
+     "value_captured": 0.16157984422614416,
+     "mean_bid": NaN
+    }
+   },
+   "C4": {
+    "1.0": {
+     "wins": 564235,
+     "win_rate": 0.39459172919343094,
+     "placed_rate": 0.9980663267411276,
+     "spend": 3196.508462069939,
+     "value": 12499.818879660048,
+     "profit": 9303.31041759011,
+     "profit_per_1k_wins": 16.488361086409228,
+     "value_captured": 0.6272156278903259,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 517777,
+     "win_rate": 0.3621018224083708,
+     "placed_rate": 0.8688438032590612,
+     "spend": 3033.8095111354423,
+     "value": 12362.019869983651,
+     "profit": 9328.21035884821,
+     "profit_per_1k_wins": 18.01588397871711,
+     "value_captured": 0.6203011523120049,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 381294,
+     "win_rate": 0.2666538920681632,
+     "placed_rate": 0.5785354575532494,
+     "spend": 2615.802731739324,
+     "value": 11785.72392290886,
+     "profit": 9169.921191169535,
+     "profit_per_1k_wins": 24.04947675853681,
+     "value_captured": 0.5913837873665541,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 150858,
+     "win_rate": 0.1055009332683414,
+     "placed_rate": 0.3119214278271317,
+     "spend": 1533.7997726470646,
+     "value": 8991.589323161057,
+     "profit": 7457.789550513992,
+     "profit_per_1k_wins": 49.43582408963391,
+     "value_captured": 0.4511797648712645,
+     "mean_bid": NaN
+    }
+   }
+  },
+  "20252": {
+   "C1": {
+    "1.0": {
+     "wins": 339083,
+     "win_rate": 0.23736880533312052,
+     "placed_rate": 0.9994364745850037,
+     "spend": 1119.1066525623473,
+     "value": 5061.276524933411,
+     "profit": 3942.1698723710633,
+     "profit_per_1k_wins": 11.625973205295054,
+     "value_captured": 0.24917520417352168,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 289629,
+     "win_rate": 0.2027494439999244,
+     "placed_rate": 0.8321009277518416,
+     "spend": 866.2687062444295,
+     "value": 4462.553795769363,
+     "profit": 3596.285089524934,
+     "profit_per_1k_wins": 12.41686809513182,
+     "value_captured": 0.21969907151255383,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 142320,
+     "win_rate": 0.09962849324504536,
+     "placed_rate": 0.445340484855867,
+     "spend": 528.894793508418,
+     "value": 3290.714324342453,
+     "profit": 2761.819530834035,
+     "profit_per_1k_wins": 19.4057021559446,
+     "value_captured": 0.16200743223678163,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 27748,
+     "win_rate": 0.019424476043869578,
+     "placed_rate": 0.25755351566355644,
+     "spend": 208.43839327688187,
+     "value": 1599.8766117536607,
+     "profit": 1391.4382184767787,
+     "profit_per_1k_wins": 50.1455318753344,
+     "value_captured": 0.07876463169366257,
+     "mean_bid": NaN
+    }
+   },
+   "oracle": {
+    "1.0": {
+     "wins": 148260,
+     "profit": 17234.40986761612,
+     "value": 19263.9595430623,
+     "spend": 2029.5496754461822,
+     "placed_rate": 0.10378668077930314,
+     "value_captured": 0.9483973121575614
+    },
+    "1.5": {
+     "wins": 131493,
+     "profit": 17142.295616745974,
+     "value": 18775.21304183874,
+     "spend": 1632.9174250927647,
+     "placed_rate": 0.0920492514212391,
+     "value_captured": 0.9243354952164139
+    },
+    "2.0": {
+     "wins": 120093,
+     "profit": 16948.95877640718,
+     "value": 18319.15224789741,
+     "spend": 1370.1934714902316,
+     "placed_rate": 0.08406889150700697,
+     "value_captured": 0.901882850930719
+    },
+    "3.0": {
+     "wins": 104430,
+     "profit": 16480.341068907153,
+     "value": 17529.278309630135,
+     "spend": 1048.9372407229805,
+     "placed_rate": 0.07310429700379487,
+     "value_captured": 0.8629960209245908
+    }
+   },
+   "C2": {
+    "1.0": {
+     "wins": 430447,
+     "win_rate": 0.30132648982469107,
+     "placed_rate": 0.9976884957511584,
+     "spend": 3325.720048053676,
+     "value": 10423.702520272496,
+     "profit": 7097.9824722188205,
+     "profit_per_1k_wins": 16.489794265539825,
+     "value_captured": 0.5131765061517013,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 376924,
+     "win_rate": 0.2638587000273712,
+     "placed_rate": 0.8355667840619612,
+     "spend": 2481.4209186893454,
+     "value": 9151.647106634318,
+     "profit": 6670.2261879449725,
+     "profit_per_1k_wins": 17.696475119506776,
+     "value_captured": 0.4505510665315065,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 256577,
+     "win_rate": 0.1796120005012226,
+     "placed_rate": 0.5249326744636184,
+     "spend": 1689.4667670330168,
+     "value": 7796.82489728629,
+     "profit": 6107.358130253273,
+     "profit_per_1k_wins": 23.80321747566334,
+     "value_captured": 0.3838508775633572,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 109605,
+     "win_rate": 0.07672696038591341,
+     "placed_rate": 0.3064353202329425,
+     "spend": 965.6334500541107,
+     "value": 5953.086028809549,
+     "profit": 4987.4525787554385,
+     "profit_per_1k_wins": 45.50387827886902,
+     "value_captured": 0.2930804944925776,
+     "mean_bid": NaN
+    }
+   },
+   "C3": {
+    "1.0": {
+     "wins": 301609,
+     "win_rate": 0.2111358222255824,
+     "placed_rate": 0.9995288787524317,
+     "spend": 835.8488491701961,
+     "value": 4685.742031813999,
+     "profit": 3849.8931826438034,
+     "profit_per_1k_wins": 12.764516916417625,
+     "value_captured": 0.2306870058827831,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 260266,
+     "win_rate": 0.18219441696820526,
+     "placed_rate": 0.8438054556260487,
+     "spend": 746.4978303145945,
+     "value": 4474.924696788021,
+     "profit": 3728.4268664734263,
+     "profit_per_1k_wins": 14.325447298046715,
+     "value_captured": 0.22030811189435254,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 159335,
+     "win_rate": 0.11153953043282253,
+     "placed_rate": 0.5108263382678558,
+     "spend": 570.6122538935745,
+     "value": 3704.0286282481375,
+     "profit": 3133.4163743545632,
+     "profit_per_1k_wins": 19.66558743750314,
+     "value_captured": 0.18235559451485256,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 33156,
+     "win_rate": 0.023210246782129875,
+     "placed_rate": 0.2817438066456797,
+     "spend": 253.3367200916264,
+     "value": 1883.9264925117195,
+     "profit": 1630.5897724200931,
+     "profit_per_1k_wins": 49.179327193271,
+     "value_captured": 0.09274888777701991,
+     "mean_bid": NaN
+    }
+   },
+   "C4": {
+    "1.0": {
+     "wins": 434992,
+     "win_rate": 0.3045081333168126,
+     "placed_rate": 0.9980651127365844,
+     "spend": 2467.8658422217936,
+     "value": 9809.129341404734,
+     "profit": 7341.26349918294,
+     "profit_per_1k_wins": 16.876778191743618,
+     "value_captured": 0.4829200290417177,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 403926,
+     "win_rate": 0.2827609525189586,
+     "placed_rate": 0.8830786268460707,
+     "spend": 2351.3212187921577,
+     "value": 9729.667392171477,
+     "profit": 7378.346173379319,
+     "profit_per_1k_wins": 18.266578960946607,
+     "value_captured": 0.479007982875759,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 324622,
+     "win_rate": 0.2272456487787599,
+     "placed_rate": 0.6202517733549783,
+     "spend": 2078.5444040365464,
+     "value": 9344.076786745854,
+     "profit": 7265.532382709308,
+     "profit_per_1k_wins": 22.381515678879765,
+     "value_captured": 0.46002470516686406,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 140282,
+     "win_rate": 0.0982018289024835,
+     "placed_rate": 0.3211625844325579,
+     "spend": 1252.1212370389096,
+     "value": 7196.609067441754,
+     "profit": 5944.487830402844,
+     "profit_per_1k_wins": 42.37527145608734,
+     "value_captured": 0.354301237030397,
+     "mean_bid": NaN
+    }
+   }
+  },
+  "20253": {
+   "C1": {
+    "1.0": {
+     "wins": 595470,
+     "win_rate": 0.4172511747386005,
+     "placed_rate": 1.0,
+     "spend": 2381.717125996898,
+     "value": 7577.854474233038,
+     "profit": 5196.13734823614,
+     "profit_per_1k_wins": 8.726111052170788,
+     "value_captured": 0.38703291477615154,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 539422,
+     "win_rate": 0.3779778379764646,
+     "placed_rate": 0.8663895129091614,
+     "spend": 1878.4698932348126,
+     "value": 6610.294325004492,
+     "profit": 4731.824431769679,
+     "profit_per_1k_wins": 8.772027154564848,
+     "value_captured": 0.3376155465685002,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 307883,
+     "win_rate": 0.21573638207137982,
+     "placed_rate": 0.4763083287670465,
+     "spend": 1156.4053776151584,
+     "value": 5213.939152350073,
+     "profit": 4057.533774734914,
+     "profit_per_1k_wins": 13.178817195931293,
+     "value_captured": 0.26629781219225457,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 50557,
+     "win_rate": 0.035425743767544,
+     "placed_rate": 0.17628716735593072,
+     "spend": 315.96954246498547,
+     "value": 2223.9489019047414,
+     "profit": 1907.979359439756,
+     "profit_per_1k_wins": 37.73917280376122,
+     "value_captured": 0.11358642855232846,
+     "mean_bid": NaN
+    }
+   },
+   "oracle": {
+    "1.0": {
+     "wins": 155004,
+     "profit": 17047.71325525186,
+     "value": 18813.77091821442,
+     "spend": 1766.057662962563,
+     "placed_rate": 0.10861269432411715,
+     "value_captured": 0.9608984470692535
+    },
+    "1.5": {
+     "wins": 138579,
+     "profit": 16977.758259075068,
+     "value": 18440.409256887513,
+     "spend": 1462.6509978124434,
+     "placed_rate": 0.09710354937125383,
+     "value_captured": 0.9418292959605362
+    },
+    "2.0": {
+     "wins": 127387,
+     "profit": 16825.469966829278,
+     "value": 18081.23555947559,
+     "spend": 1255.7655926463133,
+     "placed_rate": 0.08926121449682789,
+     "value_captured": 0.9234847838703467
+    },
+    "3.0": {
+     "wins": 111805,
+     "profit": 16429.349123283635,
+     "value": 17414.69504107358,
+     "spend": 985.3459177899446,
+     "placed_rate": 0.07834276721186496,
+     "value_captured": 0.8894417548664614
+    }
+   },
+   "C2": {
+    "1.0": {
+     "wins": 631174,
+     "win_rate": 0.44226928806566485,
+     "placed_rate": 0.9990295180663795,
+     "spend": 4563.462250279901,
+     "value": 11825.064252145601,
+     "profit": 7261.6020018657,
+     "profit_per_1k_wins": 11.504913069717226,
+     "value_captured": 0.6039557899251418,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 562183,
+     "win_rate": 0.3939266750097749,
+     "placed_rate": 0.8447782466299402,
+     "spend": 3605.4126084086056,
+     "value": 10799.790769919258,
+     "profit": 7194.378161510653,
+     "profit_per_1k_wins": 12.797217563516956,
+     "value_captured": 0.5515907589499437,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 374310,
+     "win_rate": 0.2622823773093616,
+     "placed_rate": 0.5172738777094664,
+     "spend": 2421.9294230136543,
+     "value": 9103.204348328289,
+     "profit": 6681.274925314634,
+     "profit_per_1k_wins": 17.849576354664944,
+     "value_captured": 0.46493895135047775,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 137878,
+     "win_rate": 0.0966123523781362,
+     "placed_rate": 0.24947551933045856,
+     "spend": 1198.8902316005992,
+     "value": 6646.747315127817,
+     "profit": 5447.8570835272185,
+     "profit_per_1k_wins": 39.512156279661866,
+     "value_captured": 0.3394773541642662,
+     "mean_bid": NaN
+    }
+   },
+   "C3": {
+    "1.0": {
+     "wins": 567792,
+     "win_rate": 0.39785695166369334,
+     "placed_rate": 1.0,
+     "spend": 2004.1842688651673,
+     "value": 7316.62041585924,
+     "profit": 5312.436146994072,
+     "profit_per_1k_wins": 9.356306793674571,
+     "value_captured": 0.37369059217085404,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 532666,
+     "win_rate": 0.3732438481255334,
+     "placed_rate": 0.8991273370396167,
+     "spend": 1845.3580463077908,
+     "value": 7061.592249141218,
+     "profit": 5216.234202833428,
+     "profit_per_1k_wins": 9.792692236473565,
+     "value_captured": 0.36066523056612565,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 389482,
+     "win_rate": 0.2729135339136138,
+     "placed_rate": 0.5942152269666449,
+     "spend": 1392.6662176579725,
+     "value": 6000.538709316075,
+     "profit": 4607.872491658103,
+     "profit_per_1k_wins": 11.830771362111994,
+     "value_captured": 0.3064727614908149,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 68736,
+     "win_rate": 0.04816393226666742,
+     "placed_rate": 0.19411180232158898,
+     "spend": 407.88384726441114,
+     "value": 2682.4470156312595,
+     "profit": 2274.5631683668485,
+     "profit_per_1k_wins": 33.091293766975795,
+     "value_captured": 0.1370038565299094,
+     "mean_bid": NaN
+    }
+   },
+   "C4": {
+    "1.0": {
+     "wins": 581735,
+     "win_rate": 0.40762693693479063,
+     "placed_rate": 0.9991479378835506,
+     "spend": 3450.144004872609,
+     "value": 11310.296664367475,
+     "profit": 7860.152659494866,
+     "profit_per_1k_wins": 13.511569115653804,
+     "value_captured": 0.5776644431319954,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 544962,
+     "win_rate": 0.3818597657109463,
+     "placed_rate": 0.888062441578389,
+     "spend": 3285.604492309834,
+     "value": 11220.912907909671,
+     "profit": 7935.308415599837,
+     "profit_per_1k_wins": 14.56121420502684,
+     "value_captured": 0.5730992385726922,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 415895,
+     "win_rate": 0.29142136013218173,
+     "placed_rate": 0.5975085591601582,
+     "spend": 2767.5224518187447,
+     "value": 10656.194164589659,
+     "profit": 7888.671712770914,
+     "profit_per_1k_wins": 18.967940736894924,
+     "value_captured": 0.5442566760770603,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 157840,
+     "win_rate": 0.11059990498386267,
+     "placed_rate": 0.27868177021510365,
+     "spend": 1475.347676168335,
+     "value": 7851.358041713283,
+     "profit": 6376.0103655449475,
+     "profit_per_1k_wins": 40.39540272139475,
+     "value_captured": 0.40100189284025833,
+     "mean_bid": NaN
+    }
+   }
+  },
+  "20254": {
+   "C1": {
+    "1.0": {
+     "wins": 398575,
+     "win_rate": 0.279011567875956,
+     "placed_rate": 0.9999992999772492,
+     "spend": 1318.4755169085993,
+     "value": 3565.34166511786,
+     "profit": 2246.8661482092607,
+     "profit_per_1k_wins": 5.637248066760987,
+     "value_captured": 0.18795283525945003,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 335125,
+     "win_rate": 0.2345951243415411,
+     "placed_rate": 0.7936381932412804,
+     "spend": 984.6978983408289,
+     "value": 3083.1570784900355,
+     "profit": 2098.4591801492065,
+     "profit_per_1k_wins": 6.261720791194946,
+     "value_captured": 0.16253368369207577,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 135124,
+     "win_rate": 0.09458987417091055,
+     "placed_rate": 0.3795012337900982,
+     "spend": 530.3007405481278,
+     "value": 2114.150919459738,
+     "profit": 1583.85017891161,
+     "profit_per_1k_wins": 11.72145717201689,
+     "value_captured": 0.11145093424466947,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 28155,
+     "win_rate": 0.01970914054706778,
+     "placed_rate": 0.23656288829386954,
+     "spend": 200.14827102659982,
+     "value": 965.8852320613063,
+     "profit": 765.7369610347065,
+     "profit_per_1k_wins": 27.197192720110333,
+     "value_captured": 0.05091822466197027,
+     "mean_bid": NaN
+    }
+   },
+   "oracle": {
+    "1.0": {
+     "wins": 148045,
+     "profit": 15906.298975327196,
+     "value": 18081.933176927545,
+     "spend": 2175.6342016003496,
+     "placed_rate": 0.10363486813321433,
+     "value_captured": 0.9532187730633946
+    },
+    "1.5": {
+     "wins": 131712,
+     "profit": 15813.690605586415,
+     "value": 17592.392483819072,
+     "spend": 1778.701878232657,
+     "placed_rate": 0.09220139654538773,
+     "value_captured": 0.9274118322742929
+    },
+    "2.0": {
+     "wins": 120172,
+     "profit": 15615.119493565137,
+     "value": 17122.376325490983,
+     "spend": 1507.2568319258467,
+     "placed_rate": 0.08412313400185506,
+     "value_captured": 0.9026341593685466
+    },
+    "3.0": {
+     "wins": 103932,
+     "profit": 15101.529971755255,
+     "value": 16257.575115647742,
+     "spend": 1156.0451438924856,
+     "placed_rate": 0.07275476452984722,
+     "value_captured": 0.8570447447786083
+    }
+   },
+   "C2": {
+    "1.0": {
+     "wins": 504382,
+     "win_rate": 0.35307887506343955,
+     "placed_rate": 0.9984298489700916,
+     "spend": 3642.4897641351845,
+     "value": 8265.576338707164,
+     "profit": 4623.086574571979,
+     "profit_per_1k_wins": 9.16584369500097,
+     "value_captured": 0.43573341739243393,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 436831,
+     "win_rate": 0.3057916382282424,
+     "placed_rate": 0.8013517439316777,
+     "spend": 2691.572151366905,
+     "value": 7303.928406862587,
+     "profit": 4612.356255495682,
+     "profit_per_1k_wins": 10.558674305385107,
+     "value_captured": 0.38503856896320215,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 281166,
+     "win_rate": 0.19682259673439387,
+     "placed_rate": 0.4899466232652561,
+     "spend": 1827.3315373335001,
+     "value": 6227.456920310227,
+     "profit": 4400.125382976727,
+     "profit_per_1k_wins": 15.64956425377438,
+     "value_captured": 0.32829060846534547,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 116558,
+     "win_rate": 0.08159325178068287,
+     "placed_rate": 0.2839887296337131,
+     "spend": 986.0034786833744,
+     "value": 4622.36257026127,
+     "profit": 3636.3590915778955,
+     "profit_per_1k_wins": 31.197850783111374,
+     "value_captured": 0.24367542644725607,
+     "mean_bid": NaN
+    }
+   },
+   "C3": {
+    "1.0": {
+     "wins": 374421,
+     "win_rate": 0.26210321835459655,
+     "placed_rate": 0.9999992999772492,
+     "spend": 1056.3835709997,
+     "value": 3305.163036753197,
+     "profit": 2248.779465753497,
+     "profit_per_1k_wins": 6.006018534626789,
+     "value_captured": 0.17423709201007576,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 331511,
+     "win_rate": 0.23206524212036891,
+     "placed_rate": 0.8530883253705746,
+     "spend": 949.8635777778453,
+     "value": 3167.862971462166,
+     "profit": 2217.9993936843207,
+     "profit_per_1k_wins": 6.690575557626507,
+     "value_captured": 0.1669990938105669,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 198152,
+     "win_rate": 0.1387109081045134,
+     "placed_rate": 0.48955531054759277,
+     "spend": 690.6376265140011,
+     "value": 2566.6829638302,
+     "profit": 1876.045337316199,
+     "profit_per_1k_wins": 9.46770831137813,
+     "value_captured": 0.13530690339829388,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 34415,
+     "win_rate": 0.024091282966696416,
+     "placed_rate": 0.23809943823174254,
+     "spend": 252.76635349944002,
+     "value": 1111.2971996693236,
+     "profit": 858.5308461698836,
+     "profit_per_1k_wins": 24.94641424291395,
+     "value_captured": 0.05858385510069534,
+     "mean_bid": NaN
+    }
+   },
+   "C4": {
+    "1.0": {
+     "wins": 468200,
+     "win_rate": 0.32775065189618663,
+     "placed_rate": 0.9985880541117587,
+     "spend": 2676.5526591530756,
+     "value": 7719.51390160875,
+     "profit": 5042.961242455674,
+     "profit_per_1k_wins": 10.77095523805142,
+     "value_captured": 0.40694684013800986,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 435047,
+     "win_rate": 0.30454279764092335,
+     "placed_rate": 0.873375684709753,
+     "spend": 2552.9864292961693,
+     "value": 7652.135742349633,
+     "profit": 5099.149313053464,
+     "profit_per_1k_wins": 11.720915931045297,
+     "value_captured": 0.40339488993048467,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 337232,
+     "win_rate": 0.23607007227734902,
+     "placed_rate": 0.5887604347141282,
+     "spend": 2228.9803197062256,
+     "value": 7324.150552458547,
+     "profit": 5095.170232752322,
+     "profit_per_1k_wins": 15.108798194573236,
+     "value_captured": 0.38610461254521733,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 138891,
+     "win_rate": 0.09722685987294587,
+     "placed_rate": 0.308113613692445,
+     "spend": 1297.3638454320562,
+     "value": 5610.678711673321,
+     "profit": 4313.314866241265,
+     "profit_per_1k_wins": 31.055394994933184,
+     "value_captured": 0.29577613329632435,
+     "mean_bid": NaN
+    }
+   }
+  },
+  "20255": {
+   "C1": {
+    "1.0": {
+     "wins": 919655,
+     "win_rate": 0.6436974131154953,
+     "placed_rate": 1.0,
+     "spend": 5434.1104396398105,
+     "value": 10745.835016200042,
+     "profit": 5311.724576560232,
+     "profit_per_1k_wins": 5.7757795875194855,
+     "value_captured": 0.5561158068091038,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 834112,
+     "win_rate": 0.5838229951977557,
+     "placed_rate": 0.8956546023782344,
+     "spend": 3759.950714843895,
+     "value": 9018.326106183807,
+     "profit": 5258.375391339912,
+     "profit_per_1k_wins": 6.304159862632251,
+     "value_captured": 0.46671419122359703,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 696946,
+     "win_rate": 0.4878159062704949,
+     "placed_rate": 0.7156813818368637,
+     "spend": 2859.423209901253,
+     "value": 7972.097662665387,
+     "profit": 5112.674452764135,
+     "profit_per_1k_wins": 7.335825806825974,
+     "value_captured": 0.41257003452504903,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 334921,
+     "win_rate": 0.23442245330918096,
+     "placed_rate": 0.35280431887013924,
+     "spend": 1468.3886751678426,
+     "value": 5780.803520133669,
+     "profit": 4312.414844965826,
+     "profit_per_1k_wins": 12.875916544396517,
+     "value_captured": 0.2991667198274986,
+     "mean_bid": NaN
+    }
+   },
+   "oracle": {
+    "1.0": {
+     "wins": 163615,
+     "profit": 17306.887238449348,
+     "value": 18782.80742049414,
+     "spend": 1475.9201820447927,
+     "placed_rate": 0.11451963208691496,
+     "value_captured": 0.9720432229827629
+    },
+    "1.5": {
+     "wins": 147118,
+     "profit": 17255.85095060373,
+     "value": 18512.947932912422,
+     "spend": 1257.096982308692,
+     "placed_rate": 0.10297282787863432,
+     "value_captured": 0.958077521254107
+    },
+    "2.0": {
+     "wins": 135950,
+     "profit": 17139.93880552564,
+     "value": 18238.180514569685,
+     "spend": 1098.2417090440467,
+     "placed_rate": 0.09515596969847562,
+     "value_captured": 0.943857825501644
+    },
+    "3.0": {
+     "wins": 120483,
+     "profit": 16826.9939506789,
+     "value": 17710.34954648667,
+     "spend": 883.3555958077653,
+     "placed_rate": 0.08433009707378769,
+     "value_captured": 0.9165416472584648
+    }
+   },
+   "C2": {
+    "1.0": {
+     "wins": 702587,
+     "win_rate": 0.49176423157442356,
+     "placed_rate": 0.9984342485898088,
+     "spend": 5112.611184537018,
+     "value": 12824.991794313115,
+     "profit": 7712.380609776097,
+     "profit_per_1k_wins": 10.977118292504839,
+     "value_captured": 0.6637158162453033,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 615487,
+     "win_rate": 0.4308000170783793,
+     "placed_rate": 0.8535997933796082,
+     "spend": 3729.957074068956,
+     "value": 11315.4850372418,
+     "profit": 7585.5279631728445,
+     "profit_per_1k_wins": 12.32443246270489,
+     "value_captured": 0.5855961943799977,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 443743,
+     "win_rate": 0.31059062494969225,
+     "placed_rate": 0.5861810714163226,
+     "spend": 2601.6872964286035,
+     "value": 9847.288134836905,
+     "profit": 7245.600838408302,
+     "profit_per_1k_wins": 16.328372139748236,
+     "value_captured": 0.5096144299378098,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 209853,
+     "win_rate": 0.14688316078804123,
+     "placed_rate": 0.3288714900955899,
+     "spend": 1518.0718973611158,
+     "value": 8008.201357746086,
+     "profit": 6490.12946038497,
+     "profit_per_1k_wins": 30.9270273018969,
+     "value_captured": 0.41443846405968493,
+     "mean_bid": NaN
+    }
+   },
+   "C3": {
+    "1.0": {
+     "wins": 867735,
+     "win_rate": 0.607356861833812,
+     "placed_rate": 1.0,
+     "spend": 4026.3896220385736,
+     "value": 9966.16333169832,
+     "profit": 5939.773709659747,
+     "profit_per_1k_wins": 6.845147089445219,
+     "value_captured": 0.515766429844054,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 838627,
+     "win_rate": 0.5869831952947665,
+     "placed_rate": 0.9547751918342949,
+     "spend": 3766.1586984382043,
+     "value": 9790.925754167723,
+     "profit": 6024.767055729519,
+     "profit_per_1k_wins": 7.18408428983269,
+     "value_captured": 0.5066975778967845,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 779648,
+     "win_rate": 0.5457018128979559,
+     "placed_rate": 0.8363667287974371,
+     "spend": 3394.8502197306866,
+     "value": 9339.827767457595,
+     "profit": 5944.977547726909,
+     "profit_per_1k_wins": 7.625207205978735,
+     "value_captured": 0.4833524660044957,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 437043,
+     "win_rate": 0.3059010699884581,
+     "placed_rate": 0.45201220404183645,
+     "spend": 1880.1804857749667,
+     "value": 6977.798368218335,
+     "profit": 5097.617882443368,
+     "profit_per_1k_wins": 11.663881774661458,
+     "value_captured": 0.36111330235788436,
+     "mean_bid": NaN
+    }
+   },
+   "C4": {
+    "1.0": {
+     "wins": 646901,
+     "win_rate": 0.4527877304443808,
+     "placed_rate": 0.9978624028579688,
+     "spend": 3375.976390562086,
+     "value": 11948.987890311737,
+     "profit": 8573.011499749651,
+     "profit_per_1k_wins": 13.25243197915856,
+     "value_captured": 0.6183810779855751,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 601411,
+     "win_rate": 0.4209477520583297,
+     "placed_rate": 0.9059394263484395,
+     "spend": 3185.61623510462,
+     "value": 11843.634776342817,
+     "profit": 8658.018541238196,
+     "profit_per_1k_wins": 14.396175895083722,
+     "value_captured": 0.6129288695823797,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 511914,
+     "win_rate": 0.3583057967798856,
+     "placed_rate": 0.7027431096788914,
+     "spend": 2905.2297982757873,
+     "value": 11597.111443589196,
+     "profit": 8691.88164531341,
+     "profit_per_1k_wins": 16.979183310699472,
+     "value_captured": 0.6001708547901491,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 253349,
+     "win_rate": 0.177327471622943,
+     "placed_rate": 0.3807246692288902,
+     "spend": 1881.7907864415804,
+     "value": 9752.697438367037,
+     "profit": 7870.906651925457,
+     "profit_per_1k_wins": 31.067447086530663,
+     "value_captured": 0.5047191955139915,
+     "mean_bid": NaN
+    }
+   }
+  },
+  "20256": {
+   "C1": {
+    "1.0": {
+     "wins": 744324,
+     "win_rate": 0.5217650976131226,
+     "placed_rate": 1.0,
+     "spend": 2710.682252412724,
+     "value": 9014.220589934717,
+     "profit": 6303.5383375219935,
+     "profit_per_1k_wins": 8.468809735440471,
+     "value_captured": 0.42308912101842766,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 656195,
+     "win_rate": 0.4599873821457362,
+     "placed_rate": 0.8408916617013074,
+     "spend": 2068.0086683966556,
+     "value": 7829.287574444805,
+     "profit": 5761.278906048149,
+     "profit_per_1k_wins": 8.77982749952095,
+     "value_captured": 0.36747341215180307,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 357305,
+     "win_rate": 0.2504679120956153,
+     "placed_rate": 0.4678966737934177,
+     "spend": 1244.05058376998,
+     "value": 5844.905674604645,
+     "profit": 4600.855090834665,
+     "profit_per_1k_wins": 12.876548301408222,
+     "value_captured": 0.27433497767575804,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 66026,
+     "win_rate": 0.04628369142336406,
+     "placed_rate": 0.1927461357821317,
+     "spend": 359.22809203587025,
+     "value": 2397.309711855597,
+     "profit": 2038.0816198197267,
+     "profit_per_1k_wins": 30.867864474899687,
+     "value_captured": 0.11251950722511331,
+     "mean_bid": NaN
+    }
+   },
+   "oracle": {
+    "1.0": {
+     "wins": 169235,
+     "profit": 19426.06290895435,
+     "value": 20864.43182702925,
+     "spend": 1438.3689180748986,
+     "placed_rate": 0.1186323647961866,
+     "value_captured": 0.9792875639302102
+    },
+    "1.5": {
+     "wins": 152948,
+     "profit": 19383.866604013063,
+     "value": 20642.72058701928,
+     "spend": 1258.8539830062166,
+     "placed_rate": 0.10721530966317339,
+     "value_captured": 0.9688813826392326
+    },
+    "2.0": {
+     "wins": 141969,
+     "profit": 19283.154239076073,
+     "value": 20405.379613677633,
+     "spend": 1122.2253746015606,
+     "placed_rate": 0.09951911955416914,
+     "value_captured": 0.957741608236008
+    },
+    "3.0": {
+     "wins": 126980,
+     "profit": 18989.913702346013,
+     "value": 19912.615363191504,
+     "spend": 922.7016608454902,
+     "placed_rate": 0.08901195191195542,
+     "value_captured": 0.934613353105412
+    }
+   },
+   "C2": {
+    "1.0": {
+     "wins": 650701,
+     "win_rate": 0.45613613262766817,
+     "placed_rate": 0.9976797167992709,
+     "spend": 4261.236573433403,
+     "value": 14213.706527784418,
+     "profit": 9952.469954351014,
+     "profit_per_1k_wins": 15.294997171282992,
+     "value_captured": 0.6671308452301531,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 546810,
+     "win_rate": 0.3833093827766289,
+     "placed_rate": 0.7843819003890505,
+     "spend": 3266.6371623887644,
+     "value": 12686.674925813608,
+     "profit": 9420.037763424843,
+     "profit_per_1k_wins": 17.22725949310518,
+     "value_captured": 0.5954584857843909,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 324438,
+     "win_rate": 0.22742841120185062,
+     "placed_rate": 0.48084609722757704,
+     "spend": 2183.2194075643783,
+     "value": 10751.101541152862,
+     "profit": 8567.882133588484,
+     "profit_per_1k_wins": 26.408380441219844,
+     "value_captured": 0.5046109151250724,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 133400,
+     "win_rate": 0.09351231993270477,
+     "placed_rate": 0.29418527216010654,
+     "spend": 1185.7840268621794,
+     "value": 8005.810763843207,
+     "profit": 6820.026736981027,
+     "profit_per_1k_wins": 51.12463820825357,
+     "value_captured": 0.37575865881254406,
+     "mean_bid": NaN
+    }
+   },
+   "C3": {
+    "1.0": {
+     "wins": 712100,
+     "win_rate": 0.4991763345133364,
+     "placed_rate": 1.0,
+     "spend": 2237.420118513172,
+     "value": 8579.723663138817,
+     "profit": 6342.303544625645,
+     "profit_per_1k_wins": 8.906478787565856,
+     "value_captured": 0.4026956858889888,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 665985,
+     "win_rate": 0.4668500928814272,
+     "placed_rate": 0.9082114191581088,
+     "spend": 2041.7220172035286,
+     "value": 8267.11863911083,
+     "profit": 6225.396621907301,
+     "profit_per_1k_wins": 9.34765290795934,
+     "value_captured": 0.38802333751206675,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 516655,
+     "win_rate": 0.36217097192527425,
+     "placed_rate": 0.6501146121762293,
+     "spend": 1587.7778565651265,
+     "value": 7037.568656869514,
+     "profit": 5449.790800304387,
+     "profit_per_1k_wins": 10.548220379759,
+     "value_captured": 0.33031349825923473,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 87738,
+     "win_rate": 0.06150362763310084,
+     "placed_rate": 0.20498335144229085,
+     "spend": 458.84037331826227,
+     "value": 2812.904111478646,
+     "profit": 2354.0637381603838,
+     "profit_per_1k_wins": 26.83060632975887,
+     "value_captured": 0.13202573823892194,
+     "mean_bid": NaN
+    }
+   },
+   "C4": {
+    "1.0": {
+     "wins": 654712,
+     "win_rate": 0.45894781115278116,
+     "placed_rate": 0.9987445235007536,
+     "spend": 3564.718286956518,
+     "value": 13860.076020547118,
+     "profit": 10295.3577335906,
+     "profit_per_1k_wins": 15.725017616281052,
+     "value_captured": 0.6505329354076008,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 603464,
+     "win_rate": 0.4230233780799832,
+     "placed_rate": 0.8837117521292629,
+     "spend": 3365.5996548762673,
+     "value": 13704.294440510761,
+     "profit": 10338.694785634494,
+     "profit_per_1k_wins": 17.13224779876595,
+     "value_captured": 0.6432212115474105,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 459150,
+     "win_rate": 0.32186043251200447,
+     "placed_rate": 0.6109109389786548,
+     "spend": 2880.5641417338843,
+     "value": 13031.744692577226,
+     "profit": 10151.18055084334,
+     "profit_per_1k_wins": 22.10863672186288,
+     "value_captured": 0.6116545909111137,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 172276,
+     "win_rate": 0.12076408117486243,
+     "placed_rate": 0.30844204549437454,
+     "spend": 1596.7586000677131,
+     "value": 9511.497011893302,
+     "profit": 7914.738411825589,
+     "profit_per_1k_wins": 45.94219979466431,
+     "value_captured": 0.4464291582596474,
+     "mean_bid": NaN
+    }
+   }
+  },
+  "20257": {
+   "C1": {
+    "1.0": {
+     "wins": 326414,
+     "win_rate": 0.227952606886611,
+     "placed_rate": 1.0,
+     "spend": 1337.0144829225308,
+     "value": 2931.20096811972,
+     "profit": 1594.1864851971893,
+     "profit_per_1k_wins": 4.883940288091777,
+     "value_captured": 0.16350099960037406,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 298729,
+     "win_rate": 0.20861866924405945,
+     "placed_rate": 0.8577263820081595,
+     "spend": 1099.8051107086776,
+     "value": 2637.3777013354998,
+     "profit": 1537.5725906268221,
+     "profit_per_1k_wins": 5.147048296706453,
+     "value_captured": 0.14711167715283,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 134908,
+     "win_rate": 0.09421357628612412,
+     "placed_rate": 0.3740350490035183,
+     "spend": 630.0627387566299,
+     "value": 1849.0763946046138,
+     "profit": 1219.013655847984,
+     "profit_per_1k_wins": 9.035888574791592,
+     "value_captured": 0.10314060419038525,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 18820,
+     "win_rate": 0.013143027142236606,
+     "placed_rate": 0.16680121625377636,
+     "spend": 203.37960752967913,
+     "value": 667.9036796940751,
+     "profit": 464.524072164396,
+     "profit_per_1k_wins": 24.682469296726673,
+     "value_captured": 0.037255350436377566,
+     "mean_bid": NaN
+    }
+   },
+   "oracle": {
+    "1.0": {
+     "wins": 124667,
+     "profit": 13587.822154770718,
+     "value": 16198.553355646272,
+     "spend": 2610.731200875554,
+     "placed_rate": 0.08706173032631301,
+     "value_captured": 0.9035476224706223
+    },
+    "1.5": {
+     "wins": 108311,
+     "profit": 13448.697495894101,
+     "value": 15446.445084172827,
+     "spend": 1997.7475882787262,
+     "placed_rate": 0.07563944807666254,
+     "value_captured": 0.861595379846842
+    },
+    "2.0": {
+     "wins": 97020,
+     "profit": 13174.377425023282,
+     "value": 14798.91623663506,
+     "spend": 1624.5388116117767,
+     "placed_rate": 0.06775433014557893,
+     "value_captured": 0.8254765278834378
+    },
+    "3.0": {
+     "wins": 81331,
+     "profit": 12497.00696431152,
+     "value": 13651.235728457816,
+     "spend": 1154.228764146296,
+     "placed_rate": 0.05679785018625108,
+     "value_captured": 0.7614594535341432
+    }
+   },
+   "C2": {
+    "1.0": {
+     "wins": 375578,
+     "win_rate": 0.2622864956443645,
+     "placed_rate": 0.9991263588227982,
+     "spend": 3065.2450056119665,
+     "value": 6399.154939253107,
+     "profit": 3333.9099336411405,
+     "profit_per_1k_wins": 8.87674446757036,
+     "value_captured": 0.356941827102597,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 336291,
+     "win_rate": 0.23485025189638098,
+     "placed_rate": 0.8321058593318984,
+     "spend": 2295.1217010134824,
+     "value": 5570.387014330785,
+     "profit": 3275.2653133173026,
+     "profit_per_1k_wins": 9.73937843509729,
+     "value_captured": 0.3107135453725832,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 211999,
+     "win_rate": 0.14805040441695103,
+     "placed_rate": 0.44922056681225025,
+     "spend": 1540.2147753936954,
+     "value": 4663.394517101999,
+     "profit": 3123.1797417083035,
+     "profit_per_1k_wins": 14.732049404517491,
+     "value_captured": 0.2601219341047716,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 64437,
+     "win_rate": 0.044999853345605745,
+     "placed_rate": 0.21102380130983325,
+     "spend": 720.4970972418112,
+     "value": 3022.548176510519,
+     "profit": 2302.0510792687082,
+     "profit_per_1k_wins": 35.725609188334474,
+     "value_captured": 0.1685963035542957,
+     "mean_bid": NaN
+    }
+   },
+   "C3": {
+    "1.0": {
+     "wins": 319648,
+     "win_rate": 0.2232275419745827,
+     "placed_rate": 1.0,
+     "spend": 1118.3716732484859,
+     "value": 2761.707561171084,
+     "profit": 1643.335887922598,
+     "profit_per_1k_wins": 5.141079837579456,
+     "value_captured": 0.1540467377591767,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 300765,
+     "win_rate": 0.21004051851406974,
+     "placed_rate": 0.8665228522463961,
+     "spend": 1050.9205722322704,
+     "value": 2674.7397591569274,
+     "profit": 1623.819186924657,
+     "profit_per_1k_wins": 5.398963266751973,
+     "value_captured": 0.14919571501559348,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 162206,
+     "win_rate": 0.11327725083069239,
+     "placed_rate": 0.42444575114285676,
+     "spend": 715.0295088314111,
+     "value": 2028.4337729908054,
+     "profit": 1313.4042641593942,
+     "profit_per_1k_wins": 8.097137369514039,
+     "value_captured": 0.11314507367944114,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 21128,
+     "win_rate": 0.014754828770519394,
+     "placed_rate": 0.16414886678054497,
+     "spend": 228.3655503329216,
+     "value": 737.091069774431,
+     "profit": 508.72551944150945,
+     "profit_per_1k_wins": 24.078261995527708,
+     "value_captured": 0.0411145902363479,
+     "mean_bid": NaN
+    }
+   },
+   "C4": {
+    "1.0": {
+     "wins": 375594,
+     "win_rate": 0.26229766931249815,
+     "placed_rate": 0.9996389508484306,
+     "spend": 2364.8343686979915,
+     "value": 5772.560795808769,
+     "profit": 3407.726427110778,
+     "profit_per_1k_wins": 9.072899000278966,
+     "value_captured": 0.3219907030032462,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 355587,
+     "win_rate": 0.24832569566559445,
+     "placed_rate": 0.8705439760660029,
+     "spend": 2269.6971618720895,
+     "value": 5731.333886862898,
+     "profit": 3461.6367249908085,
+     "profit_per_1k_wins": 9.734992350650638,
+     "value_captured": 0.3196910855780352,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 250828,
+     "win_rate": 0.17516680191460804,
+     "placed_rate": 0.5056021978605219,
+     "spend": 1807.351748321398,
+     "value": 5268.835359186454,
+     "profit": 3461.483610865056,
+     "profit_per_1k_wins": 13.80022808803266,
+     "value_captured": 0.2938931370882368,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 75550,
+     "win_rate": 0.05276066421870221,
+     "placed_rate": 0.21085968805911987,
+     "spend": 814.4488117964773,
+     "value": 3341.176254588812,
+     "profit": 2526.7274427923344,
+     "profit_per_1k_wins": 33.44444001048755,
+     "value_captured": 0.18636922660977795,
+     "mean_bid": NaN
+    }
+   }
+  },
+  "20258": {
+   "C1": {
+    "1.0": {
+     "wins": 690073,
+     "win_rate": 0.4833804754559757,
+     "placed_rate": 1.0,
+     "spend": 2874.4381628686306,
+     "value": 7553.51186492928,
+     "profit": 4679.073702060649,
+     "profit_per_1k_wins": 6.780548872453566,
+     "value_captured": 0.39084453149636594,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 624512,
+     "win_rate": 0.43745648284741223,
+     "placed_rate": 0.8726882497733955,
+     "spend": 2158.0608089822567,
+     "value": 6518.310463032465,
+     "profit": 4360.249654050209,
+     "profit_per_1k_wins": 6.981850875644037,
+     "value_captured": 0.33727967131426967,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 417158,
+     "win_rate": 0.2922097116975507,
+     "placed_rate": 0.5517582680838724,
+     "spend": 1452.7960726157369,
+     "value": 5456.235072257478,
+     "profit": 4003.4389996417412,
+     "profit_per_1k_wins": 9.596936891158125,
+     "value_captured": 0.2823242590578072,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 96579,
+     "win_rate": 0.06765139766236714,
+     "placed_rate": 0.19738049506934024,
+     "spend": 478.62333702565786,
+     "value": 2882.3537749277343,
+     "profit": 2403.7304379020766,
+     "profit_per_1k_wins": 24.888748463973293,
+     "value_captured": 0.14914283990192148,
+     "mean_bid": NaN
+    }
+   },
+   "oracle": {
+    "1.0": {
+     "wins": 158113,
+     "profit": 16922.005407553504,
+     "value": 18624.179802867162,
+     "spend": 1702.1743953136574,
+     "placed_rate": 0.11075456816274609,
+     "value_captured": 0.9636787443669221
+    },
+    "1.5": {
+     "wins": 140864,
+     "profit": 16857.373373161936,
+     "value": 18278.28590704672,
+     "spend": 1420.9125338847834,
+     "placed_rate": 0.09867203512473399,
+     "value_captured": 0.9457810114875869
+    },
+    "2.0": {
+     "wins": 128966,
+     "profit": 16714.419375579775,
+     "value": 17941.067881435294,
+     "spend": 1226.6485058555186,
+     "placed_rate": 0.0903377561470386,
+     "value_captured": 0.9283321977981334
+    },
+    "3.0": {
+     "wins": 112734,
+     "profit": 16325.123455886845,
+     "value": 17285.446550413508,
+     "spend": 960.3230945266625,
+     "placed_rate": 0.07896760852845129,
+     "value_captured": 0.8944081083753079
+    }
+   },
+   "C2": {
+    "1.0": {
+     "wins": 572951,
+     "win_rate": 0.4013391725121498,
+     "placed_rate": 0.9988365071960034,
+     "spend": 3556.012476417883,
+     "value": 10569.293531180705,
+     "profit": 7013.281054762821,
+     "profit_per_1k_wins": 12.240629748028752,
+     "value_captured": 0.5468913867232762,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 495617,
+     "win_rate": 0.3471684605890454,
+     "placed_rate": 0.8169617777553625,
+     "spend": 2600.238460242192,
+     "value": 9300.21769372425,
+     "profit": 6699.979233482058,
+     "profit_per_1k_wins": 13.518461298708594,
+     "value_captured": 0.48122506356212613,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 319084,
+     "win_rate": 0.22351110046385608,
+     "placed_rate": 0.5052199568786171,
+     "spend": 1729.870639045547,
+     "value": 7892.736071073481,
+     "profit": 6162.865432027934,
+     "profit_per_1k_wins": 19.314241491356302,
+     "value_captured": 0.4083971518262869,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 130595,
+     "win_rate": 0.0914788336772677,
+     "placed_rate": 0.28699816054659644,
+     "spend": 910.9633367157451,
+     "value": 5980.111822077735,
+     "profit": 5069.14848536199,
+     "profit_per_1k_wins": 38.81579298872078,
+     "value_captured": 0.3094314333770805,
+     "mean_bid": NaN
+    }
+   },
+   "C3": {
+    "1.0": {
+     "wins": 651258,
+     "win_rate": 0.4561914488532486,
+     "placed_rate": 1.0,
+     "spend": 2254.2864266803035,
+     "value": 6937.792957853327,
+     "profit": 4683.506531173023,
+     "profit_per_1k_wins": 7.191476390574892,
+     "value_captured": 0.35898512992623166,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 619316,
+     "win_rate": 0.4338168027694071,
+     "placed_rate": 0.9260513113635631,
+     "spend": 2076.408341400286,
+     "value": 6731.509502424375,
+     "profit": 4655.1011610240885,
+     "profit_per_1k_wins": 7.516520098017956,
+     "value_captured": 0.34831131860054637,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 523000,
+     "win_rate": 0.36634963063831694,
+     "placed_rate": 0.7029436858275229,
+     "spend": 1713.3064529340822,
+     "value": 6105.345395980044,
+     "profit": 4392.038943045962,
+     "profit_per_1k_wins": 8.39778000582402,
+     "value_captured": 0.31591144669998555,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 132321,
+     "win_rate": 0.09268785750610466,
+     "placed_rate": 0.22893279480638107,
+     "spend": 603.2669568439792,
+     "value": 3519.699742543433,
+     "profit": 2916.4327856994537,
+     "profit_per_1k_wins": 22.040589065223614,
+     "value_captured": 0.18212129953345182,
+     "mean_bid": NaN
+    }
+   },
+   "C4": {
+    "1.0": {
+     "wins": 567306,
+     "win_rate": 0.39738497812409374,
+     "placed_rate": 0.9986354702094007,
+     "spend": 2772.732610683029,
+     "value": 9758.96127877648,
+     "profit": 6986.22866809345,
+     "profit_per_1k_wins": 12.314744896217297,
+     "value_captured": 0.5049620252274907,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 528684,
+     "win_rate": 0.37033114364127717,
+     "placed_rate": 0.8929369472358465,
+     "spend": 2607.3240181015804,
+     "value": 9663.017327190595,
+     "profit": 7055.693309089014,
+     "profit_per_1k_wins": 13.345766675535886,
+     "value_captured": 0.4999975571127846,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 425728,
+     "win_rate": 0.2982128022034214,
+     "placed_rate": 0.6362092129577094,
+     "spend": 2253.031288163684,
+     "value": 9330.059247372865,
+     "profit": 7077.027959209181,
+     "profit_per_1k_wins": 16.623355661852592,
+     "value_captured": 0.482769167584663,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 169490,
+     "win_rate": 0.11872389846441365,
+     "placed_rate": 0.3071466897543986,
+     "spend": 1196.6095068493787,
+     "value": 7154.010324437716,
+     "profit": 5957.400817588337,
+     "profit_per_1k_wins": 35.14898116460167,
+     "value_captured": 0.37017295578196624,
+     "mean_bid": NaN
+    }
+   }
+  },
+  "20259": {
+   "C1": {
+    "1.0": {
+     "wins": 623113,
+     "win_rate": 0.4354820674029149,
+     "placed_rate": 1.0,
+     "spend": 2783.9774140886475,
+     "value": 8428.382761682376,
+     "profit": 5644.405347593729,
+     "profit_per_1k_wins": 9.058397670396428,
+     "value_captured": 0.38429668249444615,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 569426,
+     "win_rate": 0.3979612232660404,
+     "placed_rate": 0.8758122748728385,
+     "spend": 2174.2468860792183,
+     "value": 7380.372706835164,
+     "profit": 5206.125820755946,
+     "profit_per_1k_wins": 9.142760992220142,
+     "value_captured": 0.33651209573723356,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 356453,
+     "win_rate": 0.24911836115114147,
+     "placed_rate": 0.5128866735902514,
+     "spend": 1434.9437101599333,
+     "value": 5973.775669107475,
+     "profit": 4538.831958947541,
+     "profit_per_1k_wins": 12.733325175963007,
+     "value_captured": 0.272377541043924,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 64747,
+     "win_rate": 0.04525047209436576,
+     "placed_rate": 0.17336311499813398,
+     "spend": 423.95396328238337,
+     "value": 2486.731677171681,
+     "profit": 2062.7777138892975,
+     "profit_per_1k_wins": 31.859046965717294,
+     "value_captured": 0.11338387930547339,
+     "mean_bid": NaN
+    }
+   },
+   "oracle": {
+    "1.0": {
+     "wins": 158664,
+     "profit": 19361.79709601961,
+     "value": 21221.39032288753,
+     "spend": 1859.59322686792,
+     "placed_rate": 0.1108873137655868,
+     "value_captured": 0.9676007995367255
+    },
+    "1.5": {
+     "wins": 142297,
+     "profit": 19294.849556241144,
+     "value": 20865.653446285993,
+     "spend": 1570.8038900448485,
+     "placed_rate": 0.09944872237496663,
+     "value_captured": 0.9513807837419492
+    },
+    "2.0": {
+     "wins": 130919,
+     "profit": 19142.69317720514,
+     "value": 20505.18696603782,
+     "spend": 1362.493788832683,
+     "placed_rate": 0.09149685014166326,
+     "value_captured": 0.9349451191041734
+    },
+    "3.0": {
+     "wins": 115280,
+     "profit": 18737.61609740512,
+     "value": 19823.66361143405,
+     "spend": 1086.047514028931,
+     "placed_rate": 0.08056704438875137,
+     "value_captured": 0.9038706921800175
+    }
+   },
+   "C2": {
+    "1.0": {
+     "wins": 583848,
+     "win_rate": 0.40804049039108004,
+     "placed_rate": 0.9990851642860438,
+     "spend": 4774.356832310762,
+     "value": 13603.192321494247,
+     "profit": 8828.835489183486,
+     "profit_per_1k_wins": 15.121804800536246,
+     "value_captured": 0.6202449305281287,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 516561,
+     "win_rate": 0.3610148596156991,
+     "placed_rate": 0.8347201469328194,
+     "spend": 3720.2585916766952,
+     "value": 12291.911015925167,
+     "profit": 8571.652424248472,
+     "profit_per_1k_wins": 16.593688691652044,
+     "value_captured": 0.5604563483296385,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 341781,
+     "win_rate": 0.2388643736834822,
+     "placed_rate": 0.5063500361321669,
+     "spend": 2513.4143316422696,
+     "value": 10320.360630762803,
+     "profit": 7806.946299120534,
+     "profit_per_1k_wins": 22.841955226067377,
+     "value_captured": 0.4705624394016927,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 133618,
+     "win_rate": 0.09338313096058448,
+     "placed_rate": 0.2647984635791951,
+     "spend": 1343.4467508188395,
+     "value": 7753.597031818725,
+     "profit": 6410.150280999886,
+     "profit_per_1k_wins": 47.97370325105813,
+     "value_captured": 0.35352946122394074,
+     "mean_bid": NaN
+    }
+   },
+   "C3": {
+    "1.0": {
+     "wins": 601514,
+     "win_rate": 0.42038692868195165,
+     "placed_rate": 1.0,
+     "spend": 2409.353226041728,
+     "value": 8215.20113178293,
+     "profit": 5805.847905741201,
+     "profit_per_1k_wins": 9.652057817010412,
+     "value_captured": 0.37457655047676314,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 571738,
+     "win_rate": 0.39957703699458647,
+     "placed_rate": 0.9104816830181611,
+     "spend": 2251.5309895030937,
+     "value": 7978.535466981551,
+     "profit": 5727.0044774784565,
+     "profit_per_1k_wins": 10.016833720127849,
+     "value_captured": 0.3637856511529932,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 441763,
+     "win_rate": 0.30873993086665485,
+     "placed_rate": 0.6295467474759899,
+     "spend": 1757.7500463928177,
+     "value": 6775.254954503045,
+     "profit": 5017.504908110228,
+     "profit_per_1k_wins": 11.35791116075866,
+     "value_captured": 0.30892142368126835,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 83605,
+     "win_rate": 0.05842997697884766,
+     "placed_rate": 0.18819477544242685,
+     "spend": 536.2039017339032,
+     "value": 2856.936774920528,
+     "profit": 2320.7328731866246,
+     "profit_per_1k_wins": 27.758302412375155,
+     "value_captured": 0.13026358148917155,
+     "mean_bid": NaN
+    }
+   },
+   "C4": {
+    "1.0": {
+     "wins": 542256,
+     "win_rate": 0.3789726164301419,
+     "placed_rate": 0.9985938506825974,
+     "spend": 3722.1503209524603,
+     "value": 13213.002078186228,
+     "profit": 9490.851757233768,
+     "profit_per_1k_wins": 17.50252972255497,
+     "value_captured": 0.6024539947952762,
+     "mean_bid": NaN
+    },
+    "1.5": {
+     "wins": 506717,
+     "win_rate": 0.3541350714047096,
+     "placed_rate": 0.8764852976326093,
+     "spend": 3577.921243022035,
+     "value": 13128.538921155528,
+     "profit": 9550.617678133494,
+     "profit_per_1k_wins": 18.84803090903501,
+     "value_captured": 0.5986028513484608,
+     "mean_bid": NaN
+    },
+    "2.0": {
+     "wins": 381578,
+     "win_rate": 0.2666777555844116,
+     "placed_rate": 0.5779084996554514,
+     "spend": 3065.090414173796,
+     "value": 12414.521088560692,
+     "profit": 9349.430674386896,
+     "profit_per_1k_wins": 24.502017082711518,
+     "value_captured": 0.5660468210794583,
+     "mean_bid": NaN
+    },
+    "3.0": {
+     "wins": 152111,
+     "win_rate": 0.10630754414484177,
+     "placed_rate": 0.29057111187832757,
+     "spend": 1733.6347442459662,
+     "value": 9120.330652536468,
+     "profit": 7386.695908290501,
+     "profit_per_1k_wins": 48.56122113647601,
+     "value_captured": 0.4158464218018691,
+     "mean_bid": NaN
+    }
+   }
+  }
+ }
+}

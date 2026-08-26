@@ -5,9 +5,31 @@
 
 The plan states four pass conditions for gate 2: every calibration row in band,
 all direction checks pass, V1 to V11 all pass, and the row count matches the
-scale with 55 columns. This reports all four against the real files, and it
-reports what it finds rather than what would be convenient. A level out of band
-is printed as out of band.
+scale with the frozen column set. This reports all four against the real files,
+and it reports what it finds rather than what would be convenient. A level out
+of band is printed as out of band.
+
+NEITHER SIDE OF THE SHAPE CONDITION IS A LITERAL ANY MORE, repaired 23 August
+2026. The condition read "55 columns" as a hardcoded constant. v2.2 added
+`min_winning_price` and the master became 56, so this gate reported FAIL on a
+design change every other gate had already accepted: gate 1 checks the settings
+against the node register and passes at 56, gate 3 reads 56 master columns and
+passes, and gate 7 reproduces all thirty datasets byte-identically. The number
+was stale, not the data.
+
+Writing 56 in its place would put the same trap one column further down the
+road. Both halves now come from the design:
+
+    columns   len(settings["column_order"]), the same list V4 checks the
+              emitting rows against, so `graph.yaml` is the single source of
+              truth and this gate cannot drift from the register
+    rows      settings["scales"][manifest["scale"]]
+
+AND THE ROW HALF WAS NEVER TESTED. The condition has always claimed two things
+and checked one: the old code compared columns only, so "row count matches the
+scale" was asserted by the wording of a table cell rather than measured. It is
+measured now. A condition naming a check it does not run is worse than no
+condition, because a reader counts it as covered.
 """
 import io
 import json
@@ -36,6 +58,30 @@ def one(path, s):
     r = V.run(Path(path), quiet=True)
     return {"path": Path(path).name, "rows": len(df), "cols": len(df.columns),
             "manifest": man, **r}
+
+
+def shape_ok(r, s):
+    """Does this file have the rows its scale declares and the frozen columns?
+
+    Returns (ok, detail). The detail is what went wrong, so the artifact can say
+    which half failed rather than printing a bare no.
+
+    A file whose manifest names no scale cannot have its rows judged, and that is
+    reported rather than passed. Silently skipping the row half is how the column
+    half came to be the whole condition.
+    """
+    want_cols = len(s.raw["column_order"])
+    scale = r["manifest"].get("scale")
+    want_rows = s.raw["scales"].get(scale) if scale else None
+    bad = []
+    if r["cols"] != want_cols:
+        bad.append("%d columns against %d in `column_order`" % (r["cols"], want_cols))
+    if want_rows is None:
+        bad.append("no scale in the manifest, so the row count cannot be judged")
+    elif r["rows"] != want_rows:
+        bad.append("%d rows against %d declared for scale %s"
+                   % (r["rows"], want_rows, scale))
+    return (not bad), "; ".join(bad)
 
 
 def main():
@@ -142,13 +188,17 @@ def main():
            % (", ".join("`%s`" % u for u in unm) if unm else "none"),
            "| all direction checks pass | %s |" % ("yes" if ok else "**no**"),
            "| V1 to V11 all pass | yes |",
-           "| row count matches the scale, 55 columns | %s |"
-           % ("yes" if all(r["cols"] == 55 for r in reports) else "**no**"), ""]
+           "| row count matches the scale, %d columns | %s |"
+           % (len(s.raw["column_order"]),
+              "yes" if all(shape_ok(r, s)[0] for r in reports)
+              else "**no**, " + "; ".join(
+                  "%s: %s" % (r["path"], shape_ok(r, s)[1])
+                  for r in reports if not shape_ok(r, s)[0])), ""]
 
     # A bold verdict line, so all seven gate files answer their question the
     # same way. A reader scanning seven files for seven verdicts should not have
     # to infer this one from a table of yeses.
-    passed = (not oob) and ok and all(r["cols"] == 55 for r in reports)
+    passed = (not oob) and ok and all(shape_ok(r, s)[0] for r in reports)
     L_ += ["**Gate 2: %s**" % ("PASS" if passed else "FAIL"), ""]
 
     OUT.parent.mkdir(parents=True, exist_ok=True)

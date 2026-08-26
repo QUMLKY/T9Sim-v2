@@ -85,10 +85,76 @@ spend_model:
 candidate_prices:
   # The bid ladder the profit-max bidder searches, shared by both learned bidders
   # and the true-value oracle.
+  #
+  # WIDENED 22 Aug 2026, rebuild plan v2.2 bid-ladder section. Values are USD per
+  # IMPRESSION and `bidders.ladder` multiplies by PER_MILLE, so this is
+  # geomspace(0.1, 1200, 60) in CPM.
+  #
+  # v1's 0.1-120 clipped the argmax: measured on the oracle at 100K seed 20250,
+  # 1.528 percent of achievable profit sat on the top rung, against a pass
+  # condition of 0.1 percent at each end. Our own bids top out near 26 CPM, which
+  # is why the old ceiling looked generous, but m^win reaches 971 and ev reaches
+  # 16,148 CPM on whale traffic.
+  #
+  # THE FLOOR STAYS AT 0.1. Raising it to 0.3 was proposed on the ground that
+  # nothing clears below there, true by row count and false by money: it strands
+  # 0.571 percent of profit on the bottom rung against 0.039 percent at 0.1.
+  #
+  # 60 rather than 96: doubling the rungs recovers about 0.2 points, because the
+  # profit curve is flat at its own maximum, so grid error is second-order in
+  # profit while a clipped ceiling is first-order. Verify with
+  # tools/ladder_boundary.py, which is the pass condition rather than these
+  # numbers being it.
   spacing: geomspace
-  low:    {value: 0.0001, route: inferred, source: "v1 BID_GRID = np.geomspace(1e-4, 0.12, 48), t9_sim/src/t9sim/pipeline.py:73"}
-  high:   {value: 0.12,   route: inferred, source: "as low. USD per impression"}
-  n:      {value: 48,     route: inferred, source: "as low. Coarser spacing quantises the economics metrics"}
+  low:    {value: 0.0001, route: inferred, source: "v1 BID_GRID = np.geomspace(1e-4, 0.12, 48), t9_sim/src/t9sim/pipeline.py:73. The floor is v1's and is kept: at 0.1 CPM only 0.039 percent of oracle profit sits on the bottom rung"}
+  high:   {value: 1.2,    route: inferred, source: "rebuild plan v2.2, bid-ladder section, 22 Aug 2026. Was 0.12, which put 1.528 percent of oracle profit on the top rung at 100K seed 20250; at 1.2 it is 0.000 percent"}
+  n:      {value: 60,     route: inferred, source: "rebuild plan v2.2. Was 48. Twelve more rungs hold the step near v1's over a range ten times as wide, 17.3 percent against 16.3"}
+
+roas_target:
+  # The minimum return on ad spend a row must promise before the bidder will bid
+  # on it at all: `ev / b >= target` at the rung the argmax has already picked.
+  #
+  # A GATE, NOT A CONSTRAINED SEARCH. The bidder takes its ordinary
+  # profit-maximising bid and the row is then either bid or dropped. It never
+  # reprices a row to meet the target, because a repriced bid would make the
+  # ladder argmax mean one thing in a gated run and another in an ungated one,
+  # and the two could no longer be compared. Rebuild plan v2.2, step 2.
+  #
+  # THE VALUE WAS 1.0 UNTIL 25 AUGUST 2026, AND AT 1.0 THE GATE NEVER FIRED.
+  # Measured across ten seeds at 10M, the learned bidder placed on 99.99 percent
+  # of test rows in C1 and 100.00 percent in C3. Every economic figure v2.2
+  # reported before this date therefore described a bidder that bid on every
+  # auction it saw.
+  #
+  # The reason is the exact zeros, and it was already written down here under
+  # the old value. Thirty percent of rows have `ev_truth` of exactly zero, the
+  # inactive archetype, so a target of 1 declines them and `truth_ev` and
+  # `oracle` place only 0.2620 of rows. The learned head cannot produce an exact
+  # zero. Its smallest prediction is 4.83 eCPM against a bottom rung of 0.1 CPM,
+  # so nothing it values ever fails a test of `ev / b >= 1`. The gate was inert
+  # on the one bidder the study reports.
+  #
+  # 3.0 IS SOURCEABLE RATHER THAN PICKED. The standard rule is that break-even
+  # ROAS is one divided by the profit margin, so a threefold return is the
+  # requirement of a buyer working to roughly a 33 percent margin. No advertiser
+  # runs with no return requirement at all, so 1.0 described a policy that does
+  # not exist in the market. This is a correction to a defective default and not
+  # a search for a better number. Ken's ruling, 24 August 2026: "ROAS = 1
+  # resulted the bidder bidding on ALL auctions, which is absolutely not how
+  # advertisers behave. So change ROAS is fixing a bug."
+  #
+  # Note that the realised return runs well above the target, about 5.4 to 5.6
+  # times across the views, because the gate tests expected value at the chosen
+  # bid while a win also needs that bid to clear.
+  #
+  # CHANGING THIS INVALIDATES NO DATASET. training.yaml is excluded from the
+  # design fingerprint by design, generate.py:53-56, because it changes how a
+  # dataset is scored and never what it contains. The thirty parquets stay
+  # valid and no regeneration is needed.
+  value:
+    value: 3.0
+    route: inferred
+    source: "Ken 24 Aug 2026, a correction rather than a tuning choice. At the previous value of 1.0 the learned bidder placed on 99.99 percent of rows, so the gate was inert. Break-even ROAS is 1 divided by the profit margin, making 3:1 the requirement of a buyer at roughly a 33 percent margin. Background in t9v2/docs/ROAS_Change_Background.md"
 
 xgboost:
   # THREE parameter sets, not two. The Tier-2 win classifier is deeper than Tier-1.
@@ -151,6 +217,75 @@ xgboost:
   # Do not re-add an AFT head without also deciding the sigma question v1 left open:
   # its single sigma trained the model, shaped its win curve, scored its CRPS AND built
   # the oracle ceiling every view was judged against.
+  #
+  # RE-ADDED 23 August 2026 as `tier2_price` below, and the sigma question is
+  # answered rather than inherited. See that block.
+  tier2_price:
+    # THE PRICE HEAD. One estimand for all four views, m^win, the minimum winning
+    # price. What differs between views is not what is predicted but how well it
+    # is OBSERVED, which is the ablation working rather than a methodological
+    # difference smuggled in beside it.
+    #
+    #   C3, C4        exact on every row, from `min_winning_price`
+    #   C1, C2 won    floor <= m^win <= bid, a bounded interval
+    #   C1, C2 lost   m^win >= max(bid, floor), right-unbounded
+    #
+    # ONE LIKELIHOOD, NOT TWO. All four views use the same interval-censored
+    # class; C3 and C4 simply supply degenerate intervals [x, x]. With plain
+    # regression on one side and a censored model on the other, C3 minus C1 would
+    # mix the data layer with the estimator and no reader could tell which
+    # produced the contrast.
+    #
+    # `aft_loss_distribution_scale` IS NOT SET HERE, and its absence is the
+    # point. v1 copied 1.0 from nowhere and that constant sat on the headline
+    # contrast. It is now read off C3's residuals per seed at its own scale,
+    # clamped to [0.2, 2.0], and recorded in results.json. See `train/price.py`.
+    value: {n_estimators: 300, max_depth: 6, learning_rate: 0.1, tree_method: hist,
+            enable_categorical: true, objective: "survival:aft",
+            eval_metric: "aft-nloglik",
+            aft_loss_distribution: normal, early_stopping_rounds: 20}
+    route: inferred
+    source: "rebuild plan v2.2 step 6, 22 Aug 2026. Tree parameters follow tier1_binary, which is v1's XGB_CLF; the objective and the censoring are the plan's, and the scale is deliberately absent"
+
+  sigma:
+    # The AFT scale, and the one number v1 never justified.
+    #
+    # It is INERT where labels are exact and LOAD-BEARING where they are not. For
+    # a normal AFT with all-exact observations the location MLE does not depend on
+    # the scale, so sigma does nothing to C3 and C4. For interval observations the
+    # likelihood is a difference of two normal CDFs whose shape sigma sets, so it
+    # does affect C1 and C2 -- which are interval on every row. Sigma therefore
+    # still sits on the C3 minus C1 contrast, THROUGH C1. It halves the problem
+    # rather than dissolving it.
+    #
+    # So it is estimated, not chosen: sigma_hat = std(log m^win - log pred) on
+    # C3's held-out rows. Nearly free, because the same fact that makes it inert
+    # in C3 means C3 can be fitted with any placeholder and the residual spread
+    # read off afterwards. The whole cost is one ordering rule -- C3 trains first
+    # -- and one line of arithmetic.
+    #
+    # ESTIMATED WITHIN EACH RUN AT ITS OWN SCALE. Residual spread shrinks as the
+    # model improves with data, so a value taken from a 1M pilot is too wide for a
+    # 10M campaign.
+    #
+    # THE COST, stated because a reader should be told rather than left to find
+    # it: C1's sigma is derived from C3's labels, so a view defined by NOT having
+    # SSP data borrows one quantity computed from it. What transfers is a nuisance
+    # parameter and not price information -- a scale, nothing about where prices
+    # sit -- and it is the only option of the three weighed that leaves the
+    # contrast free of a fitted parameter. It belongs in the limitations.
+    placeholder:
+      value: 1.0
+      route: inferred
+      source: "v1 AFT_SCALE. Used for C3 and C4, where the normal-AFT location MLE is independent of the scale, so it barely affects the FIT: measured, C3 rmse_log moves 0.0076 across sigma 0.2 to 4.0. It is NOT inert downstream. runner.py passes this same value to the win curve, the curve sets the argmax bid, and C3 wins about 15 percent more auctions at 0.75 than at 1.5 -- so C3 and C4 bid at 1.0 while C1 and C2 bid at the fitted ~0.90, and plan section 7b says all four should use one value. Queued as Q4, corrected here 23 Aug 2026 because this field previously read 'it cannot affect a number'. Never used for C1 or C2"
+    clamp_low:
+      value: 0.2
+      route: inferred
+      source: "rebuild plan v2.2 step 6. A guard so a pathological seed cannot produce nonsense, not a tuning range"
+    clamp_high:
+      value: 2.0
+      route: inferred
+      source: "rebuild plan v2.2 step 6, as clamp_low"
 
 split_days: {train: [1, 20], valid: [21, 24], test: [25, 28]}
 

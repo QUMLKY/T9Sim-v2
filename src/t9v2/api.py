@@ -72,12 +72,22 @@ class Trained:
         return float(ev[0]), float(pw[0])
 
     def bid(self, rows):
-        """The profit-maximising bid over the shared ladder."""
+        """The profit-maximising bid over the shared ladder, and whether to bid.
+
+        Returns `(bid, placed)`. The second is the ROAS gate's answer and is not
+        folded into the first: `bid` stays the ungated argmax on every row, so a
+        caller sees both what the bidder would pay and whether it was willing to
+        pay it. A declined row cannot be signalled by a zero bid, because 14
+        percent of rows have a floor of exactly zero and a zero bid clears the
+        hurdle on them.
+        """
         prices = B.ladder(self.settings)
         d = self._prep(rows)
         ev = self.t1.predict(d)["ev"]
-        b, _ = B.choose(B.to_price_unit(ev), self.t2.win_curve(d, prices), prices)
-        return b
+        b, _, _, placed = B.choose(B.to_price_unit(ev),
+                                   self.t2.win_curve(d, prices), prices,
+                                   B.roas_target(self.settings))
+        return b, placed
 
 
 def train(master, view, settings=None, seed=0):
@@ -112,7 +122,7 @@ def aggregate(results):
             "win_auc": float(np.mean([r["heads"]["win"]["auc"] for r in rows])),
             "spend_crps": float(np.mean([r["heads"]["spend"]["crps"] for r in rows])),
             "profit": float(np.mean([r["economics"]["learned"]["profit"] for r in rows])),
-            "ev_ratio": float(np.mean([r["economics"]["learned"]["ev_ratio"] for r in rows])),
+            "value_captured": float(np.mean([r["economics"]["learned"]["value_captured"] for r in rows])),
         }
     return out
 
@@ -142,11 +152,11 @@ def main_run(argv=None):
     r = _c.run_one(a.scale, a.seed)
     v = r["views"]
     print("%s seed %d, %.0fs" % (a.scale, a.seed, r["total_seconds"]))
-    print("  %-4s %9s %9s %9s %11s" % ("view", "clickAUC", "winAUC", "ev_ratio", "profit"))
+    print("  %-4s %9s %9s %9s %11s" % ("view", "clickAUC", "winAUC", "value_captured", "profit"))
     for k in _c.VIEWS:
         h, e = v[k]["heads"], v[k]["economics"]["learned"]
         print("  %-4s %9.4f %9.4f %9.4f %11.0f"
-              % (k, h["click"]["auc"], h["win"]["auc"], e["ev_ratio"], e["profit"]))
+              % (k, h["click"]["auc"], h["win"]["auc"], e["value_captured"], e["profit"]))
     return 0
 
 

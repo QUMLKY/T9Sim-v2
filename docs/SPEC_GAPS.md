@@ -35,6 +35,7 @@ Each is either a genuine gap, meaning a node whose law has no parameters yet, or
 | `bn.audience_centroids` |
 | `bn.k_audience` |
 | `entity_latents.audience_dirichlet_k` |
+| `min_bid_to_win` |
 | `price_rmse_all` |
 | `slot_sizes` |
 

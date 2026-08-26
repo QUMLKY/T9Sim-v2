@@ -13,6 +13,8 @@ from __future__ import annotations
 
 import warnings
 
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 import pytest
@@ -88,7 +90,7 @@ def test_user_id_cannot_reach_any_model(master, s):
 def test_all_four_views_produce_all_five_models(master, s):
     """5 models: the 4 Tier-1 heads and the Tier-2 win classifier."""
     for v in ("C1", "C2", "C3", "C4"):
-        r, f = train_view(master, v, s)
+        r, f = train_view(master, v, s, sigma=1.0)
         assert set(r["head_mode"]) == {"click", "install", "payer", "spend"}
         assert all(m in ("model", "intercept") for m in r["head_mode"].values()), \
             "%s left a head unavailable: %s" % (v, r["head_mode"])
@@ -96,8 +98,8 @@ def test_all_four_views_produce_all_five_models(master, s):
 
 
 def test_c4_is_trained_on_more_columns_than_c1(master, s):
-    r1, _ = train_view(master, "C1", s)
-    r4, _ = train_view(master, "C4", s)
+    r1, _ = train_view(master, "C1", s, sigma=1.0)
+    r4, _ = train_view(master, "C4", s, sigma=1.0)
     assert r4["features_tier2"] > r1["features_tier2"]
     assert r4["columns"] > r1["columns"]
 
@@ -192,14 +194,33 @@ def test_crps_falls_as_the_forecast_sharpens_on_the_truth():
 
 
 def test_economics_pays_its_own_bid_on_won_rows():
-    """First price: the winner pays what it bid, so profit is value minus bid."""
+    """First price: the winner pays what it bid, so profit is value minus bid.
+
+    THIS TEST ASSERTED 3.0, WHICH IS WHY THE UNITS DEFECT SHIPPED. Every price
+    reaching `economics` is a CPM and a won row is ONE impression, so the money
+    divides by a thousand: 2.0 + 1.0 CPM is $0.003, not $3.00. A test written
+    against the buggy value cannot catch the bug it exists to guard, and this one
+    silently ratified it for the life of v2.
+
+    It now pins THREE things separately, because they fail independently: the
+    first-price rule, the unit, and the fact that the ratio does not move.
+    """
     bid = np.array([2.0, 5.0, 1.0])
     hurdle = np.array([1.0, 6.0, 0.5])
     value = np.array([10.0, 10.0, 10.0])
     e = M.economics(bid, None, value, hurdle, np.zeros(3))
-    assert e["wins"] == 2
-    assert e["spend"] == 3.0                      # 2.0 + 1.0, not the hurdles
-    assert e["profit"] == 20.0 - 3.0
+
+    assert e["wins"] == 2, "rows 0 and 2 clear their hurdle, row 1 does not"
+
+    # the first-price rule: the winner pays ITS OWN BID, not the hurdle it beat
+    assert e["spend"] == pytest.approx(3.0 / M.PER_MILLE)
+    assert e["profit"] == pytest.approx((20.0 - 3.0) / M.PER_MILLE)
+
+    # the unit, stated as money rather than as an expression in the constant
+    assert e["spend"] == pytest.approx(0.003), "2.0 + 1.0 CPM, one impression each"
+
+    # the ratio divides one sum by another of the same unit, so it does NOT move
+    assert e["value_captured"] == pytest.approx(20.0 / 30.0)
 
 
 # ---------------------------------------------------------------------------
@@ -222,3 +243,76 @@ def test_a_nonzero_tau_actually_changes_the_data():
     b = G.frame("100K", seed=20250, n_rows=12000, untilted=True)
     c = G.frame("100K", seed=20250, n_rows=12000, tau_scale=1.0)
     assert not c["os"].equals(b["os"])
+
+
+def test_choose_returns_the_ladder_index_it_took():
+    """The bidder hands back WHICH rung it chose, so nothing re-derives it.
+
+    A tool that recomputed the argmax to find the chosen bid would be a second
+    implementation of the bidder, used to audit the first. The two would agree
+    until a tie-break or a curve shape made them disagree, and then silently.
+    `curve[i, j]` is the chosen bid's own win probability, which is what
+    calibration at the recommended bid is measured on.
+    """
+    prices = np.geomspace(0.1, 120.0, 48)
+    curve = np.tile(np.linspace(0.0, 1.0, 48), (3, 1))
+    ev = np.array([5.0, 50.0, 0.05])
+
+    b, profit, j, placed = B.choose(ev, curve, prices)
+
+    assert j.shape == b.shape == profit.shape
+    assert np.array_equal(prices[j], b), "the index must name the bid returned"
+    assert np.allclose(profit, (ev[:, None] - prices[None, :])[np.arange(3), j] * curve[np.arange(3), j])
+    assert j.dtype.kind == "i"
+    assert (j >= 0).all() and (j < len(prices)).all()
+    assert placed.all(), "no target given means no gate; see test_roas.py"
+
+
+def test_choose_ties_take_the_lowest_rung():
+    """Equal expected profit is no reason to pay more, and the index says so."""
+    prices = np.array([1.0, 2.0, 3.0])
+    curve = np.array([[1.0, 1.0, 1.0]])          # flat: profit falls with price
+    b, _, j, _ = B.choose(np.array([10.0]), curve, prices)
+    assert j[0] == 0 and b[0] == 1.0
+
+
+def test_the_bid_ladder_is_one_shared_grid():
+    """Both bidders and the oracle search the same rungs, or the contrast is grid.
+
+    Shared deliberately: with a free choice of bid a policy with a marginally
+    better curve could beat another on grid resolution rather than on what it
+    knows. Pinned to the literal so a settings edit cannot move it silently.
+    """
+    prices = B.ladder(load("default"))
+    assert len(prices) == 60
+    assert np.allclose(prices, np.geomspace(0.1, 1200.0, 60))
+    assert prices[0] == pytest.approx(0.1)      # CPM, not per impression
+    assert prices[-1] == pytest.approx(1200.0)
+
+
+def test_the_ladder_boundary_holds_at_100k(tmp_path):
+    """Profit at risk on each extreme rung, which is the pass condition.
+
+    Measured on the ORACLE: true value, true win rule, no model error, because
+    the question is whether the GRID can express the right bid.
+
+    Rows are the wrong measure and this asserts why. v1's 0.1-120 put only 0.042
+    percent of ROWS on its top rung, which reads as negligible, and 1.528 percent
+    of PROFIT, because whale traffic is rare and large.
+    """
+    from t9v2 import generate as G
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
+    from ladder_boundary import measure, THRESHOLD
+
+    p = tmp_path / "m.parquet"
+    G.generate(scale="100K", seed=20250, out=str(p), quiet=True)
+    m = pd.read_parquet(p, columns=["lu7_competing_bid", "floor_price", "ev_truth"])
+
+    live = measure(m, B.ladder(load("default")))
+    assert live["share_on_top_rung"] < THRESHOLD, "the ceiling clips the argmax"
+    assert live["share_on_bottom_rung"] < THRESHOLD, "the floor strands profit"
+
+    old = measure(m, np.geomspace(0.1, 120.0, 48))
+    assert old["share_on_top_rung"] > 0.01, "v1's ladder should still fail this"
+    assert old["rows_on_top_rung"] < 0.001, "and should look fine by row count"

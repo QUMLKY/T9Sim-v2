@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "t9v2"
-version = "2.0.0"
-description = "T9Sim v2, the ad-auction simulator rebuild"
+version = "2.2.0"
+description = "T9Sim v2.2, the ad-auction simulator rebuild"
 requires-python = ">=3.13,<3.14"
 dependencies = [
     "numpy",
@@ -19,6 +19,12 @@ dependencies = [
 
 [project.optional-dependencies]
 attribution = ["shap"]
+# The Word documents. Needed by tools/make_report.py steps 3 and 4 and by
+# the docx half of tests/test_report_shape.py, which skips without them.
+# `pypandoc_binary` rather than `pypandoc` because it bundles pandoc, so a
+# fresh clone needs nothing installed outside the venv. Kept OPTIONAL: the
+# markdown under docs/ is the record and generating it needs none of this.
+docx = ["pypandoc_binary", "python-docx"]
 
 [project.scripts]
 t9v2-generate = "t9v2.api:main_generate"

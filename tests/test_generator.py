@@ -45,7 +45,8 @@ def test_v3_every_node_has_a_law(s):
 
 
 def test_law_count_matches_the_node_count(s):
-    assert len(L.LAWS) == len(s.nodes) == 78
+    """79 since H5, and the law must exist as well as the register row."""
+    assert len(L.LAWS) == len(s.nodes) == 79
 
 
 def test_no_funnel_law_reads_won():
@@ -74,9 +75,9 @@ def test_our_bid_reads_no_latent_and_no_competing_bid():
         assert banned not in args, "our_bid takes %r" % banned
 
 
-def test_columns_are_exactly_the_frozen_55(s, df):
+def test_columns_are_exactly_the_frozen_56(s, df):
     assert list(df.columns) == s.raw["column_order"]
-    assert len(df.columns) == 55
+    assert len(df.columns) == 56
 
 
 # ---------------------------------------------------------------------------
@@ -145,6 +146,37 @@ def test_first_price_means_the_winner_pays_its_own_bid(df):
 def test_unsold_rows_have_no_winning_price(df):
     unsold = (df["won"] == 0) & (df["lu7_competing_bid"] < df["floor_price"])
     assert (df["winning_price"].isna() == unsold).all()
+
+
+def test_both_price_shapes_are_normalised_by_the_paying_median():
+    """The floor fix. ONE denominator, and the medians say which one.
+
+    The floor and the paying price are two prices in one market, and the ratio
+    between them is the market's structure. Dividing each by its own median
+    forces both to 1 and erases it. Measured on the pmfs, the floor's weighted
+    median is 40 against the paying median's 70, so the correct floor shape has
+    median 40/70 exactly; the bug made it 1 and inflated every floor by 1.750.
+
+    ASSERTED ON THE MEDIANS, NOT ON A REALISED RATIO. The fix commit on the
+    abandoned branch reported 0.5664, which is the MEAN ratio over drawn rows
+    and moves with the seed. These two numbers are properties of the pmfs, so
+    exact equality is the right test where a drifting one would not be.
+    """
+    (fv, fp), (pv, pp) = M.price_shapes()
+    assert M._weighted_median(pv, pp) == 1.0
+    assert M._weighted_median(fv, fp) == 40.0 / 70.0
+
+
+def test_the_floor_zero_atom_keeps_its_measured_mass():
+    """14.15 percent, and NOT the 57 percent the documents carried.
+
+    Both shapes are resampled as empirical pmfs rather than fitted, so the atom
+    survives normalisation whatever the denominator is. 57 percent was the shape
+    ratio 40/70 misread as a share; the Node Register corrected it on 16 August
+    2026 and the Specification did not follow until the floor fix.
+    """
+    (fv, fp), _ = M.price_shapes()
+    assert abs(float(fp[fv == 0].sum()) - 0.1415) < 0.0005
 
 
 def test_ev_truth_is_the_product_of_its_four_parents(df):

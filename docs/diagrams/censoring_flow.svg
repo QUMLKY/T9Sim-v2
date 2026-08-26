@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="620" height="280" viewBox="0 0 1240 560">
+<rect width="1240" height="560" fill="#FFFFFF"/>
+<defs><marker id="ar" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#78909C"/></marker></defs>
+<text x="620.0" y="34.0" font-family="Segoe UI, Arial, sans-serif" font-size="21" font-weight="700" fill="#212121" text-anchor="middle">The censoring operator, block by block</text>
+<text x="620.0" y="52.0" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#546E7A" text-anchor="middle">one master record, two masks, four views</text>
+<text x="180.0" y="86.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#212121" text-anchor="middle">master record D_full, 55 columns</text>
+<rect x="60" y="100" width="240" height="54" rx="8" fill="#FFFFFF" stroke="#607D8B" stroke-width="1.8"/>
+<text x="74.0" y="123.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#212121">x  observables</text>
+<text x="74.0" y="140.0" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" fill="#546E7A">A B C D</text>
+<rect x="60" y="162" width="240" height="54" rx="8" fill="#FFE0B2" stroke="#EF6C00" stroke-width="1.8"/>
+<text x="74.0" y="185.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#212121">f b w  floor, bid, won</text>
+<text x="74.0" y="202.0" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" fill="#546E7A">H1 H2 H3</text>
+<rect x="60" y="224" width="240" height="54" rx="8" fill="#FFCDD2" stroke="#D32F2F" stroke-width="1.8"/>
+<text x="74.0" y="247.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#212121">y  funnel outcomes</text>
+<text x="74.0" y="264.0" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" fill="#546E7A">E F G</text>
+<rect x="60" y="286" width="240" height="54" rx="8" fill="#FFE0B2" stroke="#EF6C00" stroke-width="1.8"/>
+<text x="74.0" y="309.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#212121">m N  price, rivals</text>
+<text x="74.0" y="326.0" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" fill="#546E7A">H4 H9</text>
+<rect x="60" y="348" width="240" height="54" rx="8" fill="#BBDEFB" stroke="#1976D2" stroke-width="1.8"/>
+<text x="74.0" y="371.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#212121">z  latents</text>
+<text x="74.0" y="388.0" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" fill="#546E7A">LU LA LC LR</text>
+<rect x="60" y="410" width="240" height="54" rx="8" fill="#E1BEE7" stroke="#8E24AA" stroke-width="1.8"/>
+<text x="74.0" y="433.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#212121">v*  truth</text>
+<text x="74.0" y="450.0" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" fill="#546E7A">heads, EV</text>
+<text x="60.0" y="488.0" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="400" fill="#546E7A">the oracle evaluator reads all of it</text>
+<rect x="420" y="130" width="300" height="300" rx="10" fill="#FAFAFA" stroke="#212121" stroke-width="1.8"/>
+<text x="570.0" y="156.0" font-family="Segoe UI, Arial, sans-serif" font-size="13.5" font-weight="700" fill="#212121" text-anchor="middle">censoring operator C_k</text>
+<rect x="438" y="176" width="264" height="72" rx="8" fill="#FFFFFF" stroke="#D32F2F" stroke-width="1.8"/>
+<text x="452.0" y="198.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#D32F2F">outcome mask</text>
+<text x="452.0" y="216.0" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" fill="#212121">hides y on lost rows</text>
+<text x="452.0" y="233.0" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" fill="#546E7A">lifted by the MMP layer (C2, C4)</text>
+<rect x="438" y="262" width="264" height="72" rx="8" fill="#FFFFFF" stroke="#EF6C00" stroke-width="1.8"/>
+<text x="452.0" y="284.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#EF6C00">price mask</text>
+<text x="452.0" y="302.0" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" fill="#212121">hides m and N</text>
+<text x="452.0" y="319.0" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" fill="#546E7A">lifted by the SSP layer (C3, C4)</text>
+<text x="570.0" y="388.0" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="700" fill="#8E24AA" text-anchor="middle">z and v* are deleted in every view,</text>
+<text x="570.0" y="404.0" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" fill="#546E7A" text-anchor="middle">x, f, b and w pass through untouched</text>
+<polyline points="300,280.0 420,280.0" fill="none" stroke="#78909C" stroke-width="2.2" marker-end="url(#ar)"/>
+<rect x="800" y="80" width="380" height="96" rx="10" fill="#FFFFFF" stroke="#90A4AE" stroke-width="1.8"/>
+<text x="816.0" y="104.0" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" fill="#212121">C1</text>
+<text x="848.0" y="104.0" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" fill="#546E7A">DSP alone</text>
+<rect x="816" y="118" width="23" height="24" rx="12" fill="#FFFFFF" stroke="#607D8B" stroke-width="1.5"/>
+<text x="827.3" y="134.0" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="700" fill="#607D8B" text-anchor="middle">x</text>
+<rect x="848.6" y="118" width="49" height="24" rx="12" fill="#FFE0B2" stroke="#EF6C00" stroke-width="1.5"/>
+<text x="873.1" y="134.0" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="700" fill="#EF6C00" text-anchor="middle">f b w</text>
+<rect x="907.6" y="118" width="82" height="24" rx="12" fill="#FFE8EA" stroke="#D32F2F" stroke-width="1.5" stroke-dasharray="5,3"/>
+<text x="948.6" y="134.0" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="700" fill="#D32F2F" text-anchor="middle">y won rows</text>
+<text x="816.0" y="162.0" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="400" fill="#546E7A">never sees  m N, z, v*</text>
+<polyline points="720,146 760.0,146 760.0,128.0 800,128.0" fill="none" stroke="#78909C" stroke-width="2.0" marker-end="url(#ar)"/>
+<rect x="800" y="190" width="380" height="96" rx="10" fill="#FFFFFF" stroke="#90A4AE" stroke-width="1.8"/>
+<text x="816.0" y="214.0" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" fill="#212121">C2</text>
+<text x="848.0" y="214.0" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" fill="#546E7A">DSP + MMP</text>
+<rect x="816" y="228" width="23" height="24" rx="12" fill="#FFFFFF" stroke="#607D8B" stroke-width="1.5"/>
+<text x="827.3" y="244.0" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="700" fill="#607D8B" text-anchor="middle">x</text>
+<rect x="848.6" y="228" width="49" height="24" rx="12" fill="#FFE0B2" stroke="#EF6C00" stroke-width="1.5"/>
+<text x="873.1" y="244.0" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="700" fill="#EF6C00" text-anchor="middle">f b w</text>
+<rect x="907.6" y="228" width="23" height="24" rx="12" fill="#FFCDD2" stroke="#D32F2F" stroke-width="1.5"/>
+<text x="918.9" y="244.0" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="700" fill="#D32F2F" text-anchor="middle">y</text>
+<text x="816.0" y="272.0" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="400" fill="#546E7A">never sees  m N, z, v*</text>
+<polyline points="720,238.0 760.0,238.0 760.0,238.0 800,238.0" fill="none" stroke="#78909C" stroke-width="2.0" marker-end="url(#ar)"/>
+<rect x="800" y="300" width="380" height="96" rx="10" fill="#FFFFFF" stroke="#90A4AE" stroke-width="1.8"/>
+<text x="816.0" y="324.0" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" fill="#212121">C3</text>
+<text x="848.0" y="324.0" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" fill="#546E7A">DSP + SSP</text>
+<rect x="816" y="338" width="23" height="24" rx="12" fill="#FFFFFF" stroke="#607D8B" stroke-width="1.5"/>
+<text x="827.3" y="354.0" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="700" fill="#607D8B" text-anchor="middle">x</text>
+<rect x="848.6" y="338" width="49" height="24" rx="12" fill="#FFE0B2" stroke="#EF6C00" stroke-width="1.5"/>
+<text x="873.1" y="354.0" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="700" fill="#EF6C00" text-anchor="middle">f b w</text>
+<rect x="907.6" y="338" width="82" height="24" rx="12" fill="#FFE8EA" stroke="#D32F2F" stroke-width="1.5" stroke-dasharray="5,3"/>
+<text x="948.6" y="354.0" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="700" fill="#D32F2F" text-anchor="middle">y won rows</text>
+<rect x="999.6" y="338" width="36" height="24" rx="12" fill="#FFE0B2" stroke="#EF6C00" stroke-width="1.5"/>
+<text x="1017.5" y="354.0" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="700" fill="#EF6C00" text-anchor="middle">m N</text>
+<text x="816.0" y="382.0" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="400" fill="#546E7A">never sees  z, v*</text>
+<polyline points="720,348.0 760.0,348.0 760.0,348.0 800,348.0" fill="none" stroke="#78909C" stroke-width="2.0" marker-end="url(#ar)"/>
+<rect x="800" y="410" width="380" height="96" rx="10" fill="#FFFFFF" stroke="#90A4AE" stroke-width="1.8"/>
+<text x="816.0" y="434.0" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" fill="#212121">C4</text>
+<text x="848.0" y="434.0" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" fill="#546E7A">all three</text>
+<rect x="816" y="448" width="23" height="24" rx="12" fill="#FFFFFF" stroke="#607D8B" stroke-width="1.5"/>
+<text x="827.3" y="464.0" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="700" fill="#607D8B" text-anchor="middle">x</text>
+<rect x="848.6" y="448" width="49" height="24" rx="12" fill="#FFE0B2" stroke="#EF6C00" stroke-width="1.5"/>
+<text x="873.1" y="464.0" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="700" fill="#EF6C00" text-anchor="middle">f b w</text>
+<rect x="907.6" y="448" width="23" height="24" rx="12" fill="#FFCDD2" stroke="#D32F2F" stroke-width="1.5"/>
+<text x="918.9" y="464.0" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="700" fill="#D32F2F" text-anchor="middle">y</text>
+<rect x="940.2" y="448" width="36" height="24" rx="12" fill="#FFE0B2" stroke="#EF6C00" stroke-width="1.5"/>
+<text x="958.1" y="464.0" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="700" fill="#EF6C00" text-anchor="middle">m N</text>
+<text x="816.0" y="492.0" font-family="Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="400" fill="#546E7A">never sees  z, v*</text>
+<polyline points="720,414 760.0,414 760.0,458.0 800,458.0" fill="none" stroke="#78909C" stroke-width="2.0" marker-end="url(#ar)"/>
+<text x="60.0" y="542.0" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="700" fill="#37474F">pill states:</text>
+<text x="138.0" y="542.0" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" fill="#37474F">solid = all rows</text>
+<text x="255.4" y="542.0" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" fill="#37474F">dashed and lighter = won rows only</text>
+<text x="470.0" y="542.0" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" fill="#37474F">absent = never in the view</text>
+</svg>

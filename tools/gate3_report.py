@@ -78,6 +78,18 @@ def main():
          "%d latent columns, 0 exposed" % len(latent)),
         ("`user_id` hidden everywhere",
          all("user_id" not in d.columns for d in views.values()), "absent from all 4"),
+        # THE ANTI-LEAK CONDITION, gate 3's half. Rebuild plan v2.2: the check
+        # on H5 is a pass condition on gates 3 and 4 rather than an eighth gate,
+        # and gate 3 owns the column's per-view VISIBILITY. `won = 1[bid_price >=
+        # min_winning_price]` is an identity, so a view that can see the column
+        # can decide its own label. C1 and C2 must not, and `build_graph.py`
+        # grants this censoring from a set that never parses H5's role text, so
+        # an omission there is silent everywhere except here.
+        ("`min_winning_price` absent in C1 and C2, present in C3 and C4",
+         all(("min_winning_price" in views[v].columns) == (v in ("C3", "C4"))
+             for v in C.VIEWS),
+         ", ".join("%s %s" % (v, "yes" if "min_winning_price" in views[v].columns
+                              else "no") for v in C.VIEWS)),
         ("C4 sees at least C2, C2 at least C1",
          all(set(views[a].columns) <= set(views[b].columns)
              and all(int(views[a][c].notna().sum()) <= int(views[b][c].notna().sum())

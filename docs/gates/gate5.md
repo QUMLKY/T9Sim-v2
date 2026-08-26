@@ -19,34 +19,34 @@ Seeds 20250-20259, fixed before the campaign and never changed. Generation is de
 
 | Contrast | mean | 95% CI | seeds positive |
 |---|---:|---|---:|
-| MMP, click AUC (C2 − C1) | 0.08298 | [0.06613, 0.09983] | 10/10 |
-| MMP, install AUC (C2 − C1) | 0.03133 | [-0.01703, 0.07970] | 6/10 |
-| MMP, ev_ratio (C2 − C1) | 0.12653 | [0.07749, 0.17557] | 10/10 |
-| MMP, profit (C2 − C1) | 13658 | [5942, 21375] | 10/10 |
-| SSP, win AUC (C3 − C1) | -0.00068 | [-0.00194, 0.00058] | 2/10 |
-| SSP, ev_ratio (C3 − C1) | -0.00875 | [-0.01522, -0.00228] | 0/10 |
-| SSP, profit (C3 − C1) | -1110 | [-2069, -150] | 0/10 |
+| MMP, click AUC (C2 − C1) | 0.09131 | [0.07244, 0.11017] | 10/10 |
+| MMP, install AUC (C2 − C1) | 0.02217 | [-0.01898, 0.06332] | 6/10 |
+| MMP, value_captured (C2 − C1) | 0.13999 | [0.08659, 0.19339] | 10/10 |
+| MMP, profit (C2 − C1) | 15.78903 | [7.53644, 24.04162] | 10/10 |
+| SSP, win AUC (C3 − C1) | 0.00033 | [-0.00046, 0.00113] | 6/10 |
+| SSP, value_captured (C3 − C1) | -0.00018 | [-0.00266, 0.00229] | 2/10 |
+| SSP, profit (C3 − C1) | -0.11993 | [-0.72008, 0.48023] | 2/10 |
 
 ## 1M, n = 10 seeds
 
 | Contrast | mean | 95% CI | seeds positive |
 |---|---:|---|---:|
-| MMP, click AUC (C2 − C1) | 0.10223 | [0.09033, 0.11413] | 10/10 |
-| MMP, install AUC (C2 − C1) | 0.08150 | [0.06290, 0.10010] | 10/10 |
-| MMP, ev_ratio (C2 − C1) | 0.10897 | [0.07760, 0.14034] | 10/10 |
-| MMP, profit (C2 − C1) | 125385 | [95961, 154809] | 10/10 |
-| SSP, win AUC (C3 − C1) | -0.00062 | [-0.00095, -0.00030] | 2/10 |
-| SSP, ev_ratio (C3 − C1) | -0.00569 | [-0.01119, -0.00020] | 4/10 |
-| SSP, profit (C3 − C1) | -8247 | [-15988, -507] | 3/10 |
+| MMP, click AUC (C2 − C1) | 0.10718 | [0.09956, 0.11480] | 10/10 |
+| MMP, install AUC (C2 − C1) | 0.06423 | [0.05120, 0.07726] | 10/10 |
+| MMP, value_captured (C2 − C1) | 0.09408 | [0.06665, 0.12151] | 10/10 |
+| MMP, profit (C2 − C1) | 114 | [88, 141] | 10/10 |
+| SSP, win AUC (C3 − C1) | 0.00002 | [-0.00023, 0.00028] | 5/10 |
+| SSP, value_captured (C3 − C1) | 0.00351 | [-0.00117, 0.00819] | 7/10 |
+| SSP, profit (C3 − C1) | 4.10753 | [-0.94068, 9.15574] | 7/10 |
 
 ## 10M, the watched seed
 
-| View | click AUC | install AUC | win AUC | profit | ev_ratio |
+| View | click AUC | install AUC | win AUC | profit | value_captured |
 |---|---:|---:|---:|---:|---:|
-| C1 | 0.6459 | 0.6568 | 0.8733 | 3835610 | 0.2276 |
-| C2 | 0.7046 | 0.6896 | 0.8733 | 5218638 | 0.3142 |
-| C3 | 0.6455 | 0.6595 | 0.8734 | 3763762 | 0.2216 |
-| C4 | 0.7043 | 0.6900 | 0.8734 | 5208875 | 0.3107 |
+| C1 | 0.6426 | 0.6515 | 0.8214 | 3944 | 0.2349 |
+| C2 | 0.7046 | 0.6904 | 0.8214 | 5018 | 0.3007 |
+| C3 | 0.6419 | 0.6523 | 0.8213 | 4010 | 0.2396 |
+| C4 | 0.7045 | 0.6894 | 0.8213 | 5179 | 0.3122 |
 
 Direction checks on this seed:
 
@@ -73,7 +73,7 @@ Direction checks on this seed:
 | PASS | fresh process per seed | the driver spawns a subprocess per seed; a 10M seed peaks near 5 GB and only a process exit returns it |
 | PASS | skip only what is COMPLETE | results.json must exist, parse and hold all 4 views; a corrupted file re-runs, tested |
 | PASS | kill-and-resume | a complete seed is skipped, a corrupted one is re-run rather than skipped |
-| PASS | disk guard | 116.8 GB free against the 26.0 GB the guard requires for 9 remaining 10M seeds |
+| PASS | disk guard | 59.4 GB free against the 30.5 GB the guard requires for 9 remaining 10M seeds |
 | PASS | keepawake.ps1 present | stops the machine sleeping during the unattended run |
 | PASS | logging | every line appended to output/runs/campaign_<scale>.log |
 | PASS | the watched 10M seed passed its direction checks | 5 of 5 |

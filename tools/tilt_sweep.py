@@ -54,8 +54,8 @@ def contrasts(r):
         "ssp_win_auc": h("C3", "win") - h("C1", "win"),
         "mmp_profit": e("C2", "profit") - e("C1", "profit"),
         "ssp_profit": e("C3", "profit") - e("C1", "profit"),
-        "mmp_ev_ratio": e("C2", "ev_ratio") - e("C1", "ev_ratio"),
-        "ssp_ev_ratio": e("C3", "ev_ratio") - e("C1", "ev_ratio"),
+        "mmp_ev_ratio": e("C2", "value_captured") - e("C1", "value_captured"),
+        "ssp_ev_ratio": e("C3", "value_captured") - e("C1", "value_captured"),
     }
 
 

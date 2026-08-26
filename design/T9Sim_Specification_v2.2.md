@@ -1,4 +1,22 @@
-# T9Sim Specification (v2)
+# T9Sim Specification (v2.2)
+
+**Forked 22 August 2026 from `T9Sim_Specification_v2.md`, which is v2's trusted record and is not
+edited.** The v2 file stays where it is because `t9v2/tools/build_graph.py` reads it by that exact
+path: `graph.yaml` is generated from the register and the frozen column order is parsed out of the
+Specification. Repointing those two path constants at these v2.2 files is a **step 5** action, taken
+in the same change as the generator law. Until then `main`, tag `v2.0.0` and tag `v2-corrected-1M`
+all still build from the v2 files and reproduce byte-identically.
+
+## Change log against v2
+
+*One row per design unit. Numbered `U1…Un`, never `D1…Dn`, because the `D` family is already the
+Specification's time columns (timestamp, hour_of_day, day_of_week, week).*
+
+| Unit | Change |
+|---|---|
+| U1 | **H5 `min_winning_price`**, law `max(LU7, H1)`, on every row, `C1 none / C2 none / C3 all / C4 all`. Tier-2 price-head target, never a per-row feature. Reinstates v1's arm B1 in an all-rows form. Applied 22 Aug 2026 from a verified 44-site sweep; see `docs/T9Sim_Rebuild_Plan_v2.2.md`, build order step 3 |
+
+---
 
 **12 August 2026.** This file carries the v10 specification in Klimis notation. The content is unchanged, only the mathematical symbols differ. `docs/v1/T9Sim_Specification_v10.md` stays as it was beside it, and `docs/T9Sim_Symbol_Plan.md` is the notation authority. Conformance is machine-checked.
 
@@ -128,7 +146,7 @@ This section empties as each correction lands and is deleted when empty.
 
 ## 1.1 What the generator emits
 
-- One master parquet 𝒟^full (`auctions.parquet`; 55 columns, always, the five `la2_*` columns from dependency #1 and `bid_density` from dependency #6 among them; per-row availability in 1.5).
+- One master parquet 𝒟^full (`auctions.parquet`; 56 columns, always, the five `la2_*` columns from dependency #1 and `bid_density` from dependency #6 among them; per-row availability in 1.5).
 - Four censored views C1-C4 (the tables 𝒟^{obs,k}) derived from it. The master carries every column on every row: A, B, C, D families (observables), E, F, G, H families (outcome labels; H1 floor and H2 own bid are observed inputs), plus pool variables (latents) and estimands.
 
 ## 1.2 Market setting
@@ -154,9 +172,9 @@ Every column has exactly one **primary** status. The test for *latent* is a sing
 | Status | Columns / variables | Meaning |
 |---|---|---|
 | **Latent (ground-truth) parameters** | LU1-LU6, LA1-LA2, LC1-LC2, LR1-LR6 | Generative parameters: they shape the draws but are never columns in any view, and no model infers them. LU/LA/LC are master columns (dropped from views); LR1-LR6 are generator-internal (1.7). |
-| **Latent auction variable** | LU7 `competing_bid` | A hidden per-auction draw (not a pool parameter), never a column in any view. On lost-but-sold rows in C3/C4 it leaks through `H4 = u_i`: that leak **is** the SSP signal. `u_i = max` over rival bids (2.5). |
+| **Latent auction variable** | LU7 `competing_bid` | A hidden per-auction draw (not a pool parameter), never a column in any view. C3/C4 disclose it through two channels: `H4 = u_i` on lost-but-sold rows, and `H5 = max(u_i, f_i)` (`min_winning_price`) on **every** row, which equals u_i wherever u_i ≥ f_i and f_i otherwise. H5 therefore extends exact disclosure of u_i to won rows, where H4 gives only b_i under first-price. The signal available as model INPUT is unchanged: H5 is the Tier-2 price head's **target** and never a per-row feature, since `won = 𝟙[b_i ≥ H5]` is an identity, so the added disclosure enters as a label. `u_i = max` over rival bids (2.5). |
 | **Observed features** | A1-A5, B1-B6, `C1`-`C4`, D1-D3, H1 (floor), H2 (own bid) | Visible columns; model inputs in every condition. |
-| **Outcome labels** | E1-E2, F1-F2, G1-G4, H3, H4, H9 | Random draws on **all** master rows, observed or censored per condition and row (1.5): H3 everywhere; E/F/G on won rows (C1/C3) or all rows (C2/C4); H4, H9 in C3/C4 only. |
+| **Outcome labels** | E1-E2, F1-F2, G1-G4, H3, H4, H5, H9 | Random draws on **all** master rows, observed or censored per condition and row (1.5): H3 everywhere; E/F/G on won rows (C1/C3) or all rows (C2/C4); H4, H5, H9 in C3/C4 only. |
 | **Estimands (latent ground-truth quantities)** | p_i^click = Pr(click), p_i^install = Pr(install \| click), p_i^pay = Pr(payer \| install), ℓ_i = 𝔼[ltv \| payer], v_i^⋆; F_{u\|x}(b) for Tier 2 | The deterministic quantities computed *before* each draw; the labels are their noisy realisations. Tier-1 estimates the funnel quantities, Tier-2 estimates F_{u\|x}(b), from visible features. |
 
 Censoring is not latent status: it withholds an *observable* label from specific conditions and rows, and the C1-C4 comparison rests entirely on it. Admissibility follows: the five estimands, `lu7_competing_bid` and `la2_audience_shares` are never model features in any condition (nor in the oracle-features diagnostic).
@@ -165,37 +183,41 @@ Censoring is not latent status: it withholds an *observable* label from specific
 
 One master table 𝒟^full; four views 𝒟^{obs,k}. Identical rows and temporal split in every condition (split days 1-20 / 21-24 / 25-28 BEFORE censoring); only label visibility differs. Views are masks, never copies.
 
-| Condition | Layers | E/F/G (click, install, payer, LTV) | H4 winning price | H9 rival count | Always visible |
-|---|---|---|---|---|---|
-| **C1** | DSP only | **won rows only** (standard postbacks) | hidden | hidden | A, B, `C`, D, H1, H2, H3 |
-| **C2** | DSP + MMP | **all rows** (cross-network attribution) | hidden | hidden | A, B, `C`, D, H1, H2, H3 |
-| **C3** | DSP + SSP | **won rows only** | **all rows** (NaN only where unsold) | **all rows** | A, B, `C`, D, H1, H2, H3 |
-| **C4** | DSP + MMP + SSP | **all rows** | **all rows** | **all rows** | A, B, `C`, D, H1, H2, H3 |
+| Condition | Layers | E/F/G (click, install, payer, LTV) | H4 winning price | H5 min winning price | H9 rival count | Always visible |
+|---|---|---|---|---|---|---|
+| **C1** | DSP only | **won rows only** (standard postbacks) | hidden | hidden | hidden | A, B, `C`, D, H1, H2, H3 |
+| **C2** | DSP + MMP | **all rows** (cross-network attribution) | hidden | hidden | hidden | A, B, `C`, D, H1, H2, H3 |
+| **C3** | DSP + SSP | **won rows only** | **all rows** (NaN only where unsold) | **all rows** (never NaN) | **all rows** | A, B, `C`, D, H1, H2, H3 |
+| **C4** | DSP + MMP + SSP | **all rows** | **all rows** | **all rows** (never NaN) | **all rows** | A, B, `C`, D, H1, H2, H3 |
 
 `user_id` is master-lineage only (dropped from every view; user/device ids carry no signal under single-touch).
 
-**NaN semantics.** Censored cells are **NaN** in the view, distinct from `-1` (an *observed* no-event timestamp on E2/F2) and from `0` labels; this applies to all of E1-E2, F1-F2, G1-G4 on masked rows. "Hidden" H4/H9 in C1/C2 are all-NaN columns (kept, not dropped, so all views share one column schema). *In the symbols of 2.7, a cell censored by 𝒞^k is ∅ and a quantity that does not exist on the row is ⊥; the word NaN is kept in prose and the symbols are used in the laws.*
+**NaN semantics.** Censored cells are **NaN** in the view, distinct from `-1` (an *observed* no-event timestamp on E2/F2) and from `0` labels; this applies to all of E1-E2, F1-F2, G1-G4 on masked rows. "Hidden" H4/H5/H9 in C1/C2 are all-NaN columns (kept, not dropped, so all views share one column schema). *In the symbols of 2.7, a cell censored by 𝒞^k is ∅ and a quantity that does not exist on the row is ⊥; the word NaN is kept in prose and the symbols are used in the laws.*
 
 **Real-world mapping (MMP).** Every DSP gets won-row postbacks (C1/C3). What MMP adds is attribution on the auctions the DSP *lost*: its tracking links and in-game SDK record clicks, installs and spend whoever won (C2/C4). Those lost rows are systematically the high-value impressions (the DSP's biased view).
 
-**Real-world mapping (SSP).** An SSP sees every auction it runs: winning prices on losses (H4) and realized competition density (H9) are exactly what SSP ownership reveals and a lone DSP cannot observe.
+**Real-world mapping (SSP).** An SSP sees every auction it runs: winning prices on losses (H4), the minimum winning price m_i^win = max(u_i, f_i) on every auction (H5), and realized competition density (H9) are exactly what SSP ownership reveals and a lone DSP cannot observe.
 
 **Counterfactual simplification (declared).** Lost-row E/F/G represent what the attribution chain would have recorded had our ad been served; the competitor's creative is not modelled. The outcome formulas never depend on `won`, so this counterfactual is well-defined within the model.
 
 **What each lift measures.**
 
 - **C1→C2**: value of cross-network attribution. Same rows, unbiased funnel labels; corrects the DSP's biased view (selection bias).
-- **C1→C3**: value of price visibility. Lost-row winning prices and competition density fingerprint hidden rival structure; Tier-2 win-curve precision.
+- **C1→C3**: value of price visibility. Lost-row winning prices, the all-row minimum winning price m_i^win = max(u_i, f_i) (H5, the Tier-2 price target and never a feature), and competition density fingerprint hidden rival structure; Tier-2 win-curve precision.
 - **C2→C4**: marginal SSP on top of full attribution.
 - **C3→C4**: marginal MMP on top of price visibility.
 
-None of the dependency edges confounds the C1-C4 comparison: #1-#5 are marginal-preserving and act identically across views, and the rival pool touches the views only through H9 (SSP-only) and H4's lost-row values.
+None of the dependency edges confounds the C1-C4 comparison: #1-#5 are marginal-preserving and act identically across views, and the rival pool touches the views only through H9 (SSP-only), H4's lost-row values and H5's won-row values (SSP-only; on lost-but-sold rows H5 repeats H4 = u_i and on unsold rows it equals the floor, so won rows are the only place it opens a channel).
 
 **Per-row availability (master table).** The master is never NaN-censored: the only NaN is H4 on unsold rows (no winning price exists); E2/F2 use -1 for "no event". All won/lost-conditional hiding happens in the condition views (this section), never in generation.
 
 ## 1.6 The master variable table
 
 The one truth table: every variable of the generative model, with kind, domain, parent set, generating-rule reference, censoring, and parquet column(s). Mathematical laws live in sections 2.4-2.5; wiring status in 2.6.
+
+**Price units, and why two words are used for one dimension.** A quantity quoted, offered or paid in the auction is a **CPM**: `floor_price`, `bid_price`, `winning_price`, `min_winning_price`, `lu7_competing_bid`, `b_k`. A quantity that arose somewhere other than the impression transaction and was then divided by impressions is an **eCPM**: the bidder's `ev` after `to_price_unit`, and the per-format targets `T^ecpm`. **Both are USD per thousand impressions — the distinction is provenance, not dimension**, so `(ev − b)` is not a unit mismatch. The two price shapes ψ^floor and ψ^clearing are median-normalised and dimensionless, so `floor_price = ψ^floor · T^ecpm` is a price quoted at an eCPM-calibrated level rather than a unit error. Full rule in `docs/KDD_Terminology.md`. Retyped 22 August 2026; the Specification previously called all of them eCPM.
+
+**One denominator for both price shapes, and the 57 percent that was never a share.** The floor shape and the paying shape are two prices in one market, and what carries the market's structure is the RATIO between them. Dividing each by its own median forces both medians to 1 and destroys exactly that. Both are therefore normalised by the **paying** median: the paying shape's median becomes 1, the floor shape's becomes 40/70 = 0.571, and `ψ^clearing · T^ecpm` then lands on a target that is itself a clearing-price benchmark. Corrected 22 August 2026, twice over. The code divided each shape by its own median, inflating every floor by 70/40 = 1.750; **fixed 22 August 2026 in `7aef8ff`**, build-order step 5a, and the medians are now asserted exactly rather than described. Separately, this table read “about 57 percent of floors are zero” until today: the measured zero atom is **14.15 percent**, and 57 percent was the shape ratio 40/70 misread as a share. The Node Register corrected the same number on 16 August 2026; the Specification did not follow until now, and the generation-order description at step 4 of 2.1 carried it until the same day.
 
 Censoring legend (schema authority): **always** = visible in all four views C1-C4. **funnel** = won rows only in C1/C3, all rows in C2/C4 (masked cells NaN; -1 is an observed no-event timestamp, distinct from NaN). **ssp** = hidden in C1/C2 (all-NaN column, kept so all views share one column schema), all rows in C3/C4. **master** = master-parquet column only, dropped from every view. **none** = never materialised as a column anywhere. Conditions C1-C4 per the naming note (1.3).
 
@@ -220,8 +242,8 @@ Censoring legend (schema authority): **always** = visible in all four views C1-C
 | D2 | hour_of_day | observed | {0..23} | LU1 | auctions.py:331-343 |
 | D3 | day_of_week | observed | {0 Mon .. 6 Sun} | LU1 | auctions.py:332, 341-343 |
 | D4 | week | internal | {0..3} uniform |  | auctions.py:344 |
-| H1 | floor_price | observed | [0, ∞) USD eCPM; zero floors stay zero | floor_shape, B6 | auctions.py:426 |
-| H2 | bid_price | observed | (0, ∞) USD eCPM | C2, B6, _size, B2, v_slot, ease, eltv_b2; NO LU7 input | auctions.py:516-530 |
+| H1 | floor_price | observed | [0, ∞) USD CPM; zero floors stay zero | floor_shape, B6 | auctions.py:426 |
+| H2 | bid_price | observed | (0, ∞) USD CPM | C2, B6, _size, B2, v_slot, ease, eltv_b2; NO LU7 input | auctions.py:516-530 |
 | E1 | click | outcome | {0,1} ∼ Bernoulli(p_i^click) | p_click | auctions.py:556 |
 | E2 | click_timestamp | outcome | Unix s, or -1 = observed no-click | E1, D1 | auctions.py:569 |
 | F1 | install | outcome | {0,1}; 0 without click | E1, p_install | auctions.py:557 |
@@ -230,8 +252,9 @@ Censoring legend (schema authority): **always** = visible in all four views C1-C
 | G2 | ltv_value | outcome | [0, ∞) USD, the **90-day post-install total** = LogNormal(μ^ltv(x_i[app_category]), σ^ltv) · λ_i^ltv · λ_i^game · λ_i^os; σ^ltv = 1.648169; 0 for non-payers | G1, mu_cat, LU5, LC2, plat (#3) | auctions.py:561 |
 | G3 | ltv_7d | outcome | [0, ∞) = 0.40 · r_i; the 7-day recognition point on the way to the 90-day total | G2 | auctions.py:581 |
 | G4 | ltv_30d | outcome | [0, ∞) = 0.70 · r_i; the 30-day recognition point | G2 | auctions.py:582 |
-| H3 | won | outcome | {0,1} = 𝕀[b_i ≥ max(u_i, f_i)] | H2, LU7, H1 | auctions.py:542-544 |
-| H4 | winning_price | outcome / observed | (0, ∞) USD eCPM; first-price: b_i if w_i, u_i if w_i^riv, ⊥ if unsold | H3, H2, sold_lost, LU7 | auctions.py:545-548 |
+| H3 | won | outcome | {0,1} = 𝕀[b_i ≥ m_i^win], i.e. 𝕀[b_i ≥ max(u_i, f_i)] | H2, LU7, H1 | auctions.py:542-544 |
+| H4 | winning_price | outcome / observed | (0, ∞) USD CPM; first-price: b_i if w_i, u_i if w_i^riv, ⊥ if unsold | H3, H2, sold_lost, LU7 | auctions.py:545-548 |
+| H5 | min_winning_price | outcome / observed | (0, ∞) USD CPM = m_i^win = max(u_i, f_i); present on every row, never ⊥ | LU7, H1 | gen/rival_market.py, beside H3 |
 | H9 | bid_density | outcome / observed | {1..8} | participate_k | rival_pool.py:120 |
 | LU1 | lu1_archetype | latent | {whale, engaged_spender, casual, time_filler, inactive}; χ^archetype = 0.02/0.08/0.20/0.40/0.30 |  | user_profiles.py:52,59 |
 | LU2 | lu2_click_prop | latent | (0,1); Beta per archetype | LU1 | user_profiles.py:74 |
@@ -239,7 +262,7 @@ Censoring legend (schema authority): **always** = visible in all four views C1-C
 | LU4 | lu4_payer_prob | latent | [0,1); Beta per archetype; 0 for inactive (M19) | LU1 | user_profiles.py:76,79-84 |
 | LU5 | lu5_ltv_mult | latent | [0, ∞); LogNormal per archetype; 0 for inactive | LU1 | user_profiles.py:78-85 |
 | LU6 | interest vector | latent | 4-simplex over 𝒢; Dirichlet(ξ^interest · centroid[κ_u]); ξ^interest = 20 | LU1 | user_profiles.py:87 |
-| LU7 | lu7_competing_bid | latent | (0, ∞) USD eCPM | b_k, participate_k (law in 2.5) | rival_pool.py:106-119 |
+| LU7 | lu7_competing_bid | latent | (0, ∞) USD CPM | b_k, participate_k (law in 2.5) | rival_pool.py:106-119 |
 | LA1 | la1_app_quality | latent | (0, ∞); LogNormal(0, σ^app); σ^app = 0.30 |  | catalogue.py:44 |
 | LA2 | app audience profile | latent | 5-simplex over archetypes; Dirichlet(ξ^audience · centroid[x_a[app_category]]); ξ^audience = 3.0 | B2 | catalogue.py:65 |
 | LC1 | lc1_creative_appeal | latent | (0, ∞); LogNormal(0, σ^creative); σ^creative = 0.25 |  | catalogue.py:130 |
@@ -254,7 +277,7 @@ Censoring legend (schema authority): **always** = visible in all four views C1-C
 | - | p_install | estimand | [0,1] = clip(β_0^install · θ_i^install · α_i^ease · α_i^install · q_i^app); β_0^install = 2.564963 | LU3, ease, m_stage, LA1 | auctions.py:373 |
 | - | p_payer | estimand | [0,1] = clip(β_0^pay · θ_i^pay · α_i^pay); #4 ON: · α_i^time, re-clipped (M6); β_0^pay = 0.257853 | LU4, m_stage, t_pay (#4) | auctions.py:376-384 |
 | - | e_ltv | estimand | [0, ∞) = exp(μ^ltv(x_i[app_category]) + (σ^ltv)²/2) · λ_i^ltv · λ_i^game · λ_i^os; σ^ltv = 1.648169 | mu_cat, LU5, LC2, plat (#3) | auctions.py:387-394 |
-| - | ev_truth | estimand | [0, ∞) = p_i^click · p_i^install · p_i^pay · ℓ_i | p_click, p_install, p_payer, e_ltv | auctions.py:395 |
+| - | ev_truth | estimand | [0, ∞) USD per ONE impression, NOT per mille; ×1000 to eCPM before any comparison with a price (`to_price_unit`) = p_i^click · p_i^install · p_i^pay · ℓ_i | p_click, p_install, p_payer, e_ltv | auctions.py:395 |
 | - | user_id | internal | user pool index |  | user pool |
 | - | _size | internal | finite width × height label per format | B6 | auctions.py:325 |
 | - | app_i | internal | app pool position | pair_idx | auctions.py:282 |
@@ -271,13 +294,13 @@ Censoring legend (schema authority): **always** = visible in all four views C1-C
 | - | mu_cat | internal | real = μ_0^ltv + log(ltv tier(x_i[app_category])) - log 𝔼[λ_i^os], μ_0^ltv = 0.481154 | B2 | auctions.py:367,387-391 |
 | - | plat | internal | 1.8 iOS, 1.0 Android | A3 | auctions.py:388 |
 | - | t_pay | internal | (0, ∞); hour × dow multiplier, raked to mean 1 (#4) | D2, D3 | auctions.py:383 |
-| - | floor_shape | internal | (0, ∞) with an atom at 0; resample from the iPinYou floor pmf, median normalised. About 57 percent of floors are zero | none | auctions.py:56-59, 425-426 |
-| - | pay_shape | internal | (0, ∞); resample from the iPinYou paying-price pmf, median normalised | none | auctions.py:55, 58, 428-429 |
+| - | floor_shape | internal | (0, ∞) with an atom at 0; resample from the iPinYou floor pmf, normalised by the **PAYING** median, not its own. About 14 percent of floors are zero | none | auctions.py:56-59, 425-426 |
+| - | pay_shape | internal | (0, ∞); resample from the iPinYou paying-price pmf, normalised by the **PAYING** median, so this shape's median is 1 and the floor shape's is 40/70 = 0.571 | none | auctions.py:55, 58, 428-429 |
 | - | base_e | internal | (0, ∞); **T4**, one value per row = max(ψ^clearing · T^ecpm(x_i[slot_format]), 0.01 · T^ecpm(x_i[slot_format])). The shape draw itself is the separate `pay_shape` node. The iPinYou clearing pmf keeps its zero bin, so the 0.01 floor is a real post-draw guard | pay_shape, B6 | auctions.py:428-430 |
 | - | eltv_b2 | internal | (0, ∞) = exp(mu_cat + σ²/2) per app category. The DSP's **observable** value estimate, deliberately not the oracle e_ltv. The gap between the two is what the ablation measures | B2 | auctions.py:69-70, 517 |
 | - | z | internal | real = (log v_i^⋆ - μ^val)/σ^val on v_i^⋆ > 0, else 0 | ev_truth | auctions.py:432-436 |
 | - | participate_k | internal, plate(k) | {0,1} ∼ Bernoulli(min(1, π_k(e_i) · F_k(d_i) · g(p_k(d_i)))); A_i0 forced 1 | LR4, LR6, LR3, B3, D1 | rival_pool.py:106-112 |
-| - | b_k | internal, plate(k) | (0, ∞) USD eCPM; the individual rival bid whose max over participants is LU7. Law in 2.5 | base_e, z, LR1, LR2, LR3, LR5, A3, A5 | rival_pool.py:116-119 |
+| - | b_k | internal, plate(k) | (0, ∞) USD CPM; the individual rival bid whose max over participants is LU7. Law in 2.5 | base_e, z, LR1, LR2, LR3, LR5, A3, A5 | rival_pool.py:116-119 |
 | - | sold_lost | internal | {0,1} = (1 - w_i) · 𝕀[u_i ≥ f_i] | H3, LU7, H1 | auctions.py:543 |
 
 **The C family is built at pool scope, and reaches a row by lookup.** Corrected 16 August 2026 (the
@@ -289,7 +312,7 @@ before any auction runs, so an auction-scope node cannot be the parent of a camp
 value-based tilt (edge #2, LU4, LU5 and LC2) enters through `c_idx`'s own table, which is where it is
 recorded.
 
-**Column mapping.** Each variable is one parquet column named as in the Name column, except: LU6 is stored as four columns `lu6_casual`, `lu6_strategy`, `lu6_rpg`, `lu6_hypercasual`; LA2 as five columns `la2_<archetype>`, always materialised: O11 removed the switched-off variants, and all five are part of the frozen 55 on every run. Rows whose censoring cell reads `none` are generator-internal and never become columns.
+**Column mapping.** Each variable is one parquet column named as in the Name column, except: LU6 is stored as four columns `lu6_casual`, `lu6_strategy`, `lu6_rpg`, `lu6_hypercasual`; LA2 as five columns `la2_<archetype>`, always materialised: O11 removed the switched-off variants, and all five are part of the frozen 56 on every run. Rows whose censoring cell reads `none` are generator-internal and never become columns.
 
 ## 1.7 Map-to-parquet reconciliation
 
@@ -298,16 +321,16 @@ Schema map = the `Schema V10a/b/c` trio in `Schema diagrams/`.
 | | Count |
 |---|---|
 | Variable boxes in the map | 41 = 36 single + 5 compound (`E1/E2`, `F1/F2`, `G2/G3/G4`, `B4/B5`, `C1/C3`) |
-| Schema variables | 47 = 36 + 11 in the compound boxes |
-| Columns from variables | 54 (LU6 stored as 4 genre columns, LA2 as 5 archetype columns, rest 1:1) |
-| + `user_id` (row lineage, not a schema variable) | **55 = master parquet columns** |
+| Schema variables | 48 = 36 + 11 in the compound boxes + 1 not on the map (H5 `min_winning_price`) |
+| Columns from variables | 55 (LU6 stored as 4 genre columns, LA2 as 5 archetype columns, rest 1:1) |
+| + `user_id` (row lineage, not a schema variable) | **56 = master parquet columns** |
 | Non-column boxes | 2: the LATENTS header and the dashed rival box (LR1-LR6, `B_ik`: generator-internal, never columns) |
 
-**Three counts, never interchanged.** **55 parquet columns** (the physical fields in `auctions.parquet`); **47 schema variables** (the coded A-H and LU/LA/LC/LR entries, i.e. the map's 41 boxes; fewer than columns because LU6 expands to 4 columns and LA2 to 5, and `user_id` is a column but not a variable); **78 generator nodes** (every row of the master table in 1.6, including `user_id` and the deterministic internals like `z`, `mu_cat`, `base_e` that never become columns but that the dependency graph routes through).
+**Three counts, never interchanged.** **56 parquet columns** (the physical fields in `auctions.parquet`); **48 schema variables** (the coded A-H and LU/LA/LC/LR entries — the map's 41 boxes, which hold 47 of them, plus H5 `min_winning_price`, which the v1 map does not draw; fewer than columns because LU6 expands to 4 columns and LA2 to 5, and `user_id` is a column but not a variable); **79 generator nodes** (every row of the master table in 1.6, including `user_id` and the deterministic internals like `z`, `mu_cat`, `base_e` that never become columns but that the dependency graph routes through).
 
 78 is the count the node register carries and the count `config/graph.yaml` is generated to, so one number now serves both documents. It replaces the 72 this section used to print, which counted the same table when it was 5 rows short and excluded `user_id` (open item O3 3c, settled 15 August 2026). Of the 78, **48 emit at least one column** and 30 emit none.
 
-Verified master parquet column list (22 Jul, headline configuration with #1 and #6 on, 55 columns): user_id, region, city, os, os_version, device_type, lu1_archetype, lu2_click_prop, lu3_install_prop, lu4_payer_prob, lu5_ltv_mult, lu6_{casual,strategy,rpg,hypercasual}, app_id, app_category, la1_app_quality, la2_{whale,engaged_spender,casual,time_filler,inactive}, campaign_id, advertiser_id, advertiser_scale, ad_genre, lc1_creative_appeal, lc2_game_quality, ad_exchange, slot_format, slot_width, slot_height, timestamp, hour_of_day, day_of_week, p_click, p_install, p_payer, e_ltv, ev_truth, floor_price, lu7_competing_bid, bid_price, won, winning_price, click, click_timestamp, install, install_timestamp, is_payer, ltv_value, ltv_7d, ltv_30d, bid_density.
+Verified master parquet column list (22 Jul, headline configuration with #1 and #6 on, 56 columns): user_id, region, city, os, os_version, device_type, lu1_archetype, lu2_click_prop, lu3_install_prop, lu4_payer_prob, lu5_ltv_mult, lu6_{casual,strategy,rpg,hypercasual}, app_id, app_category, la1_app_quality, la2_{whale,engaged_spender,casual,time_filler,inactive}, campaign_id, advertiser_id, advertiser_scale, ad_genre, lc1_creative_appeal, lc2_game_quality, ad_exchange, slot_format, slot_width, slot_height, timestamp, hour_of_day, day_of_week, p_click, p_install, p_payer, e_ltv, ev_truth, floor_price, lu7_competing_bid, bid_price, won, winning_price, min_winning_price, click, click_timestamp, install, install_timestamp, is_payer, ltv_value, ltv_7d, ltv_30d, bid_density.
 
 ## 1.8 Per-family notes
 
@@ -316,7 +339,7 @@ Verified master parquet column list (22 Jul, headline configuration with #1 and 
 - **C (campaign).** Advertiser ids anchored to iPinYou `advertiser_id`. Pool chain C3 → C1 → C2 (a campaign belongs to an advertiser with a scale tier); C4 is a campaign property. Frequency follows `advertiser_scale` via `sample_weight`.
 - **D (time).** D2 and D3 drawn first; D1 assembled from them plus the week D4 (generator-internal). Time-structure scoping in 2.6 (edge #5).
 - **E/F/G (funnel).** Generated on all rows (lost rows = the counterfactual, 1.5); the chain gates deterministically (no click → no install → no payer → zero spend). Timestamps use -1 for no-event.
-- **H (market).** H5-H8 unused (the master jumps H4 to H9). H4 and H9 are SSP-exclusive: H3 (win/loss) is visible in all conditions; C3/C4 add the loss price (`H4 = u_i`) and competition density (`H9 = N`, 1-8 per auction).
+- **H (market).** H6-H8 unused (the master jumps H5 to H9). H4, H5 and H9 are SSP-exclusive: H3 (win/loss) is visible in all conditions; C3/C4 add the loss price (`H4 = u_i`), the minimum winning price (`H5 = max(u_i, f_i)`, every row, no NaN) and competition density (`H9 = N`, 1-8 per auction).
 - **LU/LA/LC (pool latents).** Withheld as columns. User latents are effectively unrecoverable (each user appears in only ≈ tens of rows); app and campaign latents are partly recoverable from `app_id`/`campaign_id` (constant across an entity's rows), which is realistic and does not confound the DSP/MMP/SSP comparison since those ids are visible in all of C1-C4.
 - **LR (rival latents).** The complete family LR1-LR6, and the footprint rule that governs its observability, are specified in section 2.5.
 - **Estimands.** The Tier-1 models estimate `p_click`, `p_install`, `p_payer`, `e_ltv` from visible features (the four heads are Pr(click), Pr(install | click), Pr(payer | install) and 𝔼[spend | payer]), and the bidder reconstructs an estimate of v^⋆ by multiplying them. Tier-2 estimand: F_{u|x}(b).
@@ -558,7 +581,7 @@ No. There is no mixed type and none is needed. Every apparently mixed law resolv
 
 **Pools.** T9Sim is a structured generative model over a single ad auction. Four fixed pools supply its entities: a user pool, an app pool and a campaign pool, and a rival pool of K = 8 persistent rival-bidder archetypes (latents LR1-LR6, frozen at creation). One auction row draws a (user, app, campaign, context) tuple, runs the conversion funnel, and settles the market against the rival pool.
 
-![T9Sim generator: four frozen pools feed one ordered auction row, producing the uncensored master record; censoring, models and the bidder are downstream.](C:/Users/ktaiw/Desktop/MSc%20Project/Schema%20diagrams/T9Sim_Generator.png)
+![T9Sim generator: four frozen pools feed one ordered auction row, producing the uncensored master record; censoring, models and the bidder are downstream.](figures/T9Sim_Generator.png)
 
 *Figure 2.1. The generator at a glance: four pools (frozen once) feed the ten-step per-auction sequence, whose output is one uncensored master row; the dashed rule marks where the generator stops.*
 
@@ -579,7 +602,7 @@ No. There is no mixed type and none is needed. Every apparently mixed law resolv
 1. Sample (user, app, campaign).
 2. Draw the context: B3 ad_exchange and B6 slot_format, then the slot size drawn given that format and split into B4 width and B5 height, then D4 the week, then D2 hour and D3 day-of-week, and last the D1 timestamp assembled from hour, day and week.
 3. Compute the four head means: p_i^click, p_i^install, p_i^pay, ℓ_i. Their product is v_i^⋆; its z-score is z_i^val.
-4. Draw the two price shapes ψ^floor (`floor_shape`) and ψ^clearing (`pay_shape`), then compute H1 = ψ^floor · T^ecpm(B6) and β_0(x_i) (`base_e`) = max(ψ^clearing · T^ecpm(B6), 0.01 · T^ecpm(B6)). H1 inherits the iPinYou atom at zero, so about 57 percent of rows carry a zero floor; base_e is the shared price core every rival bid at step 6 is written around.
+4. Draw the two price shapes ψ^floor (`floor_shape`) and ψ^clearing (`pay_shape`), then compute H1 = ψ^floor · T^ecpm(B6) and β_0(x_i) (`base_e`) = max(ψ^clearing · T^ecpm(B6), 0.01 · T^ecpm(B6)). H1 inherits the iPinYou atom at zero, so about 14 percent of rows carry a zero floor (measured 14.15); base_e is the shared price core every rival bid at step 6 is written around.
 5. Participation draws A_ik, giving the participant set 𝒜_i and the count N_i = H9.
 6. Rival bids B_ik, giving u_i = max_{k ∈ 𝒜_i} B_ik (LU7).
 7. Our bid H2, which takes no input from LU7 (H2 and LU7 remain correlated through the shared latents).
@@ -656,7 +679,7 @@ The two say the same thing with one difference: the procedure fixes dependency b
 
 **What this section is for.** Six modelled dependencies (#1-#6) connect some of the generator's variables to others; those connected variables are the **dependency graph**, drawn as the 23 nodes listed below. The rest take no part in the six: they are independent draws (region, city, slot geometry, the floor shape), deterministic equations (the floor price, stage multipliers, settlement rules), or variables whose parents are fixed base structure rather than one of the six (`p_click`, `ev_truth`).
 
-![The dependency graph: the 23 variables the six dependencies connect; the dashed grey tilts were wired by O1 and the figure is due a rebuild.](C:/Users/ktaiw/Desktop/MSc%20Project/Schema%20diagrams/T9Sim_DepGraph_anchored.png)
+![The dependency graph: the 23 variables the six dependencies connect; the dashed grey tilts were wired by O1 and the figure is due a rebuild.](figures/T9Sim_DepGraph_anchored.png)
 
 *Figure 2.3. The dependency graph: the 23 variables the six dependencies connect. The dashed grey tilts on `os`, `device_type` and `day_of_week` were wired by O1 on 15 August 2026; the figure predates that and is due a rebuild.*
 
@@ -833,7 +856,7 @@ Inactive users have `θ_i^pay = λ_i^ltv = 0`, forcing `y_i^pay = r_i = v_i^⋆ 
 | B_ik, 𝒜_i, N_i, u_i, z_i^val, v_i^⋆ | per-auction quantities: B_ik given ε_ik above, the rest derived | rival bid, the node the register calls `b_k` and types T3, its σ_k·ε_ik noise listed separately in the row above; participant set; rival count (H9); top competing bid; standardized log value; impression expected value | rival bid, the node the register calls `b_k`; participant set; rival count (H9); top competing bid; standardized log value; impression expected value |
 | H1-H4, H9 | per-auction columns | floor, own bid, won, winning price, rival count |
 
-**The footprint rule.** No view ever sees LR1-LR6; what C3/C4 can recover is their statistical footprint. The level components (retargeting, pacing, participation, flights) leave cell-level traces in winning prices (H4) and competition density (H9) over observable cells (time, exchange, segment); LR5 noise leaves none by construction. The latent-value interaction ω_k·z_i^val is recoverable by no one: it prices a latent impression value that no side observes, supplying realism and DSP-unpredictability rather than SSP-recoverable signal. No view is ever handed a rival-segment feature directly; H4/H9 traces are the only channel. The Tier-2 features that read those traces are pipeline, not generator (entry V-8, 2.6).
+**The footprint rule.** No view ever sees LR1-LR6; what C3/C4 can recover is their statistical footprint. The level components (retargeting, pacing, participation, flights) leave cell-level traces in winning prices (H4) and competition density (H9) over observable cells (time, exchange, segment); LR5 noise leaves none by construction. The latent-value interaction ω_k·z_i^val is recoverable by no one: it prices a latent impression value that no side observes, supplying realism and DSP-unpredictability rather than SSP-recoverable signal. No view is ever handed a rival-segment feature directly; H4, H5 and H9 traces are the only channels. H5 changes the coverage of that leak rather than its kind: H4 already equals u_i exactly on lost-but-sold rows, and H5 extends the same per-row exposure to won rows, where it equals u_i when u_i ≥ f_i and the floor otherwise. On lost-but-sold rows it duplicates H4 and on unsold rows it equals H1, so the only new information is the won-row block, left-censored at the floor. H5 is a Tier-2 target and never a per-row feature. The Tier-2 features that read those traces are pipeline, not generator (entry V-8, 2.6).
 
 **Calibration and gates.** Calibrated by win-rate autocalibration and the validation targets and direction checks; no moment raking.
 
@@ -975,7 +998,7 @@ region.
 
 *Formal statement.* In every condition C1-C4, the win curve b ↦ F_{u|x}(b) = Pr(u_i ≤ b | x_i) is identified for almost every b ≥ f_i, hence at every b ≥ f_i by monotonicity and right-continuity. Below the floor it is identified in no condition. Pooling floor levels extends identification down to the essential infimum of the floor's conditional support. F_{u|x}(b) is the paper's F̂_m(b | x_i) conditioned on the top rival bid rather than on the price, so the two agree for b ≥ f_i and differ below the floor.
 
-*Sketch.* b_i = v_i^proxy(x_i) · ζ^shade · η_i, η_i ∼ LogNormal(0, σ^explore), and the exploration factor is independent of u_i given x_i. So each row is a randomised threshold query of u_i's conditional law: Pr(w_i = 1 | x_i, b_i = b) = F_{u|x}(b) for b ≥ f_i. The lognormal has support (0, ∞), so the queries trace the whole curve above the floor. Below f_i no bid wins regardless of u_i, and C3/C4's m_i is ⊥ on unsold rows, so no condition observes that region (and no bid decision depends on it). w_i is visible in every condition, so no condition has an identification advantage for the win curve. C3/C4's exact prices (m_i = u_i on sold-lost rows) add only **statistical efficiency**: direct observation versus threshold reconstruction through the thin exploration tails.
+*Sketch.* b_i = v_i^proxy(x_i) · ζ^shade · η_i, η_i ∼ LogNormal(0, σ^explore), and the exploration factor is independent of u_i given x_i. So each row is a randomised threshold query of u_i's conditional law: Pr(w_i = 1 | x_i, b_i = b) = F_{u|x}(b) for b ≥ f_i. The lognormal has support (0, ∞), so the queries trace the whole curve above the floor. Below f_i no bid wins regardless of u_i, and C3/C4's m_i is ⊥ on unsold rows, so no condition observes that region (and no bid decision depends on it). w_i is visible in every condition, so no condition has an identification advantage for the win curve. C3/C4's price columns are two: m_i = u_i on sold-lost rows, and H5 `min_winning_price` = m_i^win = max(u_i, f_i) on every row. Because the auction is first-price, m_i on won rows is b_i and says nothing about u_i, so H5's new content is precisely the won rows. Together they add only **statistical efficiency**: direct observation versus threshold reconstruction through the thin exploration tails.
 
 ---
 
@@ -1344,6 +1367,16 @@ already true, plus one factual correction. Nothing here changes the data.
   24 July decision to abandon arms B1, B2 and B3, not a new choice. With it gone no condition observes its
   own overpayment on wins, so bid-shading is out of scope and is already declared as a limitation in
   `DATASHEET.md`.
+  **Superseded 22 August 2026.** The quantity is reinstated as node **H5**, column **`min_winning_price`**,
+  law `max(LU7, H1)`, present on every row with no NaN, observability `C1 none / C2 none / C3 all / C4 all`
+  copying `winning_price`. This reverses the 24 July B1 decision, so it is a new choice rather than a
+  consequence of an old one, and it is an ALL-ROWS form rather than B1's won-rows-only one. The master
+  therefore carries **56** columns. One consequence has to be re-taken rather than inherited: because
+  `winning_price` on a won row is the winner's own bid under first-price clearing, C3 and C4 now recover
+  their own overpayment on wins exactly, as `bid_price − min_winning_price`, where C1 and C2 still cannot.
+  **The bid-shading scope decision and the `DATASHEET.md` limitation both rested on no condition observing
+  won-row overpayment, and that ground is gone.** Bid shading may still be out of scope, but it has to be
+  decided afresh. Recorded at `docs/T9Sim_Rebuild_Plan_v2.2.md`, build order step 3.
 - **No config key parameterises the estimands, H3, H4, LU7 or H9, and none ever will.** This is a
   guarantee rather than an omission: a settings key here would let a dial move the very quantity the
   ablation measures. The v2 register locks it in with the ground-truth freezes, and `tools/report_holes.py`
@@ -1421,7 +1454,7 @@ Affects the Tier-1 heads, the reported ECE, and one sentence of the paper's meth
 
 ## O8 The win classifier is not monotone-constrained — DECIDED, add the constraint
 
-![Why the win classifier needs a monotone constraint: a small sag in the fitted win curve moves the profit-maximising bid.](C:/Users/ktaiw/Desktop/MSc%20Project/Schema%20diagrams/O8_monotone_win_curve.png)
+![Why the win classifier needs a monotone constraint: a small sag in the fitted win curve moves the profit-maximising bid.](figures/O8_monotone_win_curve.png)
 
 *Figure O8. The same sag, seen twice. On the win curve it looks minor. On expected profit, which is what the bidder maximises, it moves the chosen bid from \$0.027 to \$0.037 and forgoes 14 percent of the profit. Curves computed by `t9v2/tools/make_o8_diagram.py` from the project's own win-curve form; illustrative, not a measurement of v1.*
 
@@ -1455,12 +1488,14 @@ The D1 row in 2.4 and its parent set in the master table are corrected to match.
 
 `docs/KDD_Terminology.md` retires "clearing price" for both quantities it was used for, because the term carries a second-price connotation that this first-price market does not have. The price a bid must beat becomes the **minimum winning price**, and the price the winner actually pays becomes the **winning price**. H4 holds the second of those and was named `clearing_price`, one of the frozen 55 columns. The same rules had already renamed the derived feature `hist_clearing` to `hist_winning_price`, so the feature and the column it is built from disagreed with each other.
 
-**Ken's verdict, 14 August 2026. v2 emits the column as `winning_price`.** The column count stays at 55. Applied here at 1.6, 1.7 and 2.4, in `docs/T9Sim_Symbol_Plan.md` and in `docs/T9Sim_DGP_Node_Register.md`.
+**Ken's verdict, 14 August 2026. v2 emits the column as `winning_price`.** The column count stays at 55. Applied here at 1.6, 1.7 and 2.4, in `docs/T9Sim_Symbol_Plan.md` and in `docs/T9Sim_DGP_Node_Register.md`. (H5's own entries land in this file and in `docs/T9Sim_DGP_Node_Register_v2.2.md`; `docs/T9Sim_Symbol_Plan.md` records H5 as free at its line 162 and is corrected at step 5, with `tools/build_graph.py` and `config/graph.yaml`.)
 
 Three things follow and are not yet done.
 
 1. The v2 master is no longer column-name identical to the deposited v1 parquets. Permitted, but the datasheet must state it rather than let a reader discover it. Stage 7.
 2. Startup check V4 asserts the `default` profile emits exactly the frozen 55 columns. Its list is taken from 1.7 above, so it inherits the new name, and the check should carry a note that only the name changed. Stage 1.
+**Amended 22 August 2026.** The two counts in this dated verdict were true when it was taken and are left standing as the record. Both have since moved: node H5 `min_winning_price` was added at build-order step 3, so the master carries **56** columns and startup check V4 asserts the frozen **56**. The verdict itself — that v2 emits the column as `winning_price` — is unaffected, and point 3 below is still open.
+
 3. The Klimis symbol for `pay_shape` is still written `ψ^clearing`, and `tools/check_symbols.py` reads the tag registry from the Symbol Plan. Renaming a notation tag is a separate decision from renaming a column and has not been taken. Left as it stands.
 
 ## O11 The switched-off variants are dropped — DECIDED, drop them

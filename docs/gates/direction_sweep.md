@@ -4,7 +4,7 @@
 
 Gate 6 requires every dataset to have passed its direction checks. Stage 2 checked the watched seed only; this sweep checks all 30, so the condition is measured rather than assumed.
 
-**30 of 30 datasets pass all 5 checks.** Swept in 308 seconds.
+**30 of 30 datasets pass all 5 checks.** Swept in 299 seconds.
 
 | Scale | Seed | ltv_by_archetype_monotone | relevance_lifts_ctr | format_ecpm_ordering | adverse_selection | win_rises_with_bid_within_format | Verdict |
 |---|---:|---|---|---|---|---|---|

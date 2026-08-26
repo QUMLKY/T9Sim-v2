@@ -8,13 +8,13 @@ Settings against the node register. Every row is compared; none is assumed.
 
 | What | Settings | Register | |
 |---|---:|---:|---|
-| nodes | 78 | 78 | OK |
-| emitting rows | 48 | 48 | OK |
-| columns | 55 | 55 | OK |
+| nodes | 79 | 79 | OK |
+| emitting rows | 49 | 49 | OK |
+| columns | 56 | 56 | OK |
 | law T1 | 18 | 18 | OK |
 | law T2 | 9 | 9 | OK |
 | law T3 | 17 | 17 | OK |
-| law T4 | 34 | 34 | OK |
+| law T4 | 35 | 35 | OK |
 
 ## Startup checks
 
@@ -24,7 +24,7 @@ Each check ran against the loaded settings. A failure raises and no report is wr
 |---|---|---|
 | V1 | every parent exists and the graph is acyclic | PASS |
 | V2 | one entry per node, no duplicates | PASS |
-| V4 | the emitting rows are exactly the frozen 55 columns | PASS |
+| V4 | the emitting rows are exactly the frozen column set | PASS |
 | V5 | every parent is read by its child's law | PASS |
 | V6 | every probability table's rows sum to 1 | PASS |
 | V7 | every calibration path resolves | PASS |
@@ -64,11 +64,11 @@ Summary only. The full list, with the hand-written entries, is `docs/SPEC_GAPS.m
 |---|---:|
 | holes, no document supplies the value | 0 |
 | unsourced, a value with no route or source | 0 |
-| undeclared, a register key with no home in the config | 5 |
+| undeclared, a register key with no home in the config | 6 |
 
 ## Gate 1 verdict
 
 **Gate 1: PASS**
 
-5 undeclared register keys reported, not gating.
+6 undeclared register keys reported, not gating.
 

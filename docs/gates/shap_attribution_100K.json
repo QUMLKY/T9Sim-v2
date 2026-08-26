@@ -1,0 +1,946 @@
+{
+ "C1": {
+  "click": [
+   {
+    "feature": "app_id",
+    "mean_abs_shap": 0.5543705224990845,
+    "share": 0.37520155276614103
+   },
+   {
+    "feature": "city",
+    "mean_abs_shap": 0.554022490978241,
+    "share": 0.37496600278335446
+   },
+   {
+    "feature": "campaign_id",
+    "mean_abs_shap": 0.21382808685302734,
+    "share": 0.1447202312464253
+   },
+   {
+    "feature": "slot_height",
+    "mean_abs_shap": 0.04728243127465248,
+    "share": 0.03200105509368467
+   },
+   {
+    "feature": "bid_price",
+    "mean_abs_shap": 0.028385326266288757,
+    "share": 0.019211372283782745
+   },
+   {
+    "feature": "_enc_dsp_price",
+    "mean_abs_shap": 0.01838216930627823,
+    "share": 0.012441170998476166
+   },
+   {
+    "feature": "slot_format",
+    "mean_abs_shap": 0.016170328482985497,
+    "share": 0.010944182833178573
+   },
+   {
+    "feature": "_daypart",
+    "mean_abs_shap": 0.015189540572464466,
+    "share": 0.010280379236077398
+   },
+   {
+    "feature": "os_version",
+    "mean_abs_shap": 0.012084229849278927,
+    "share": 0.008178684867646243
+   },
+   {
+    "feature": "region",
+    "mean_abs_shap": 0.007708488032221794,
+    "share": 0.005217154523531883
+   },
+   {
+    "feature": "hour_of_day",
+    "mean_abs_shap": 0.005314637441188097,
+    "share": 0.003596980971018598
+   },
+   {
+    "feature": "day_of_week",
+    "mean_abs_shap": 0.002047361573204398,
+    "share": 0.0013856675457365937
+   },
+   {
+    "feature": "floor_price",
+    "mean_abs_shap": 0.0018750326707959175,
+    "share": 0.0012690342307495879
+   },
+   {
+    "feature": "ad_exchange",
+    "mean_abs_shap": 0.0008664870401844382,
+    "share": 0.0005864440292809324
+   },
+   {
+    "feature": "os",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   },
+   {
+    "feature": "device_type",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   },
+   {
+    "feature": "app_category",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   },
+   {
+    "feature": "advertiser_id",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   },
+   {
+    "feature": "advertiser_scale",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   },
+   {
+    "feature": "ad_genre",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   },
+   {
+    "feature": "slot_width",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   }
+  ],
+  "win": [
+   {
+    "feature": "floor_price",
+    "mean_abs_shap": 0.8866161108016968,
+    "share": 0.3240659527300889
+   },
+   {
+    "feature": "slot_format",
+    "mean_abs_shap": 0.722990870475769,
+    "share": 0.2642594944998579
+   },
+   {
+    "feature": "bid_price",
+    "mean_abs_shap": 0.7185141444206238,
+    "share": 0.2626232119233317
+   },
+   {
+    "feature": "app_id",
+    "mean_abs_shap": 0.13703308999538422,
+    "share": 0.05008679441291426
+   },
+   {
+    "feature": "city",
+    "mean_abs_shap": 0.13219933211803436,
+    "share": 0.048320013578790316
+   },
+   {
+    "feature": "campaign_id",
+    "mean_abs_shap": 0.058050088584423065,
+    "share": 0.02121781573105734
+   },
+   {
+    "feature": "_enc_dsp_price",
+    "mean_abs_shap": 0.042138516902923584,
+    "share": 0.015401996941417131
+   },
+   {
+    "feature": "os",
+    "mean_abs_shap": 0.023033689707517624,
+    "share": 0.008419015297620121
+   },
+   {
+    "feature": "os_version",
+    "mean_abs_shap": 0.007491076830774546,
+    "share": 0.002738054182146723
+   },
+   {
+    "feature": "day_of_week",
+    "mean_abs_shap": 0.005077613051980734,
+    "share": 0.0018559120359283707
+   },
+   {
+    "feature": "region",
+    "mean_abs_shap": 0.0009523871121928096,
+    "share": 0.00034810582970519856
+   },
+   {
+    "feature": "hour_of_day",
+    "mean_abs_shap": 0.0008395611075684428,
+    "share": 0.0003068669369805178
+   },
+   {
+    "feature": "slot_height",
+    "mean_abs_shap": 0.0004278950800653547,
+    "share": 0.00015639939890615335
+   },
+   {
+    "feature": "ad_exchange",
+    "mean_abs_shap": 0.0002513634681235999,
+    "share": 9.187554882727926e-05
+   },
+   {
+    "feature": "_daypart",
+    "mean_abs_shap": 0.0001230831549037248,
+    "share": 4.4987970975210426e-05
+   },
+   {
+    "feature": "advertiser_id",
+    "mean_abs_shap": 6.068162838346325e-05,
+    "share": 2.21796665724006e-05
+   },
+   {
+    "feature": "device_type",
+    "mean_abs_shap": 6.058001963538118e-05,
+    "share": 2.214252768517335e-05
+   },
+   {
+    "feature": "app_category",
+    "mean_abs_shap": 2.9585107768070884e-05,
+    "share": 1.0813615970516263e-05
+   },
+   {
+    "feature": "slot_width",
+    "mean_abs_shap": 2.286434937559534e-05,
+    "share": 8.357119923363496e-06
+   },
+   {
+    "feature": "advertiser_scale",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   },
+   {
+    "feature": "ad_genre",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   }
+  ]
+ },
+ "C2": {
+  "click": [
+   {
+    "feature": "app_id",
+    "mean_abs_shap": 0.4356592297554016,
+    "share": 0.3078102273453722
+   },
+   {
+    "feature": "city",
+    "mean_abs_shap": 0.3331085443496704,
+    "share": 0.23535417079198642
+   },
+   {
+    "feature": "slot_format",
+    "mean_abs_shap": 0.2608376741409302,
+    "share": 0.18429198394955468
+   },
+   {
+    "feature": "campaign_id",
+    "mean_abs_shap": 0.23033753037452698,
+    "share": 0.1627424435161428
+   },
+   {
+    "feature": "slot_height",
+    "mean_abs_shap": 0.09691476076841354,
+    "share": 0.06847405611490516
+   },
+   {
+    "feature": "_enc_dsp_price",
+    "mean_abs_shap": 0.03898327797651291,
+    "share": 0.02754320541620409
+   },
+   {
+    "feature": "bid_price",
+    "mean_abs_shap": 0.004247239790856838,
+    "share": 0.003000840465030329
+   },
+   {
+    "feature": "region",
+    "mean_abs_shap": 0.0040415325202047825,
+    "share": 0.0028555002600688614
+   },
+   {
+    "feature": "day_of_week",
+    "mean_abs_shap": 0.003558506490662694,
+    "share": 0.0025142235423678307
+   },
+   {
+    "feature": "os_version",
+    "mean_abs_shap": 0.0031765177845954895,
+    "share": 0.002244333632026839
+   },
+   {
+    "feature": "ad_exchange",
+    "mean_abs_shap": 0.0019284130539745092,
+    "share": 0.0013624989900775022
+   },
+   {
+    "feature": "hour_of_day",
+    "mean_abs_shap": 0.0008951153140515089,
+    "share": 0.000632433859999274
+   },
+   {
+    "feature": "_daypart",
+    "mean_abs_shap": 0.0008743443759158254,
+    "share": 0.0006177583825778246
+   },
+   {
+    "feature": "floor_price",
+    "mean_abs_shap": 0.0006889987271279097,
+    "share": 0.0004868044571372573
+   },
+   {
+    "feature": "ad_genre",
+    "mean_abs_shap": 7.319093128899112e-05,
+    "share": 5.171224585860973e-05
+   },
+   {
+    "feature": "advertiser_id",
+    "mean_abs_shap": 2.5132518203463405e-05,
+    "share": 1.7757103748985497e-05
+   },
+   {
+    "feature": "os",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   },
+   {
+    "feature": "device_type",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   },
+   {
+    "feature": "app_category",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   },
+   {
+    "feature": "advertiser_scale",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   },
+   {
+    "feature": "slot_width",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   }
+  ],
+  "win": [
+   {
+    "feature": "floor_price",
+    "mean_abs_shap": 0.8866161108016968,
+    "share": 0.3240659527300889
+   },
+   {
+    "feature": "slot_format",
+    "mean_abs_shap": 0.722990870475769,
+    "share": 0.2642594944998579
+   },
+   {
+    "feature": "bid_price",
+    "mean_abs_shap": 0.7185141444206238,
+    "share": 0.2626232119233317
+   },
+   {
+    "feature": "app_id",
+    "mean_abs_shap": 0.13703308999538422,
+    "share": 0.05008679441291426
+   },
+   {
+    "feature": "city",
+    "mean_abs_shap": 0.13219933211803436,
+    "share": 0.048320013578790316
+   },
+   {
+    "feature": "campaign_id",
+    "mean_abs_shap": 0.058050088584423065,
+    "share": 0.02121781573105734
+   },
+   {
+    "feature": "_enc_dsp_price",
+    "mean_abs_shap": 0.042138516902923584,
+    "share": 0.015401996941417131
+   },
+   {
+    "feature": "os",
+    "mean_abs_shap": 0.023033689707517624,
+    "share": 0.008419015297620121
+   },
+   {
+    "feature": "os_version",
+    "mean_abs_shap": 0.007491076830774546,
+    "share": 0.002738054182146723
+   },
+   {
+    "feature": "day_of_week",
+    "mean_abs_shap": 0.005077613051980734,
+    "share": 0.0018559120359283707
+   },
+   {
+    "feature": "region",
+    "mean_abs_shap": 0.0009523871121928096,
+    "share": 0.00034810582970519856
+   },
+   {
+    "feature": "hour_of_day",
+    "mean_abs_shap": 0.0008395611075684428,
+    "share": 0.0003068669369805178
+   },
+   {
+    "feature": "slot_height",
+    "mean_abs_shap": 0.0004278950800653547,
+    "share": 0.00015639939890615335
+   },
+   {
+    "feature": "ad_exchange",
+    "mean_abs_shap": 0.0002513634681235999,
+    "share": 9.187554882727926e-05
+   },
+   {
+    "feature": "_daypart",
+    "mean_abs_shap": 0.0001230831549037248,
+    "share": 4.4987970975210426e-05
+   },
+   {
+    "feature": "advertiser_id",
+    "mean_abs_shap": 6.068162838346325e-05,
+    "share": 2.21796665724006e-05
+   },
+   {
+    "feature": "device_type",
+    "mean_abs_shap": 6.058001963538118e-05,
+    "share": 2.214252768517335e-05
+   },
+   {
+    "feature": "app_category",
+    "mean_abs_shap": 2.9585107768070884e-05,
+    "share": 1.0813615970516263e-05
+   },
+   {
+    "feature": "slot_width",
+    "mean_abs_shap": 2.286434937559534e-05,
+    "share": 8.357119923363496e-06
+   },
+   {
+    "feature": "advertiser_scale",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   },
+   {
+    "feature": "ad_genre",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   }
+  ]
+ },
+ "C3": {
+  "click": [
+   {
+    "feature": "city",
+    "mean_abs_shap": 0.5533576011657715,
+    "share": 0.36932302792212257
+   },
+   {
+    "feature": "app_id",
+    "mean_abs_shap": 0.5475661754608154,
+    "share": 0.3654577030890773
+   },
+   {
+    "feature": "campaign_id",
+    "mean_abs_shap": 0.19392341375350952,
+    "share": 0.12942874951307504
+   },
+   {
+    "feature": "_enc_ssp_minwin_price",
+    "mean_abs_shap": 0.07845395803451538,
+    "share": 0.052361896308536014
+   },
+   {
+    "feature": "slot_height",
+    "mean_abs_shap": 0.03237120434641838,
+    "share": 0.021605253422955106
+   },
+   {
+    "feature": "_daypart",
+    "mean_abs_shap": 0.018804404884576797,
+    "share": 0.012550473212285276
+   },
+   {
+    "feature": "bid_price",
+    "mean_abs_shap": 0.018486585468053818,
+    "share": 0.01233835354681863
+   },
+   {
+    "feature": "os_version",
+    "mean_abs_shap": 0.014457565732300282,
+    "share": 0.009649297202003521
+   },
+   {
+    "feature": "_enc_dsp_price",
+    "mean_abs_shap": 0.01270107738673687,
+    "share": 0.008476978265882028
+   },
+   {
+    "feature": "_enc_ssp_density",
+    "mean_abs_shap": 0.008542835712432861,
+    "share": 0.005701676358488788
+   },
+   {
+    "feature": "hour_of_day",
+    "mean_abs_shap": 0.0053932685405015945,
+    "share": 0.0035995859884799283
+   },
+   {
+    "feature": "_enc_ssp_lost_price",
+    "mean_abs_shap": 0.005380109418183565,
+    "share": 0.0035908033009573325
+   },
+   {
+    "feature": "region",
+    "mean_abs_shap": 0.002804909599944949,
+    "share": 0.0018720583295812796
+   },
+   {
+    "feature": "floor_price",
+    "mean_abs_shap": 0.0027658746112138033,
+    "share": 0.001846005519964639
+   },
+   {
+    "feature": "_enc_ssp_price",
+    "mean_abs_shap": 0.0017545395530760288,
+    "share": 0.0011710182691735452
+   },
+   {
+    "feature": "ad_exchange",
+    "mean_abs_shap": 0.001132035395130515,
+    "share": 0.000755545309152391
+   },
+   {
+    "feature": "app_category",
+    "mean_abs_shap": 0.0004069291171617806,
+    "share": 0.0002715934386430205
+   },
+   {
+    "feature": "os",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   },
+   {
+    "feature": "device_type",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   },
+   {
+    "feature": "advertiser_id",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   },
+   {
+    "feature": "advertiser_scale",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   },
+   {
+    "feature": "ad_genre",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   },
+   {
+    "feature": "slot_format",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   },
+   {
+    "feature": "slot_width",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   },
+   {
+    "feature": "day_of_week",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   }
+  ],
+  "win": [
+   {
+    "feature": "floor_price",
+    "mean_abs_shap": 0.8245315551757812,
+    "share": 0.30872368549201246
+   },
+   {
+    "feature": "bid_price",
+    "mean_abs_shap": 0.6558800935745239,
+    "share": 0.24557667739714978
+   },
+   {
+    "feature": "_enc_ssp_minwin_price",
+    "mean_abs_shap": 0.427199125289917,
+    "share": 0.15995323353070506
+   },
+   {
+    "feature": "_enc_ssp_price",
+    "mean_abs_shap": 0.2464054673910141,
+    "share": 0.09225990629566411
+   },
+   {
+    "feature": "city",
+    "mean_abs_shap": 0.12217347323894501,
+    "share": 0.04574457422632639
+   },
+   {
+    "feature": "slot_format",
+    "mean_abs_shap": 0.11790022999048233,
+    "share": 0.04414457311492198
+   },
+   {
+    "feature": "app_id",
+    "mean_abs_shap": 0.10385878384113312,
+    "share": 0.03888713090103296
+   },
+   {
+    "feature": "_enc_ssp_lost_price",
+    "mean_abs_shap": 0.09428850561380386,
+    "share": 0.03530379737428253
+   },
+   {
+    "feature": "campaign_id",
+    "mean_abs_shap": 0.0417969711124897,
+    "share": 0.01564975273929943
+   },
+   {
+    "feature": "_enc_dsp_price",
+    "mean_abs_shap": 0.02274738810956478,
+    "share": 0.008517148250323623
+   },
+   {
+    "feature": "os",
+    "mean_abs_shap": 0.007221668027341366,
+    "share": 0.002703959545035669
+   },
+   {
+    "feature": "os_version",
+    "mean_abs_shap": 0.004076096229255199,
+    "share": 0.0015261847074457757
+   },
+   {
+    "feature": "region",
+    "mean_abs_shap": 0.0011773677542805672,
+    "share": 0.0004408337194608162
+   },
+   {
+    "feature": "hour_of_day",
+    "mean_abs_shap": 0.00047601311234757304,
+    "share": 0.00017823031934191604
+   },
+   {
+    "feature": "_enc_ssp_density",
+    "mean_abs_shap": 0.0004662108258344233,
+    "share": 0.00017456011654665358
+   },
+   {
+    "feature": "ad_exchange",
+    "mean_abs_shap": 0.000341761828167364,
+    "share": 0.0001279635333420598
+   },
+   {
+    "feature": "slot_width",
+    "mean_abs_shap": 7.676369568798691e-05,
+    "share": 2.8742103193043114e-05
+   },
+   {
+    "feature": "day_of_week",
+    "mean_abs_shap": 4.4290416553849354e-05,
+    "share": 1.658335638539118e-05
+   },
+   {
+    "feature": "_daypart",
+    "mean_abs_shap": 3.6427016311790794e-05,
+    "share": 1.3639117456039882e-05
+   },
+   {
+    "feature": "advertiser_id",
+    "mean_abs_shap": 2.983469130413141e-05,
+    "share": 1.1170798494139292e-05
+   },
+   {
+    "feature": "app_category",
+    "mean_abs_shap": 2.365366162848659e-05,
+    "share": 8.856478017715859e-06
+   },
+   {
+    "feature": "slot_height",
+    "mean_abs_shap": 2.3443979443982244e-05,
+    "share": 8.77796815793445e-06
+   },
+   {
+    "feature": "device_type",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   },
+   {
+    "feature": "advertiser_scale",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   },
+   {
+    "feature": "ad_genre",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   }
+  ]
+ },
+ "C4": {
+  "click": [
+   {
+    "feature": "app_id",
+    "mean_abs_shap": 0.43944305181503296,
+    "share": 0.3069079942606623
+   },
+   {
+    "feature": "city",
+    "mean_abs_shap": 0.3345007002353668,
+    "share": 0.23361602502076823
+   },
+   {
+    "feature": "campaign_id",
+    "mean_abs_shap": 0.23340973258018494,
+    "share": 0.16301387078764035
+   },
+   {
+    "feature": "_enc_ssp_price",
+    "mean_abs_shap": 0.17368805408477783,
+    "share": 0.12130411912539207
+   },
+   {
+    "feature": "slot_height",
+    "mean_abs_shap": 0.09333370625972748,
+    "share": 0.0651844658068317
+   },
+   {
+    "feature": "_enc_ssp_lost_price",
+    "mean_abs_shap": 0.07870081812143326,
+    "share": 0.054964824535418864
+   },
+   {
+    "feature": "_enc_dsp_price",
+    "mean_abs_shap": 0.030834726989269257,
+    "share": 0.02153504117260457
+   },
+   {
+    "feature": "slot_format",
+    "mean_abs_shap": 0.028500763699412346,
+    "share": 0.01990499607572702
+   },
+   {
+    "feature": "_enc_ssp_minwin_price",
+    "mean_abs_shap": 0.00689326785504818,
+    "share": 0.00481427343669736
+   },
+   {
+    "feature": "_enc_ssp_density",
+    "mean_abs_shap": 0.002951452974230051,
+    "share": 0.002061301251059225
+   },
+   {
+    "feature": "os_version",
+    "mean_abs_shap": 0.0028927759267389774,
+    "share": 0.002020321071988825
+   },
+   {
+    "feature": "region",
+    "mean_abs_shap": 0.0028507451061159372,
+    "share": 0.0019909666543884838
+   },
+   {
+    "feature": "floor_price",
+    "mean_abs_shap": 0.0010115053737536073,
+    "share": 0.0007064375785676749
+   },
+   {
+    "feature": "bid_price",
+    "mean_abs_shap": 0.0008965178858488798,
+    "share": 0.0006261300640168104
+   },
+   {
+    "feature": "hour_of_day",
+    "mean_abs_shap": 0.0007833003182895482,
+    "share": 0.0005470586657293911
+   },
+   {
+    "feature": "ad_exchange",
+    "mean_abs_shap": 0.00048050182522274554,
+    "share": 0.0003355835319470975
+   },
+   {
+    "feature": "_daypart",
+    "mean_abs_shap": 0.00029485751292668283,
+    "share": 0.00020592913578050073
+   },
+   {
+    "feature": "device_type",
+    "mean_abs_shap": 0.00023664635955356061,
+    "share": 0.00016527433818714948
+   },
+   {
+    "feature": "day_of_week",
+    "mean_abs_shap": 0.00013661647972185165,
+    "share": 9.541325002456574e-05
+   },
+   {
+    "feature": "os",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   },
+   {
+    "feature": "app_category",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   },
+   {
+    "feature": "advertiser_id",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   },
+   {
+    "feature": "advertiser_scale",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   },
+   {
+    "feature": "ad_genre",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   },
+   {
+    "feature": "slot_width",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   }
+  ],
+  "win": [
+   {
+    "feature": "floor_price",
+    "mean_abs_shap": 0.8245315551757812,
+    "share": 0.30872368549201246
+   },
+   {
+    "feature": "bid_price",
+    "mean_abs_shap": 0.6558800935745239,
+    "share": 0.24557667739714978
+   },
+   {
+    "feature": "_enc_ssp_minwin_price",
+    "mean_abs_shap": 0.427199125289917,
+    "share": 0.15995323353070506
+   },
+   {
+    "feature": "_enc_ssp_price",
+    "mean_abs_shap": 0.2464054673910141,
+    "share": 0.09225990629566411
+   },
+   {
+    "feature": "city",
+    "mean_abs_shap": 0.12217347323894501,
+    "share": 0.04574457422632639
+   },
+   {
+    "feature": "slot_format",
+    "mean_abs_shap": 0.11790022999048233,
+    "share": 0.04414457311492198
+   },
+   {
+    "feature": "app_id",
+    "mean_abs_shap": 0.10385878384113312,
+    "share": 0.03888713090103296
+   },
+   {
+    "feature": "_enc_ssp_lost_price",
+    "mean_abs_shap": 0.09428850561380386,
+    "share": 0.03530379737428253
+   },
+   {
+    "feature": "campaign_id",
+    "mean_abs_shap": 0.0417969711124897,
+    "share": 0.01564975273929943
+   },
+   {
+    "feature": "_enc_dsp_price",
+    "mean_abs_shap": 0.02274738810956478,
+    "share": 0.008517148250323623
+   },
+   {
+    "feature": "os",
+    "mean_abs_shap": 0.007221668027341366,
+    "share": 0.002703959545035669
+   },
+   {
+    "feature": "os_version",
+    "mean_abs_shap": 0.004076096229255199,
+    "share": 0.0015261847074457757
+   },
+   {
+    "feature": "region",
+    "mean_abs_shap": 0.0011773677542805672,
+    "share": 0.0004408337194608162
+   },
+   {
+    "feature": "hour_of_day",
+    "mean_abs_shap": 0.00047601311234757304,
+    "share": 0.00017823031934191604
+   },
+   {
+    "feature": "_enc_ssp_density",
+    "mean_abs_shap": 0.0004662108258344233,
+    "share": 0.00017456011654665358
+   },
+   {
+    "feature": "ad_exchange",
+    "mean_abs_shap": 0.000341761828167364,
+    "share": 0.0001279635333420598
+   },
+   {
+    "feature": "slot_width",
+    "mean_abs_shap": 7.676369568798691e-05,
+    "share": 2.8742103193043114e-05
+   },
+   {
+    "feature": "day_of_week",
+    "mean_abs_shap": 4.4290416553849354e-05,
+    "share": 1.658335638539118e-05
+   },
+   {
+    "feature": "_daypart",
+    "mean_abs_shap": 3.6427016311790794e-05,
+    "share": 1.3639117456039882e-05
+   },
+   {
+    "feature": "advertiser_id",
+    "mean_abs_shap": 2.983469130413141e-05,
+    "share": 1.1170798494139292e-05
+   },
+   {
+    "feature": "app_category",
+    "mean_abs_shap": 2.365366162848659e-05,
+    "share": 8.856478017715859e-06
+   },
+   {
+    "feature": "slot_height",
+    "mean_abs_shap": 2.3443979443982244e-05,
+    "share": 8.77796815793445e-06
+   },
+   {
+    "feature": "device_type",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   },
+   {
+    "feature": "advertiser_scale",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   },
+   {
+    "feature": "ad_genre",
+    "mean_abs_shap": 0.0,
+    "share": 0.0
+   }
+  ]
+ }
+}

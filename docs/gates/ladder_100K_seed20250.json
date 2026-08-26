@@ -1,0 +1,20 @@
+{
+ "source": "output/t9v2_100K_seed20250.parquet",
+ "threshold": 0.001,
+ "settings": {
+  "low": 0.1,
+  "high": 1200.0,
+  "n": 60,
+  "step_pct": 17.256969367889873,
+  "oracle_profit": 1808.4200942455554,
+  "profit_on_top_rung": 0.0,
+  "profit_on_bottom_rung": 0.7055782943492783,
+  "share_on_top_rung": 0.0,
+  "share_on_bottom_rung": 0.00039016282588014183,
+  "rows_on_top_rung": 0.0,
+  "rows_on_bottom_rung": 0.00031,
+  "bids_on": 0.1018
+ },
+ "verdict": "PASS",
+ "compared": {}
+}

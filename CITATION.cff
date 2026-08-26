@@ -1,6 +1,6 @@
 cff-version: 1.2.0
-message: "If you use T9Sim v2, please cite it as below."
-title: "T9Sim v2: A Censored-View Auction Simulator for Measuring the Marginal Value of AdTech Data Layers"
+message: "If you use T9Sim v2.2, please cite it as below."
+title: "T9Sim v2.2: A Censored-View Auction Simulator for Measuring the Marginal Value of AdTech Data Layers"
 type: software
 authors:
   - family-names: "Yu"
@@ -9,14 +9,17 @@ authors:
   - family-names: "Klimis"
     given-names: "Vasileios"
     affiliation: "Queen Mary University of London"
-version: 2.0.0
+version: 2.2.0
 repository-code: "https://github.com/QUMLKY/T9Sim-v2"
 abstract: >
-  T9Sim v2 generates a synthetic mobile-game ad-auction ground truth and censors it into four
+  T9Sim v2.2 generates a synthetic mobile-game ad-auction ground truth and censors it into four
   views (C1 DSP, C2 DSP+MMP, C3 DSP+SSP, C4 all), so that the marginal predictive and economic
   value of each integrated AdTech data layer can be measured as a controlled ablation. MMP adds
   rows and SSP adds columns, over one shared master with one temporal split, so every contrast is
-  paired within a seed. It is an independent rebuild sharing no code with T9Sim v1.
+  paired within a seed. Tier 2 runs a win classifier beside an interval-censored AFT price head,
+  each constrained to move through one channel only, so that a supply-side null can be separated
+  into a feature effect and a label effect rather than reported as a flat one. It is an independent
+  rebuild sharing no code with T9Sim v1, and it supersedes v2.0, which was never released.
 keywords:
   - real-time bidding
   - computational advertising

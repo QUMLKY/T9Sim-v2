@@ -31,18 +31,44 @@ FORMATS = ["banner", "interstitial", "rewarded"]
 
 
 def price_shapes():
-    """The two iPinYou price shapes, median-normalised.
+    """The two iPinYou price shapes, BOTH normalised by the PAYING median.
+
+    ONE DENOMINATOR, NOT TWO, and that is the floor fix of 22 August 2026.
+
+    The floor and the paying price are two prices in one market, and what
+    carries the market's structure is the RATIO between them. Dividing each by
+    its own median forces both to a median of 1 and erases exactly that ratio.
+    The paying median is the right denominator for both because the target they
+    multiply, `T^ecpm`, is itself a clearing-price benchmark, so
+    `psi^clearing . T^ecpm` has to land on it.
+
+    Measured on the pmfs: the floor's weighted median is 40 and the paying
+    median is 70, so the correct floor shape has median 40/70 = 0.571. Dividing
+    the floor by its own median made that 1, inflating every floor by 1.750.
+
+    WHY IT HAD TO GO BEFORE THE CAMPAIGN rather than be noted. An inflated floor
+    turns a third of the market into rows where the floor already exceeds our
+    bid, a certain loss decidable from two columns EVERY view holds. Those are
+    free wins for the win head and they flatter C1 in particular: C1's win AUC
+    falls from 0.8720 to 0.8195 once they disappear. It moves Tier 1 too,
+    because C1 and C3 learn the funnel from won rows only, so changing the floor
+    changes which rows they train on. A defect that inflates the baseline view
+    sits directly on the C3 minus C1 contrast.
+
+        P(bid < floor)      buggy 0.391   correct 0.283   v1 0.300
+        P(floor > LU7)      buggy 0.330   correct 0.212   v1 0.231
+        P(unsold | lost)    buggy 0.335   correct 0.167   v1 0.167
+        shape ratio         buggy 0.991   correct 0.566   v1 0.566
 
     Both are resampled as empirical pmfs rather than fitted, so the floor's zero
-    atom keeps its MEASURED mass of about 14 percent. The register carried 57
-    percent until 16 August 2026; that number was the floor median over the
-    paying median, a different quantity entirely.
+    atom keeps its MEASURED mass of 14.15 percent. The register carried 57
+    percent until 16 August 2026; that number was the shape ratio 40/70 misread
+    as a share, and the Specification carried it until this fix.
     """
     fv, fp = read_pmf("ipinyou_floor_bid_distribution.csv", "floor_price")
     pv, pp = read_pmf("ipinyou_paying_distribution.csv", "paying_price")
-    med_f = _weighted_median(fv, fp)
     med_p = _weighted_median(pv, pp)
-    return (fv / med_f, fp), (pv / med_p, pp)
+    return (fv / med_p, fp), (pv / med_p, pp)
 
 
 def _weighted_median(values, weights):
@@ -208,3 +234,38 @@ def winning_price(won_v, sold, bid, lu7):
     m = (won_v == 0) & (sold == 1)
     out[m] = lu7[m]
     return out
+
+
+@law("H5")
+def min_winning_price(lu7, floor):
+    """T4. max(LU7, H1). The smallest bid that would have won, on EVERY row.
+
+    THE TARGET OF THE TIER-2 PRICE HEAD, AND NEVER A PER-ROW FEATURE, in any
+    view. `won = 1[bid >= min_winning_price]` is an identity, so a view holding
+    this column as a feature would not be predicting the auction, it would be
+    reading the answer. The censoring map cannot enforce that on its own — H5 is
+    C3/C4-visible, and C3 is precisely the view whose SSP contrast the identity
+    would destroy — so the anti-leak condition on gates 3 and 4 is what holds it
+    out of the feature lists.
+
+    ON EVERY ROW, WHICH IS WHAT DISTINGUISHES IT FROM v1's B1. v1's abandoned
+    arm `min_bid_to_win` existed on won rows only, which is a value-selected
+    sample and the same defect the MMP mechanism turns on. Here all three
+    branches of the auction have one:
+
+        won              max(LU7, floor), our own bid cleared it
+        sold to a rival  LU7, which is above the floor by construction
+        unsold           the floor, which nobody cleared
+
+    and `max(LU7, floor)` is all three at once, so there is no branch and no
+    NaN. Contrast `winning_price` beside it, which is NaN on unsold rows because
+    no price was actually paid. H5 is counterfactual and always defined; H4 is
+    realised and sometimes absent.
+
+    CONSUMES NO RANDOMNESS. A pure function of two columns already drawn, which
+    is why adding it leaves the generator's RNG stream untouched and `k_global`
+    unmoved. Step 5b's re-solve is checked against that claim rather than
+    assuming it.
+    """
+    return np.maximum(np.asarray(lu7, dtype=np.float64),
+                      np.asarray(floor, dtype=np.float64))

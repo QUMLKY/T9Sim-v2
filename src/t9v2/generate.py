@@ -250,6 +250,9 @@ class Run:
         won = M.won(bid, lu7, floor)
         sold = M.sold_but_lost(won, lu7, floor)
         wp = M.winning_price(won, sold, bid, lu7)
+        # H5, and it draws nothing: a pure function of two columns already here,
+        # so the RNG stream is identical with and without it
+        mwp = M.min_winning_price(lu7, floor)
 
         # --- 10 the funnel, on EVERY row, won or lost
         clk = F.click(st("funnel", "E1"), d["p_c"])
@@ -295,7 +298,7 @@ class Run:
             "p_click": d["p_c"], "p_install": d["p_i"], "p_payer": d["p_p"],
             "e_ltv": d["e_l"], "ev_truth": d["ev"],
             "floor_price": floor, "lu7_competing_bid": lu7, "bid_price": bid,
-            "won": won, "winning_price": wp,
+            "won": won, "winning_price": wp, "min_winning_price": mwp,
             "click": clk, "click_timestamp": clk_ts,
             "install": ins, "install_timestamp": ins_ts,
             "is_payer": pay, "ltv_value": ltv,

@@ -110,7 +110,7 @@ def main():
             m = G.frame("100K", seed=seed, overrides=o)
             r = run_seed(m, s_arm, seed=0, quiet=True)
             w = lambda v: r[v]["heads"]["win"]["auc"]                # noqa: E731
-            ev = lambda v: r[v]["economics"]["learned"]["ev_ratio"]  # noqa: E731
+            ev = lambda v: r[v]["economics"]["learned"]["value_captured"]  # noqa: E731
             rec = {"gain": gain, "seed": seed, "k_global": float(kg),
                    "latent_share": share, "corr_z": corr,
                    "win_C1": w("C1"), "ssp_win": w("C3") - w("C1"),

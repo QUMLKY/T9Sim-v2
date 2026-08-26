@@ -37,18 +37,30 @@ def load(scale):
 CONTRASTS = [
     ("MMP, click AUC (C2 − C1)", lambda r: r["C2"]["heads"]["click"]["auc"] - r["C1"]["heads"]["click"]["auc"]),
     ("MMP, install AUC (C2 − C1)", lambda r: r["C2"]["heads"]["install"]["auc"] - r["C1"]["heads"]["install"]["auc"]),
-    ("MMP, ev_ratio (C2 − C1)", lambda r: r["C2"]["economics"]["learned"]["ev_ratio"] - r["C1"]["economics"]["learned"]["ev_ratio"]),
+    ("MMP, value_captured (C2 − C1)", lambda r: r["C2"]["economics"]["learned"]["value_captured"] - r["C1"]["economics"]["learned"]["value_captured"]),
     ("MMP, profit (C2 − C1)", lambda r: r["C2"]["economics"]["learned"]["profit"] - r["C1"]["economics"]["learned"]["profit"]),
     ("SSP, win AUC (C3 − C1)", lambda r: r["C3"]["heads"]["win"]["auc"] - r["C1"]["heads"]["win"]["auc"]),
-    ("SSP, ev_ratio (C3 − C1)", lambda r: r["C3"]["economics"]["learned"]["ev_ratio"] - r["C1"]["economics"]["learned"]["ev_ratio"]),
+    ("SSP, value_captured (C3 − C1)", lambda r: r["C3"]["economics"]["learned"]["value_captured"] - r["C1"]["economics"]["learned"]["value_captured"]),
     ("SSP, profit (C3 − C1)", lambda r: r["C3"]["economics"]["learned"]["profit"] - r["C1"]["economics"]["learned"]["profit"]),
 ]
 
 
 def ci(vals):
-    v = np.asarray(vals, dtype=float)
-    m, se = v.mean(), v.std(ddof=1) / np.sqrt(len(v))
-    return m, m - 1.96 * se, m + 1.96 * se, int((v > 0).sum()), len(v)
+    """The ONE interval, borrowed from `results_report.paired`.
+
+    This file used to carry its own copy, and the copies had already diverged:
+    this one counted POSITIVE values while `paired` counts values agreeing with
+    the MEAN's sign. On a negative effect the two disagree completely -- one
+    reads 0 of 10 where the other reads 10 of 10 -- and both were being printed
+    as "seeds agreeing". Consolidated 23 August 2026 with step 8g.
+    """
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "results_report", HERE / "results_report.py")
+    rr = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(rr)
+    st = rr.paired(vals)
+    return st["mean"], st["lo"], st["hi"], st["agree"], st["n"]
 
 
 def fmt(m, lo, hi):
@@ -92,13 +104,13 @@ def main():
     r10 = runs["10M"][0]["views"] if runs["10M"] else None
     if r10:
         L += ["## 10M, the watched seed", "",
-              "| View | click AUC | install AUC | win AUC | profit | ev_ratio |",
+              "| View | click AUC | install AUC | win AUC | profit | value_captured |",
               "|---|---:|---:|---:|---:|---:|"]
         for v in C.VIEWS:
             h, e = r10[v]["heads"], r10[v]["economics"]["learned"]
             L.append("| %s | %.4f | %.4f | %.4f | %.0f | %.4f |"
                      % (v, h["click"]["auc"], h["install"]["auc"], h["win"]["auc"],
-                        e["profit"], e["ev_ratio"]))
+                        e["profit"], e["value_captured"]))
         L += ["", "Direction checks on this seed:", "",
               "| Result | Check |", "|---|---|"]
         for name, ok, _ in d10["directions"]:

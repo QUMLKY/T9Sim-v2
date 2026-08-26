@@ -53,7 +53,7 @@ from . import metrics as M
 # v1's candidate_prices are stated per impression, 1e-4 to 0.12, which is 0.1 to
 # 120 eCPM and spans the hurdle range well. They are converted here rather than
 # rewritten in the settings, so the recorded value still matches v1's.
-PER_MILLE = 1000.0
+PER_MILLE = M.PER_MILLE          # one definition, in the module that divides by it
 
 
 def to_price_unit(ev_per_impression):
@@ -73,16 +73,46 @@ def ladder(settings):
                         c["high"]["value"] * PER_MILLE, int(c["n"]["value"]))
 
 
-def choose(ev, curve, prices):
+def roas_target(settings):
+    """The minimum ev / bid a row must promise before it is bid on at all."""
+    return float(settings.raw["roas_target"]["value"]["value"])
+
+
+def choose(ev, curve, prices, target=None):
     """argmax over the ladder of (ev - b) . p(win | b), per row.
 
     Ties take the LOWEST price, which is the conservative reading: if two bids
     have equal expected profit there is no reason to pay more for it.
+
+    RETURNS THE LADDER INDEX IT TOOK, as the third value. Anything that wants to
+    know what the bidder decided, or the win probability at the bid it chose,
+    reads the index rather than redoing the argmax. A tool that recomputed it
+    would be a second implementation of the bidder, used to audit the first, and
+    the two would agree right up until a tie-break or a curve shape made them
+    disagree silently. `curve[i, j]` is then the chosen bid's own win
+    probability, which is what calibration at the recommended bid is measured on.
+
+    RETURNS WHETHER IT BID AT ALL, as the fourth. `target` is the ROAS gate: the
+    row is placed only when `ev / b >= target` at the rung the argmax already
+    chose. A GATE, NOT A CONSTRAINED SEARCH, so the bid on a placed row is
+    exactly the bid an ungated run would make. Repricing a row to satisfy the
+    target would make the argmax mean one thing under a gate and another without
+    one, and gated and ungated runs could no longer be compared.
+
+    `target=None` places every row, which is v2's behaviour exactly. It is the
+    only way to reproduce a v2 number, so it is a real mode rather than a
+    default nothing uses.
+
+    Written `ev >= target . b` rather than `ev / b >= target`: every price on the
+    ladder is strictly positive so the two agree, and the product needs no guard.
     """
     ev = np.asarray(ev, float)[:, None]
     profit = (ev - prices[None, :]) * curve
     j = np.argmax(profit, axis=1)
-    return prices[j], profit[np.arange(len(j)), j]
+    bid = prices[j]
+    placed = (np.ones(len(j), dtype=bool) if target is None
+              else ev[:, 0] >= float(target) * bid)
+    return bid, profit[np.arange(len(j)), j], j, placed
 
 
 def true_win_curve(price_to_beat, floor, prices):
@@ -99,8 +129,31 @@ def true_win_curve(price_to_beat, floor, prices):
     return (prices[None, :] >= hurdle).astype(float)
 
 
-def run_policies(master_test, ev_learned, curve_learned, prices):
+def run_policies(master_test, ev_learned, curve_learned, prices, target=None,
+                 truth_curve=None):
     """The 3 policies on one test split, each with its economics.
+
+    THE ROAS GATE APPLIES TO ALL THREE, on the same target. A gate on the
+    learned bidder alone would move it against a ceiling measured under a
+    different rule, and `value_vs_oracle` would then mix the effect of the gate
+    with the effect of the view.
+
+    THE THREE PLACE VERY DIFFERENT SHARES OF ROWS, and the gap is not a defect.
+    Measured on C1 of 100K seed 20250 at target 1: `learned` places 1.0000 and
+    the other two place 0.2620. Thirty percent of rows have `ev_truth` of
+    exactly zero, the inactive archetype, and no bid can return a target of 1 on
+    a row worth nothing; the rest are rows worth less than the cheapest rung.
+    The learned head cannot reproduce an exact zero — its smallest prediction is
+    4.83 eCPM against a bottom rung of 0.1 — so it declines nothing at all. The
+    gate is therefore live on the true-value policies and inert on the learned
+    one, which is the opposite of the intuition and is why `placed_rate` is
+    reported per policy rather than once per view.
+
+    THE CEILING BARELY MOVES, and it moves the right way. The oracle's profit on
+    that seed goes from 246.032 ungated to 246.034 gated: it declines 18 wins
+    that were together losing 0.002. That is a ceiling raised by 0.0008 percent,
+    not a ceiling redefined, because under the true win rule a worthless row
+    already sits at rung 0 and only wins when the hurdle is lower still.
 
     Two ratios are reported, and they answer different questions.
 
@@ -120,7 +173,12 @@ def run_policies(master_test, ev_learned, curve_learned, prices):
     floor = master_test["floor_price"].to_numpy(dtype=float)
     # both values restated in the unit the market clears in, see PER_MILLE
     ev_true = to_price_unit(master_test["ev_truth"].to_numpy(dtype=float))
-    truth_curve = true_win_curve(lu7, floor, prices)
+    # THE TRUTH CURVE IS PASSED IN WHEN THE CALLER ALREADY HAS ONE. It is the
+    # same array every time -- the exact win rule does not depend on any model --
+    # and at 10M it is 672 MB, so rebuilding it once per bidder was 2.7 GB of
+    # allocation churn for four identical arrays.
+    if truth_curve is None:
+        truth_curve = true_win_curve(lu7, floor, prices)
 
     out = {}
     for name, ev, curve in [
@@ -128,8 +186,8 @@ def run_policies(master_test, ev_learned, curve_learned, prices):
         ("truth_ev", ev_true, curve_learned),
         ("oracle", ev_true, truth_curve),
     ]:
-        b, _ = choose(ev, curve, prices)
-        out[name] = M.economics(b, None, ev_true, lu7, floor)
+        b, _, _, placed = choose(ev, curve, prices, target)
+        out[name] = M.economics(b, None, ev_true, lu7, floor, placed)
         out[name]["mean_bid"] = float(np.mean(b))
 
     ceiling = out["oracle"]["value"]

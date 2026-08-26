@@ -41,7 +41,20 @@ FUNNEL_STAGES = [
 ALL_OUTCOME_COLS = [c for _, cols in FUNNEL_STAGES for c in cols]
 
 # realised at settlement, never known at bid time. Cell-level history only.
-SETTLEMENT_COLS = ["winning_price", "bid_density"]
+#
+# `min_winning_price` (H5) joins them 22 August 2026, for a stronger reason than
+# the other two. It is not merely unknown at bid time, it is Tier 2's LABEL in
+# disguise: `won = 1[bid_price >= min_winning_price]` holds on every row by
+# construction, so a view carrying it as a feature is not predicting the auction,
+# it is reading the answer.
+#
+# THE CENSORING MAP CANNOT CATCH THIS. H5 is C3/C4-visible by design, and C3 is
+# exactly the view whose SSP contrast the identity would fabricate: C3's win head
+# would score near 1.0, C1's would not, and the gap would be the leak rather than
+# the data layer. That is the shape of v1's `bid_density` leak, which is how v1
+# reached an SSP result v2 had to retract. H5 exists as the TARGET of the Tier-2
+# price head and is never an input to anything.
+SETTLEMENT_COLS = ["winning_price", "bid_density", "min_winning_price"]
 
 # never a feature: Tier 2's label, and not the funnel's business
 NEVER = ["won", "user_id", "timestamp"]

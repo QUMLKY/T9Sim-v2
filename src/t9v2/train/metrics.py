@@ -108,7 +108,13 @@ def rmse(y, yhat):
 # economics
 # ---------------------------------------------------------------------------
 
-def economics(bid, won_truth, value_truth, price_to_beat, floor):
+# Prices are CPM, dollars per THOUSAND impressions; a row is one impression.
+# Defined here rather than in bidders because this is the module that divides by
+# it, and bidders already imports metrics so the constant can travel that way
+# without a cycle.
+PER_MILLE = 1000.0
+
+def economics(bid, won_truth, value_truth, price_to_beat, floor, placed=None):
     """What a bidding policy would actually have earned, scored against the truth.
 
     Counterfactual and exact, not simulated: the master holds the competing bid
@@ -116,26 +122,79 @@ def economics(bid, won_truth, value_truth, price_to_beat, floor):
     comparison rather than an estimate. In a first-price auction the winner pays
     its own bid, so profit on a won row is value minus bid.
 
-    Returned per policy:
-      wins      how many auctions the policy takes
-      spend     what it pays, which is its own bid on the rows it wins
-      value     the true expected value it acquires
-      profit    value minus spend
-      ev_ratio  the share of all available true value the policy captures, which
-                is the ranking-quality measure that does not depend on the level
+    THE MONEY IS DIVIDED BY A THOUSAND, and that is the 1000x units fix.
 
-    The denominator of ev_ratio is every row's value including the rows no
-    policy should buy, so nothing reaches 1.0 and the oracle itself reads about
-    0.90. `run_policies` adds `value_vs_oracle` alongside it for the reading
-    against the achievable ceiling.
+    Every price reaching here is a CPM, dollars per thousand impressions, because
+    that is the unit the market clears in and the unit a bid must be comparable
+    with a value in. But a won row is ONE impression. Taking it at 9.6 CPM costs
+    $0.0096, not $9.60, so summing the CPM once per won row reports a thousand
+    times the money.
+
+    Caught by comparing v2's oracle profit against v1's: 16,741,566 against
+    19,202, a factor of 1000 and a scale v1 never had. v1 divides and says so in
+    its own results file: "profit, total = profit CPM x n_won / 1000".
+
+    ONLY THE MONEY TOTALS MOVE. `value_captured` divides one sum by another of the
+    same unit so the factor cancels, `win_rate` is a count, and the argmax is
+    scale-invariant. No bid, no ranking metric and no supported-or-not verdict
+    changes; the profit LEVELS do, by exactly 1000.
+
+    `placed` IS THE ROAS GATE, and it is passed rather than inferred from the
+    bid. Encoding a declined row as a zero bid would make the refusal depend on
+    the hurdle never being zero, which is a property of the rival draw rather
+    than of the design: the floor is exactly zero on 14 percent of rows and only
+    a strictly positive competing bid keeps the hurdle above it. A refusal has
+    to be stated. None places every row, which is the ungated behaviour and
+    reproduces v2 exactly.
+
+    Returned per policy:
+      wins        how many auctions the policy takes
+      placed_rate the share of rows it was willing to bid on at all
+      spend       what it pays IN DOLLARS: its own bid on the rows it wins
+      value       the true expected value it acquires, in dollars
+      profit      value minus spend, in dollars
+      value_captured  the share of all available true value the policy takes,
+                      unitless and therefore untouched by the units fix
+      profit_per_1k_wins  profit divided by wins, times a thousand
+
+    `value_captured` WAS CALLED `ev_ratio`, RENAMED 23 August 2026, and the old
+    name was a historical accident that came to mean two different things. The
+    other one is `bidders.ev_bias`'s `ratio`, the EV LEVEL: mean predicted value
+    over mean true value, a property of the VALUATIONS before any bidder acts.
+    This one is a property of the BIDDER: what share of available value it took,
+    which depends on the win curve, the ladder and the argmax. At 1M the level
+    reads 0.302 for C1 against C2's 0.853 while captured reads 0.139 against
+    0.229 — different quantities, different sizes, one name. A BREAKING CHANGE
+    to results.json: v2's thirty committed files carry the old key, and the
+    design fingerprint is what tells the two schemas apart.
+
+    `profit_per_1k_wins` WAS CALLED `profit CPM`, and that name hid its own
+    denominator. CPM is per thousand IMPRESSIONS and every price column here is
+    one, but this divides by WINS, so the old label invited comparison with
+    `value_captured`, whose denominator is all rows. It carries no verdict and
+    stays in the no-claim set.
+
+    The denominator of `value_captured` is every row's value including the rows
+    no policy should buy, so nothing reaches 1.0 and the oracle itself reads
+    about 0.90. `run_policies` adds `value_vs_oracle` alongside it for the
+    reading against the achievable ceiling.
     """
     bid = np.asarray(bid, float)
     hurdle = np.maximum(np.asarray(price_to_beat, float), np.asarray(floor, float))
-    win = bid >= hurdle
+    place = (np.ones(len(bid), dtype=bool) if placed is None
+             else np.asarray(placed, dtype=bool))
+    win = place & (bid >= hurdle)
     v = np.asarray(value_truth, float)
-    spend = float(bid[win].sum())
-    value = float(v[win].sum())
+    won_value = float(v[win].sum())
     total = float(v.sum())
-    return {"wins": int(win.sum()), "win_rate": float(win.mean()),
-            "spend": spend, "value": value, "profit": value - spend,
-            "ev_ratio": value / total if total > 0 else float("nan")}
+    # a won row is ONE impression and every price here is per thousand
+    spend = float(bid[win].sum()) / PER_MILLE
+    value = won_value / PER_MILLE
+    n_win = int(win.sum())
+    profit = value - spend
+    return {"wins": n_win, "win_rate": float(win.mean()),
+            "placed_rate": float(place.mean()),
+            "spend": spend, "value": value, "profit": profit,
+            "profit_per_1k_wins": (profit / n_win * 1000.0 if n_win
+                                   else float("nan")),
+            "value_captured": won_value / total if total > 0 else float("nan")}

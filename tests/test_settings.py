@@ -14,12 +14,13 @@ def test_loads(s):
 
 
 def test_node_count(s):
-    assert len(s.nodes) == 78
+    """79 since H5 `min_winning_price` landed, 22 August 2026."""
+    assert len(s.nodes) == 79
 
 
-def test_emitting_rows_sum_to_the_frozen_55(s):
+def test_emitting_rows_sum_to_the_frozen_56(s):
     cols = [c for n in s.emitting() for c in n["columns"]]
-    assert len(cols) == 55
+    assert len(cols) == 56
     assert set(cols) == set(s.raw["column_order"])
 
 
@@ -40,8 +41,11 @@ def test_law_counts_match_the_register(s):
     # in `design/`, so a clone looks there. A test that reaches outside its own
     # repository passes for the author and fails for everybody else.
     here = Path(__file__).resolve()
-    candidates = [here.parents[1] / "design" / "T9Sim_DGP_Node_Register.md",
-                  here.parents[2] / "docs" / "T9Sim_DGP_Node_Register.md"]
+    # THE v2.2 FORK, and the v2 one is not a fallback. Reading v2 here would
+    # compare the built graph against a register that has no H5, and the
+    # mismatch would look like a graph defect rather than a stale path.
+    candidates = [here.parents[1] / "design" / "T9Sim_DGP_Node_Register_v2.2.md",
+                  here.parents[2] / "docs" / "T9Sim_DGP_Node_Register_v2.2.md"]
     found = [p for p in candidates if p.exists()]
     assert found, ("the node register is in neither location: %s"
                    % [str(p) for p in candidates])

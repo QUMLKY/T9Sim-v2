@@ -28,7 +28,9 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "config"
-REGISTER = ROOT.parent / "docs" / "T9Sim_DGP_Node_Register.md"
+# the v2.2 fork, 22 Aug 2026, with build_graph.py, gate_report.py and
+# tests/test_settings.py. v2's register has 78 rows and no H5.
+REGISTER = ROOT.parent / "docs" / "T9Sim_DGP_Node_Register_v2.2.md"
 
 # Keys that are structure or derived arithmetic rather than calibration, so they
 # need no provenance of their own. `implies` and `swing` restate what a tilt dial

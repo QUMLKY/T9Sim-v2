@@ -44,7 +44,7 @@ def _load_law_modules():
     """Import every module that registers a law.
 
     A decorator only runs when its module is imported, so before 16 August 2026
-    this check reported all 78 nodes missing when called from a tool that had not
+    this check reported all 79 nodes missing when called from a tool that had not
     happened to import the generator. A check whose verdict depends on the
     caller's import order is worse than no check, because it fails loudly in the
     safe direction and passes silently in the dangerous one. Imported here rather

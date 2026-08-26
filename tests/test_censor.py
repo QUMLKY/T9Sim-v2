@@ -182,9 +182,17 @@ def test_masked_integer_columns_stay_integral(views):
 # what each layer adds
 # ---------------------------------------------------------------------------
 
-def test_ssp_adds_exactly_two_columns(views):
+def test_ssp_adds_exactly_three_columns(views):
+    """Three since H5, and every one of them is barred as a raw feature.
+
+    `min_winning_price` joins `winning_price` and `bid_density` in C3 and C4,
+    which means the SSP views gain a column and gain no raw feature: all three
+    are settlement columns. The whole SSP contrast travels through the
+    empirical-Bayes encoders instead, which is the point of the design and is
+    measured in tests/test_h5.py.
+    """
     added = set(views["C3"].columns) - set(views["C1"].columns)
-    assert added == {"bid_density", "winning_price"}
+    assert added == {"bid_density", "winning_price", "min_winning_price"}
     assert set(views["C4"].columns) - set(views["C2"].columns) == added
 
 
@@ -197,4 +205,4 @@ def test_mmp_adds_rows_and_no_columns(views):
 
 def test_the_column_counts_match_the_declared_map(s):
     got = {r["view"]: r["columns"] for r in C.summary(s)}
-    assert got == {"C1": 29, "C2": 29, "C3": 31, "C4": 31}
+    assert got == {"C1": 29, "C2": 29, "C3": 32, "C4": 32}

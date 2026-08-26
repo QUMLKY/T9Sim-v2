@@ -1,36 +1,31 @@
 # calibrated.yaml, machine-written by the stage 2 solver. Do not hand-edit.
 # Regenerate with `python -m t9v2.autocal`.
 meta:
-  solved: '2026-08-16T10:52:01+00:00'
+  solved: '2026-08-22T22:50:02+00:00'
   scale: per constant, see rows_per_measurement
   seed: 20250
   rows_per_measurement:
-    funnel.base_ctr: 200000 rows at 1M pools
-    funnel.base_ir: 200000 rows at 1M pools
-    funnel.base_payer: 1000000 rows at 1M pools
-    ltv.lognormal_mu: 10000000 rows at 10M pools
-    ltv.lognormal_sigma: 10000000 rows at 10M pools
     k_global: 200000 rows at 1M pools
-  checksum: '2e7fe4543a789be3'
+  checksum: '9c1063e0c27b61a4'
 solved:
+  auction.k_global.value:
+    value: 1.096208496
+    note: 'SOLVED k_global against auction_win_rate. Target 0.3, achieved 0.29904 on 200,000 rows at 1M pools in 12 iterations. Started at 1 and moved +0.0962085. In band.'
   funnel.base_ctr.start.value:
     value: 0.2731445312
-    note: 'SOLVED funnel.base_ctr against population_ctr. Target 0.035, achieved 0.03518 on 200,000 rows at 1M pools in 9 iterations. Started at 0.27141 and moved +0.00173453. In band.'
+    note: "SOLVED funnel.base_ctr against population_ctr. Target 0.035, achieved 0.03518 on 200,000 rows at 1M pools in 9 iterations. Started at 0.27141 and moved +0.00173453. In band."
   funnel.base_ir.start.value:
     value: 2.699609375
-    note: 'SOLVED funnel.base_ir against click_to_install. Target 0.325, achieved 0.323906 on 200,000 rows at 1M pools in 7 iterations. Started at 2.56496 and moved +0.134646. In band.'
+    note: "SOLVED funnel.base_ir against click_to_install. Target 0.325, achieved 0.323906 on 200,000 rows at 1M pools in 7 iterations. Started at 2.56496 and moved +0.134646. In band."
   funnel.base_payer.start.value:
     value: 0.2903588867
-    note: 'SOLVED funnel.base_payer against install_to_payer. Target 0.035, achieved 0.0351899 on 1,000,000 rows at 1M pools in 11 iterations. Started at 0.257853 and moved +0.0325059. In band.'
+    note: "SOLVED funnel.base_payer against install_to_payer. Target 0.035, achieved 0.0351899 on 1,000,000 rows at 1M pools in 11 iterations. Started at 0.257853 and moved +0.0325059. In band."
   ltv.lognormal_mu.value:
     value: 0.146484375
-    note: 'SOLVED ltv.lognormal_mu against median_payer_spend_usd. Target 6, achieved 6.00041 on 10,000,000 rows at 10M pools in 9 iterations. Started at 1.7918 and moved -1.64532. In band.'
+    note: "SOLVED ltv.lognormal_mu against median_payer_spend_usd. Target 6, achieved 6.00041 on 10,000,000 rows at 10M pools in 9 iterations. Started at 1.7918 and moved -1.64532. In band."
   ltv.lognormal_sigma.value:
     value: 1.5625
-    note: 'SOLVED ltv.lognormal_sigma against whale_concentration. Target 0.6, achieved 0.598276 on 10,000,000 rows at 10M pools in 3 iterations. Started at 1.64817 and moved -0.085669. In band.'
-  auction.k_global.value:
-    value: 1.376914063
-    note: 'SOLVED k_global against auction_win_rate. Target 0.3, achieved 0.29951 on 200,000 rows at 1M pools in 8 iterations. Started at 1 and moved +0.376914. In band.'
+    note: "SOLVED ltv.lognormal_sigma against whale_concentration. Target 0.6, achieved 0.598276 on 10,000,000 rows at 10M pools in 3 iterations. Started at 1.64817 and moved -0.085669. In band."
 
 # ---------------------------------------------------------------------------
 # The solver's OUTPUT CONTRACT. Names only, no values: a value here would be a
