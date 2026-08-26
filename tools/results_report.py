@@ -29,7 +29,7 @@ moves every argmax, so a v2 number set beside a v2.2 number compares two
 simulators rather than two data layers.
 
 TWO BIDDERS, NEVER COMPARED BY LEVEL. The classifier and the price head choose
-different bids, so they win different impressions and their profits are not the
+different bids, so they win different auctions and their profits are not the
 same quantity. Every profit contrast here is a percentage of THAT BIDDER'S OWN
 baseline. v1 reported an AFT bidder showing higher profit in every cell and it
 was evidence of nothing.
@@ -316,7 +316,7 @@ def agreement_md(scale, rows, sweep, fl, n):
          "Three contrasts x five metrics x two bidders. `clf` is the win "
          "classifier, `aft` is the price head. **Their LEVELS are never "
          "compared** — the two choose different bids and so win different "
-         "impressions — so every profit figure is a percentage of that bidder's "
+         "auctions — so every profit figure is a percentage of that bidder's "
          "OWN baseline.", "",
          "**No head is primary.** The classifier's contrast can move only through "
          "FEATURES, since `won` is visible in all four views. The price head's "
@@ -394,7 +394,7 @@ METRICS = [
     # AUC while the price head's sat somewhere else again.
     #
     # The two Tier-2 sections must never be read ACROSS. The curves choose
-    # different bids and win different impressions, so only down-a-section and
+    # different bids and win different auctions, so only down-a-section and
     # along-a-row comparisons mean anything.
     # THE FUNNEL AUCs ARE SCORED ON EVERY TEST ROW, and the figure `runner.py`
     # records is deliberately NOT the one reported. That one scores each head

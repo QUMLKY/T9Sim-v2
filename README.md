@@ -132,7 +132,7 @@ Without them the markdown still generates and the docx steps are skipped.
 
 ## The data
 
-30 datasets: 10 seeds (20250–20259) at each of 100K, 1M and 10M impressions. **19.8 GB**, so they
+30 datasets: 10 seeds (20250–20259) at each of 100K, 1M and 10M auctions. **19.8 GB**, so they
 are not in this repository. Every one carries a sha256 in
 [`docs/gates/checksums.md`](docs/gates/checksums.md), and every one regenerates from this source.
 

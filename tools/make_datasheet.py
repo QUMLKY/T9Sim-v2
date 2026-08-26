@@ -53,7 +53,7 @@ def main():
           "generated the data. This file is written, never edited.*", "",
           "## What this is", "",
           "%d synthetic datasets of mobile-game ad auctions: 10 seeds "
-          "(20250-20259) at each of 100K, 1M and 10M impressions, %.1f GB in "
+          "(20250-20259) at each of 100K, 1M and 10M auctions, %.1f GB in "
           "total. Each row is one bid request with its outcome, in %d columns. "
           "Every dataset is generated from one specification by a deterministic "
           "process, so a seed reproduces byte for byte."

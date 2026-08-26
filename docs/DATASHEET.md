@@ -4,7 +4,7 @@
 
 ## What this is
 
-30 synthetic datasets of mobile-game ad auctions: 10 seeds (20250-20259) at each of 100K, 1M and 10M impressions, 19.8 GB in total. Each row is one bid request with its outcome, in 56 columns. Every dataset is generated from one specification by a deterministic process, so a seed reproduces byte for byte.
+30 synthetic datasets of mobile-game ad auctions: 10 seeds (20250-20259) at each of 100K, 1M and 10M auctions, 19.8 GB in total. Each row is one bid request with its outcome, in 56 columns. Every dataset is generated from one specification by a deterministic process, so a seed reproduces byte for byte.
 
 They exist to support a controlled **ablation**: the marginal predictive value of integrated AdTech data layers, measured across four censored views over ONE ground truth.
 
